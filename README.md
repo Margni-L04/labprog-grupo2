@@ -7,11 +7,8 @@ Disfruten y si no les gusta lo que ven, lastima por ustedes
 
 Atte:  
     - Lucasss  
-
-    -> Val
-
-    -> Pau
-
-    -> Mendi
+    - Val  
+    - Pau  
+    - Mendi
 
 :)
