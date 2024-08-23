@@ -7,14 +7,13 @@ Del mejor grupo (esto es obvio, ni hace falta decirlo)
 
 Disfruten y si no les gusta lo que ven, lastima por ustedes
 
-Atte:
-
+Atte: \n
     - Lucasss
 
     - Val
 
     - Pau
-    
+
     - Mendi
 
 :)
