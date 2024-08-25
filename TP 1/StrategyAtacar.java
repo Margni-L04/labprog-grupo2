@@ -15,6 +15,6 @@ public class StrategyAtacar extends Strategy {
         pokenemigo.cambiarVida(danio);
 
         System.out.println(pokeyo.getNombre() + " ataca a " + pokenemigo.getNombre()
-             + " y le resta " + danio + " de HP");
+             + " y le resta " + -1*danio + " de HP");
     }
 }
