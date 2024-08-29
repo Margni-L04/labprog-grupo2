@@ -11,7 +11,7 @@ public class Main {
             new Pokemon("Jigglypuff", 0.2, 115, 10),
             new Pokemon("Meowth", 0.4, 40, 6),
             new Pokemon("Psyduck", 0.5, 50, 7),
-            new Pokemon("Machop", 0.5, 70, 9)
+            new Pokemon("Gengar", 0.5, 70, 9)
         };
 
         //creamos las estrategias
