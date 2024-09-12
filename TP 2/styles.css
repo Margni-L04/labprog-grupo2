@@ -1,0 +1,23 @@
+h1{
+    color: red;
+}
+
+.textoRojo{
+    color: red;
+}
+
+.textoGrande{
+    font-size: 35;
+}
+#tituloPrincipal{
+    font-size: 80;
+}
+
+.displayCenter{
+    display: flex;
+    justify-content: center;
+}
+
+.azul{
+    
+}
