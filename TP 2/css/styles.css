@@ -1,0 +1,52 @@
+*{
+    margin: 0;
+    font-family: "EB Garamond", sans-serif;
+    font-optical-sizing: auto;
+}
+
+body {
+    background-color: #DDD0C8;
+}
+
+.header {
+    background-color: #e5bb89;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 70px;
+    width: auto;
+}
+
+.logo {
+    height: 70px;
+    width: auto;
+}
+
+.aNav {
+    font-family: "Quicksand", sans-serif;
+    font-weight: 500;
+    font-size: 1.5em;
+    display: inline-block;
+    padding: 12.75px 25px;
+    text-decoration: none;
+    color: black;
+}
+
+a:visited {
+    color: black;
+}
+
+a:hover {
+    color: whitesmoke;
+    background-color: brown;
+    transition: color 0.25s ease;
+    transition: all 0.25s ease;
+    border-radius: 40px;
+}
+
+.cuadrado {
+    width: 60px;
+    height: 60px;
+    background-color: white;
+    cursor: pointer;
+}
