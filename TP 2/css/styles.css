@@ -1,6 +1,5 @@
 *{
     margin: 0;
-    font-family: "EB Garamond", sans-serif;
     font-optical-sizing: auto;
 }
 
@@ -49,4 +48,23 @@ a:hover {
     height: 60px;
     background-color: white;
     cursor: pointer;
+}
+
+#grid {
+    display: grid;
+    grid-template-columns: repeat(50, 15px);
+    grid-template-rows: repeat(50, 15px);
+    gap: 1px;
+    margin-top: 20px;
+}
+
+.celula {
+    width: 15px;
+    height: 15px;
+    background-color: white;
+    border: 1px solid white;
+}
+
+.celula.alive {
+    background-color: black;
 }
