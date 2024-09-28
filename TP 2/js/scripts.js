@@ -10,7 +10,7 @@ logo.addEventListener('mouseleave', () => {
 });
 
 /* Datos de la grilla */
-const tamanioGrid = 50;
+const tamanioGrid = 95;
 let grid = crearGrid(tamanioGrid);
 let estaEjecutando = false;
 let intervalo;
@@ -43,7 +43,7 @@ function contarVecinosVivos(fila, col) {
     for(let i = iniI; i < finI; i++) {
         for(let j = iniJ; j < finJ; j++) {
             //buscamos todas las celulas excepto la actual
-            if(i != 1 && j != 1) {
+            if(i != 1 || j != 1) {
                 cantVecinos += grid[fila-1+i][col-1+j];
             }
         }
@@ -54,7 +54,7 @@ function contarVecinosVivos(fila, col) {
 
 /* Actualizar la grilla */
 function updateGrid() {
-    const celulas = document.getElementsByClassName("cell");
+    const celulas = document.getElementsByClassName("celula");
     let cont = 0;
     for (let i = 0; i < tamanioGrid; i++) {
         for (let j = 0; j < tamanioGrid; j++) {
@@ -66,10 +66,10 @@ function updateGrid() {
 
 /* Cambio del estado de la celula */
 function cambiarEstado(fila, col) {
-    if(grid[fila][col] == 0) {
-        grid[fila][col] = 1;
-    } else {
+    if(grid[fila][col] == 1) {
         grid[fila][col] = 0;
+    } else {
+        grid[fila][col] = 1;
     }
     updateGrid();
 }
@@ -105,13 +105,17 @@ function proximaGeneracion() {
                 //celula esta viva
                 if(vecinosVivos > 3 || vecinosVivos < 2) {
                     //muere por sobrepoblacion o aislamiento
-                    grid[i][j] = 0;
+                    nuevoGrid[i][j] = 0;
+                } else {
+                    nuevoGrid[i][j] = 1;
                 }
             } else {
                 //celula esta muerta
                 if(vecinosVivos == 3) {
                     //revive
-                    grid[i][j] = 1;
+                    nuevoGrid[i][j] = 1;
+                } else {
+                    nuevoGrid[i][j] = 0;
                 }
             }
         }
@@ -121,10 +125,42 @@ function proximaGeneracion() {
     updateGrid();
 }
 
-/* Iniciar el juego */
-document.getElementById("startButton").addEventListener("click", () => {
-    if (!estaEjecutando) {
-        intervalo = setInterval(nextGeneration, 100); //cada 100ms
-        estaEjecutando = true;
+/* Acciones sobre el juego */
+const botonInicio = document.getElementById("botonInicio");
+const botonReseteo = document.getElementById("botonReseteo")
+
+function empezarJuego() {
+    estaEjecutando = true;
+    if(estaEjecutando) {
+        //cada 300 ms
+        intervalo = setInterval(proximaGeneracion, 300);
     }
+}
+
+function pausarJuego() {
+    clearInterval(intervalo);
+    estaEjecutando = false;
+}
+
+function resetear() {
+    if(estaEjecutando) {
+        pausarJuego();
+    }
+
+    grid = crearGrid(tamanioGrid);
+    updateGrid();
+}
+
+botonInicio.addEventListener("click", () => {
+    if(!estaEjecutando) {
+        empezarJuego();
+        botonInicio.innerHTML = 'Pausar';
+    } else {
+        pausarJuego();
+        botonInicio.innerHTML = 'Iniciar';
+    }
+});
+
+botonReseteo.addEventListener("click", () => {
+    resetear();
 });
