@@ -107,6 +107,7 @@ function proximaGeneracion() {
                     //muere por sobrepoblacion o aislamiento
                     nuevoGrid[i][j] = 0;
                 } else {
+                    //contunua vivo
                     nuevoGrid[i][j] = 1;
                 }
             } else {
@@ -115,6 +116,7 @@ function proximaGeneracion() {
                     //revive
                     nuevoGrid[i][j] = 1;
                 } else {
+                    //continua muerto
                     nuevoGrid[i][j] = 0;
                 }
             }
@@ -145,6 +147,7 @@ function pausarJuego() {
 function resetear() {
     if(estaEjecutando) {
         pausarJuego();
+        botonInicio.innerHTML = 'Iniciar';
     }
 
     grid = crearGrid(tamanioGrid);

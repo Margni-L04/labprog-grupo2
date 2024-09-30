@@ -62,6 +62,10 @@ a:hover {
     background-color: black;
 }
 
+.celula:active {
+    transform: scale(1.2);
+}
+
 .boton {
     border: none;
     color: whitesmoke;
