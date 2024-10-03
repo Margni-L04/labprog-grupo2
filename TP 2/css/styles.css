@@ -93,3 +93,30 @@ a:hover {
 .boton:active {
     transform: scale(0.9);
 }
+
+.contenedor{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    gap: 5%;
+}
+
+.columna {
+    column-gap: 5%;
+    column-width: 300px;
+    padding: 20px;
+    box-sizing: border-box;
+    min-height: 30%;
+    flex-direction: column;
+}
+
+.tituloReglas {
+    font-family: "Quicksand", sans-serif;
+    font-weight: bold;
+    font-size: 2em;
+    text-align: center;
+}
+
+.textoReglas {
+    font-family: "Quicksand", sans-serif;
+}

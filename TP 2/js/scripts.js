@@ -23,7 +23,7 @@ let numGen = 0;
 function crearGrid(tamGrid) {
     let grid = [];
     const gridElem = document.getElementById("grid");
-    gridElem.innerHTML = '';
+    gridElem.innerHTML = "";
 
     for (let fila = 0; fila < tamGrid; fila++) {
         grid[fila] = [];
