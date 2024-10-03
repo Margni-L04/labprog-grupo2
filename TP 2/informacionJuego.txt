@@ -1,0 +1,122 @@
+00:06 Speaker 2:
+El juego de la vida de Conway es un modelo matemático de computacional que simula sistemas naturales formados
+con muchos objetos en este caso, células que interactúan entre sí con unas normas muy sencillas, 
+vamos a que de estas reglas tan simples, a veces pueden surgir cosas tan complejas. 
+El objetivo de hacer matemáticas es también jugar, y eso es precisamente lo que vamos a hacer. 
+Vamos a jugar al juego de la vida de Conway, un juego hecho para cero jugadores con cero jugadores. 
+
+Este juego consta con un número infinito de las celdas, pero para poder visualizarlo veremos uan vista finita, 
+que debemos de imaginar que se extiende hacia el infiitos en todos los lados.
+Posee casilla que las llamaremos células como si fueran organismos vivos. Y hay dos posibilidades que una células
+esté viva. Entonces la pintaremos de color negro o que esté muerta de color blanco. Y ahora la idea es la siguiente, 
+se empieza con una configuración inicial de células vivas y muertas que podemos escoger como queramos, 
+pero el tiempo pasa para el juego y cada turno, la naturaleza del juego elegirá qué células mueren y cuáles sobreviven.
+
+Las reglas son sencillas, las células vivas, por supuesto, necesitan de su entorno para sobrevivir. 
+Necesitan relacionarse, por lo que si una células está viva, solo conseguirá sobrevivir al siguiente turno 
+si tiene dos o tres células vivas a su alrededor, si tiene menos morira por soledad, si tiene más por sobrepoblación
+o por exceso de células pesadas.
+
+Por ejemplo:
+Esta celula que en el turno inicial está viva en el siguiente morirá, puesto que solo tiene a una compañera la de su derecha. 
+Y lo mismo con esta también morirá. Solo tiene la de la diagonal como célula amiga.Tenemos que tener en cuenta que 
+las diagonales también cuentan como distancia, sin embargo, esta de aquí sí que va a sobrevivir, ya que sí que tiene 
+tres células vivas a su alrededor y era dos o tres, vale, genial. 
+
+Pero resulta que hay una norma más y es que una célula muerta puede revivir si tiene exactamente 
+tres células vivas a su alrededor, ni una más ni una menos. De lo contrario sigue muerta.
+
+Por ejemplo:
+Esta celula de aquí tiene exactamente tres, por lo que vivirá en el siguiente turno. Y lo mismo con esta otra. 
+
+Con estas reglas podemos jugar a ver como evolución una posición inicial determinada, avanzando tantos turnos como queramos. 
+Lo único que tenemos que hacer nosotros es colocar las primeras posiciones después el juego avanza hasta el infinito 
+sin necesidad de que nosotros intervengamos en ningún momento. Pues esta es la razón por la que se dice que son 
+juego de cero jugadores.
+
+En realidad no está jugando nadie ahora es cuando podemos decir pues, es muy aburrido. No, no puedo jugar. 
+Y además, las reglas, pues parecen super simples. Nada divertido puede salir de esto, pues estan muy equivocados 
+porque van a sorprenderse cuando veamos todo lo que se puede hacer con esto.
+
+Vamos a ver diferentes objetos que podemos construir dentro del juego. 
+
+Estacionarios: aquí las células entran en tal compenetración que ninguna muere ni ninguna sobrevive tampoco, por lo que hay 
+se quedan para toda la eternidad. Si nos fijamos, todas las vivas tienen dos o tres a su alrededor, por lo que no mueren
+y las muertas ninguna tienen exactamente dos vivas a su alrededor, por lo que ninguna resucita. Y este tipo de 
+configuraciones puede parecer no tener mucho juego, pero también se pueden usar para dibujar.
+
+Oscilantes: 
+    estos son configuraciones iniciales que, como su propio nombre indican, tienen un ciclo del que no sale. 
+    Nunca se van a quedar así toda la vida y tiene su gracia porque están en perfecta armonía, remover cualquiera de sus células
+    vivas acabarían desastre, todas y cada una de ellas son necesarias y las hay de muchísimos tipos. Cada una de las que estan
+    viviendo representa un ciclo del número de turnos que tienen al lado y si los números que están dibujados también están hechos
+    dentro del juego con estacionarios en los de antes, para que veáis que no son tan aburridos que se puedan dibujar cositas mis 
+    favoritas, las naves espaciales.
+
+Naves espaciales:
+    Por ejemplo: estas dos configuraciones iniciales. Si le damos al play, podemos ver que una avanza hacia la derecha, 
+    mientras que la otra lo hace diagonalmente, este tipo de objetos tendrán muchísima importancia.
+
+Matusalenes: 
+    aquellas que tardan mucho en estabilizarse. En esta configuración inicial hay siete células nuevas see generan. Pues bien, 
+    si le damos de nuevo al play, la población tarda mucho en estabilizarse en comparación a cuántas células había. No lo hace 
+    hasta la generación si uno donde desaparecen todas.
+
+Por supuesto, hay muchos más tipos de configuraciones en el juego de la vida, pero se contado como las más simples. 
+Y esto ya hace más interesante el juego porque si ponemos alguna configuración inicial, podemos preguntarnos, si forma alguna nave 
+o algún ciclo que se repita y forme algo bonito, o habrá alguna configuración que tarde años en desaparecer o llegar a un bucle 
+un gigante o espera, espera, habrá alguna que no acabe nunca? Pues eso mismo se preguntó el creador del juego, el gran matemático
+británico John Horton Conway, que desafortunadamente murió en el año por complicaciones con el COVID en el 2020, creó el juego se 
+hizo la misma pregunta.
+
+Hay alguna configuración inicial cuya población de células crece indefinidamente o siempre acaba en un ciclo desapareciendo 
+como él mismo no pudo resolverlo? Y era un hombre de recursos, ofreció la enorme cantidad de $50, aquella persona que lo resolviese
+y sorpresa, poco tiempo después, un equipo de consiguió construir el juego a acentos, una fábrica de naves espaciales.
+
+06:32 Speaker 2:
+Y si, si habéis escuchado bien, lo que encontraron fue una configuración inicial en la que en la generación 15 se crea una nave espacial como las de antes y a partir de aquí, cada 30 generaciones se vuelva a construir otra nave y otra y otra, y así hasta el infinito, por lo que la población de células vivas crece indefinidamente, lo va, queda oscilando, pero se van creando cada vez más células que salen disparadas, una auténtica locura. Y, por supuesto, los estudiantes de la seguramente se ganaron sus buenos $50.
+
+07:04 Speaker 2:
+Bueno, pues yo soy Mike y esta de que veis por aquí es, no es la cat de cante, me está vigilando desde atrás. Y como es comentar al principio del video, esto es una colaboración con una empresa española que se llama dentro que se dedica a hacer desde ADN. Os cuento un poco cómo va todo? Empieza con un test de saliva. Ellos te lo vienen a tu casa, tú, pues lo rellenas de saliva y lo envis a un laboratorio donde realizan tus resultados después
+
+07:34 Speaker 2:
+Por patrocina de este video. Si con todo lo de antes, no estáis equipando un poco, agarrado es fuerte porque esto solo mejora. Vamos a hablar un momento de puertas lógicas, un idealizado o dispositivo electrónico físico que transforma entradas de señales en otras, dependiendo de cual entre, por supuesto, por ejemplo, esto es lo que se conoce como una puerta not y su funcionamiento es muy simple. Si entra una señal uno la convierte en cero. Y si le entra un cero, lo pasa uno hace justo lo contrario de lo que le entra. Por eso el a, por supuesto, hay más puertas diferentes a esta, pero quiero que queis con que agrupando diversas puertas lógicas se puede llegar a programar y es básicamente lo que utilizan todos los ordenadores del mundo.
+
+08:13 Speaker 2:
+Y porque os he contado esta milonga, pues os presento una puerta not implementada en el juego de la vida de Conway.
+
+08:20 Speaker 2:
+Y lo mejor de todo es que se ha construido precisamente usando el disparador de naves espaciales que hemos visto antes, por lo que todavía es aún más vibrante. Os cuento a la izquierda, la entrada abajo, la salida. En este caso, hemos has puesto estas células para que bloqueen la generación de naves de a, por lo que en este caso, aval de, por lo tanto, lo de la derecha, manda así ningún problema. Naves hacia la salida. Y esto es entendido como un uno, es decir, la entrada acero y la salida uno, justo como el not y al revés también funciona quitando ahora las células que bloqueaban la entrada.
+
+08:53 Speaker 2:
+Ahora estaba de uno y fijos. Qué cosa tan loca las naves colisionan y por tanto desaparecen. Y esto es una locura porque significa que no le llega nada a la salida que es estero. Es decir, si la entrada es uno, la salida estero justo como la puerta not y todo esto debido a un choque de naves espaciales es espectacular como se cumplen los dos casos.
+
+09:16 Speaker 2:
+Esto significa que podemos montar una puerta not en el juego de la vida y que por tanto podemos programar en él como si de un ordenador se tratase. Y esto significa que el mismo juego de la vida de Conway en si es equivalente a una máquina universal de Turing que en términos más sencillos, es como si fuera un ordenador. Cualquier cosa que pudiese procesar un ordenador y el juego de la vida puede replicarlo. Y ya sabiendo que el juego de la vida tiene los límites que tiene un ordenador, pues solo no es queda encontrar configuraciones iniciales que sean increíbles.
+
+09:48 Speaker 2:
+Por ejemplo, esta mega nave que viajará hacia arriba, dejando una estela como lo haría una aeronave normal, bueno, más o menos, o esta super nave espacial avanzando hacia la izquierda con combustible infinito mientras va dejando el rastro por donde ha pasado. También parece un poco una medusa. No está bastante rara que parece una abeja al final caballer todo el espacio y así hasta el infinito muy bonito,
+
+10:27 Speaker 1:
+Todo
+
+10:28 Speaker 2:
+Que sea cada parte de tu casa. Una de mis preferidas, la mega fábrica de naves espaciales, toda esta parafernalia de células están combinándose entre ellas para un mismo objetivo, esta vez un poco más grandes que las anteriores. Y es increíble que una persona haya sido capaz de generar esta posición inicial para construir las naves porque todas y cada una de las cs que allí son absolutamente necesarias. Y es que si quitamos una sola célula de cualquier lado, por ejemplo, de aquí en el sistema, colapsa y ya no hay más naves brutal.
+
+11:15 Speaker 2:
+Y así podríamos seguir todo el día. Hay configuraciones iniciales muy extrañas que acaban recordando hasta animales como los que podéis ver en pantalla, pero es que si habéis pipado hasta ahora, pues va a explotar la cabeza con lo que viene. Os he dicho que el juego de la vida de Conway es como si fuera un ordenador. Pues bien, hay una configuración inicial que dibuja al propio John Conway dentro del juego. Esta la construyó dama go. No se está bien pronunciado. Lo siento, sino a quien nos recomiendo seguir en Twitter porque hace un contenido divulgativo matemático.
+
+11:47 Speaker 2:
+Maravilloso. Otra más, mirad esta configuración inicial. Nada raro, parece un poco aleatoria. Incluso vamos a darle al play y a ver qué pasa. Y quiero que os fijéis en los puntos que van saliendo abajo a la izquierda,
+
+12:03 Speaker 2:
+Vale, algunos desaparecen y otros siguen avanzando hacia la izquierda. No parece haber nada raro tampoco, pero pero, pero pero paremos esto un momento, siguen algún orden. Ahora es un buen momento para que os agarréis de la silla por riesgo caída por locura. Porque esto son nada más y nada menos que los números primos. Efectivamente, esa generación rara del principio está computando todos y cada uno de los números primos, tantos como quedamos y ya para terminar el más flip para mí, el que más me reventó la cabeza cuando lo descubrí, habíamos dicho que en el juego de la vida se podía programar, no?
+
+12:44 Speaker 2:
+Pues, bueno, hay una persona que construyó un reloj digital dentro del mismo juego. Y si estás escuchando bien, todo esto está tan bien construido que hay células que van viajando por todo el plano, van accionando cositas que a saber como se habrán hecho. Y esto provoca que otras células mueren, vivan y en definitiva acaben marcándote la hora. Y esto solo con las dos sencillas reglas con las que habíamos empezado. Esto es un gran ejemplo de que a veces de lo sencillo combinado pueden salir cosas preciosas.
+
+13:25 Speaker 2:
+Pero espera un momento, si estamos usando el juego de la vida en un ordenador y en el propio juego, se puede programar, podremos programar otro juego de la vida dentro del juego de la vida. Pues si aquí lo tenéis, un juego de la vida dentro de otro juego de la vida
+
+14:01 Speaker 2:
+Y hasta aquí llega el video de hoy. Recordad que tenéis el código Matt es Mike.
