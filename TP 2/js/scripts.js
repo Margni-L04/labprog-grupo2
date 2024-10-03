@@ -173,6 +173,9 @@ function resetearJuego() {
         botonInicio.innerHTML = 'Iniciar';
     }
 
+    numGen = 0;
+    textoNumGen.innerHTML = "Generación: " + numGen;
+
     grid = crearGrid(tamanioGrid);
     updateGrid();
 }
