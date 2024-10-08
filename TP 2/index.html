@@ -27,10 +27,10 @@
     <section class="contenedor">
         <div class="columna">
             <h1 class="tituloReglas">Regla 1</h1>
-            <p class="textoReglas">Si una celula esta viva:
-                <br /> -Si tiene mas de 3 vecinos vivos muere por sobrepoblacion.
-                <br /> -Si tiene menos de 2 celulas vecinas vivas muere por aislación.
-                <br />-Si tiene 2 o 3 celulas vecinas vivas sobrevive.
+            <p class="textoReglas">Si una célula está viva:
+                <br /> -Si tiene más de 3 vecinos vivos, muere por sobrepoblación.
+                <br /> -Si tiene menos de 2 células vecinas vivas, muere por aislación.
+                <br />-Si tiene 2 o 3 células vecinas vivas, sobrevive.
             </p> 
         </div>
         <div class="columna">
@@ -38,14 +38,56 @@
         </div>
         <div class="columna">
             <h1 class="tituloReglas">Regla 2</h1>
-            <p class="textoReglas">Si una celula esta muerta:
+            <p class="textoReglas">Si una célula está muerta:
                 <br /> -Si tiene 3 vecinos vivos, revive.
-                <br /> -En otro caso continua muerta.
+                <br /> -En otro caso, continua muerta.
         </div>
         <div class="columna">
             <img src="imagenes/Regla2.png" id="regla2" class="imagenRegla">
         </div>
     </section>
 
+    <section>
+        <h1 class="tituloPatrones">Tipos de patrones</h1>
+    </section>
+    
+    <section class="contenedor">
+        <div class="columna">
+            <h1 class="tituloReglas">Osciladores</h1>
+            <p class="textoReglas">Tras un número finito de generaciones vuelven a su estado inicial
+                <br />
+                <br />
+            </p>
+            <img src="gifs/Game_of_life_pulsar.gif" alt="Computer man" style="width:135px;height:135px;">
+        </div>
+        <div class="columna">
+            <h1 class="tituloReglas">Naves espaciales</h1>
+            <p class="textoReglas">Tras un número finito de generaciones vuelven a su estado original pero en una ubicación diferente.
+                <br />
+                <br />
+            </p>
+            <img src="gifs/Animated_Mwss.gif" alt="Computer man" style="width:135px;height:135px;">
+        </div>
+        <div class="columna">
+            <h1 class="tituloReglas">Matusalenes</h1>
+            <p class="textoReglas"> Pueden evolucionar a lo largo de muchos turnos, o generaciones, antes de estabilizarse.
+                <br />
+                <br />
+            </p>
+            <img src="imagenes/Game_of_life_methuselah.png" id="matusalen" class="imagenRegla">
+        </div>
+        <div class="columna">
+            <h1 class="tituloReglas">Vidas estáticas</h1>
+            <p class="textoReglas"> No cambian de una generación a la siguiente.
+                <br />
+                <br />
+            </p>
+            <img src="imagenes/Game_of_life_loaf.svg.png" id="estatico" class="imagenRegla">
+        </div> 
+    </section>
+
     <script src="js/scripts.js"></script>
+
+
+
 </body>

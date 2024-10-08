@@ -104,7 +104,7 @@ a:hover {
 .columna {
     padding: 20px;  /* margen dentro de la caja */
     box-sizing: border-box;
-    height: 50vh;
+    height: 30vh;
     background-size: cover;
     display: flex; /* Para que los elementos internos sigan usando flex si es necesario */
     flex-direction: column;
@@ -125,6 +125,14 @@ a:hover {
     font-weight: bold;
     font-size: 3em;
     margin: 5%;
+}
+
+.tituloPatrones {
+    font-family: "Quicksand", sans-serif;
+    font-weight: bold;
+    font-size: 3em;
+    margin: 5%;
+    text-align: center;
 }
 
 .textoReglas {
