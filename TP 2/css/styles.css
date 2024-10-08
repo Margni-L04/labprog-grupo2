@@ -94,29 +94,47 @@ a:hover {
     transform: scale(0.9);
 }
 
-.contenedor{
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    gap: 5%;
+.contenedor {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr); /* 4 columnas iguales */
+    gap: 1%; /* Espacio entre columnas */
+    justify-content: space-around;
 }
 
 .columna {
-    column-gap: 5%;
-    column-width: 300px;
-    padding: 20px;
+    padding: 20px;  /* margen dentro de la caja */
     box-sizing: border-box;
-    min-height: 30%;
+    height: 50vh;
+    background-size: cover;
+    display: flex; /* Para que los elementos internos sigan usando flex si es necesario */
     flex-direction: column;
+    align-items: center;
 }
+
 
 .tituloReglas {
     font-family: "Quicksand", sans-serif;
     font-weight: bold;
     font-size: 2em;
     text-align: center;
+    margin: 5%;
+}
+
+.tituloJuego {
+    font-family: "Quicksand", sans-serif;
+    font-weight: bold;
+    font-size: 3em;
+    margin: 5%;
 }
 
 .textoReglas {
     font-family: "Quicksand", sans-serif;
+}
+.imagenRegla {
+    height: 150px;
+    width: auto;
+    margin: 2%;
+    justify-content: center; /* Centrar verticalmente */
+    align-items: flex-start; /* Alinear horizontalmente a la izquierda */ 
+    left: 0; /* Alinea la imagen a la izquierda */
 }
