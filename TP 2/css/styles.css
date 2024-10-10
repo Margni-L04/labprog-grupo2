@@ -127,6 +127,10 @@ a:hover {
     margin: 5%;
 }
 
+.seccionExplicacion {
+    padding: 30px;
+}
+
 .tituloPatrones {
     font-family: "Quicksand", sans-serif;
     font-weight: bold;
@@ -146,8 +150,4 @@ a:hover {
     justify-content: center; /* Centrar verticalmente */
     align-items: flex-start; /* Alinear horizontalmente a la izquierda */ 
     left: 0; /* Alinea la imagen a la izquierda */
-}
-
-.a {
-    padding: 30px;
 }
