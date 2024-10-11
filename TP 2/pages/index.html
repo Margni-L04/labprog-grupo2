@@ -2,10 +2,11 @@
 <html lang="es">
 <head>
     <title>Juego Conway</title>
-    <link rel="icon" href="imagenes/logo.png">
+    <link rel="icon" href="../img/logo.png">
 
     <!--CSS code-->
-    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="../css/styles-index.css">
+    <link rel="stylesheet" href="../css/styles-navbar.css">
 
     <!--Fuentes-->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -15,8 +16,9 @@
 
 <body>
     <header class="header">
-        <img src="imagenes/logo.png" id="logo" class="logo">
+        <img src="../img/logo.png" id="logo" class="logo">
         <nav>
+            <a href='patrones.html' class="aNav">Patrones</a>
             <a href='juego.html' class="aNav">Jugar!</a>
         </nav>
     </header>
@@ -66,7 +68,7 @@
             </p> 
         </div>
         <div class="columna">
-            <img src="imagenes/Regla1.png" id="regla1" class="imagenRegla">
+            <img src="../img/Regla1.png" id="regla1" class="imagenRegla">
         </div>
         <div class="columna">
             <h1 class="tituloReglas">Regla 2</h1>
@@ -75,51 +77,10 @@
                 <br /> -En otro caso, continua muerta.
         </div>
         <div class="columna">
-            <img src="imagenes/Regla2.png" id="regla2" class="imagenRegla">
+            <img src="../img/Regla2.png" id="regla2" class="imagenRegla">
         </div>
     </section>
 
-    <section>
-        <h1 class="tituloPatrones">Tipos de patrones</h1>
-    </section>
-    
-    <section class="contenedor">
-        <div class="columna">
-            <h1 class="tituloReglas">Osciladores</h1>
-            <p class="textoReglas">Tras un número finito de generaciones vuelven a su estado inicial
-                <br />
-                <br />
-            </p>
-            <img src="gifs/Game_of_life_pulsar.gif" alt="Computer man" style="width:135px;height:135px;">
-        </div>
-        <div class="columna">
-            <h1 class="tituloReglas">Naves espaciales</h1>
-            <p class="textoReglas">Tras un número finito de generaciones vuelven a su estado original pero en una ubicación diferente.
-                <br />
-                <br />
-            </p>
-            <img src="gifs/Animated_Mwss.gif" alt="Computer man" style="width:135px;height:135px;">
-        </div>
-        <div class="columna">
-            <h1 class="tituloReglas">Matusalenes</h1>
-            <p class="textoReglas"> Pueden evolucionar a lo largo de muchos turnos, o generaciones, antes de estabilizarse.
-                <br />
-                <br />
-            </p>
-            <img src="imagenes/Game_of_life_methuselah.png" id="matusalen" class="imagenRegla">
-        </div>
-        <div class="columna">
-            <h1 class="tituloReglas">Vidas estáticas</h1>
-            <p class="textoReglas"> No cambian de una generación a la siguiente.
-                <br />
-                <br />
-            </p>
-            <img src="imagenes/Game_of_life_loaf.svg.png" id="estatico" class="imagenRegla">
-        </div> 
-    </section>
 
-    <script src="js/scripts.js"></script>
-
-
-
+    <script src="../js/scripts-navbar.js"></script>
 </body>

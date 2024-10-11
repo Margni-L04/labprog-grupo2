@@ -2,11 +2,11 @@
 const logo = document.getElementById('logo');
 
 logo.addEventListener('mouseenter', () => {
-    logo.src = 'imagenes/logoInvertido.png';
+    logo.src = '../img/logoInvertido.png';
 });
 
 logo.addEventListener('mouseleave', () => {
-    logo.src = 'imagenes/logo.png';
+    logo.src = '../img/logo.png';
 });
 
 /*-----------------------------------------------------------------*/
