@@ -1,6 +1,8 @@
 /* Datos de la grilla */
 const textoNumGen = document.getElementById("numGen");
 const tamanioGrid = 95;
+//const tamanioGrid = screen.width / 15;
+console.log(screen.width / 15);
 let grid = crearGrid(tamanioGrid);
 let estaEjecutando = false;
 let intervalo;
