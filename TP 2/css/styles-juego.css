@@ -9,10 +9,10 @@ body {
 
 .grid {
     display: grid;
-    grid-template-columns: repeat(95, 15px);
-    grid-template-rows: repeat(95, 15px);
-    gap: 1px;
-    margin-top: 20px;
+    grid-template-columns: repeat(101, 15px);
+    grid-template-rows: repeat(101, 15px);
+    justify-content: center;
+    margin: 5px;
 }
 
 .celula {
