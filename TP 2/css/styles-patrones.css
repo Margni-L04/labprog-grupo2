@@ -115,7 +115,7 @@ body {
 .slider-patron {
     display: flex;
     flex-wrap: wrap;
-    padding: 80px 0px;
+    padding-top: 80px;
     margin: auto;
 }
 
@@ -136,7 +136,7 @@ body {
 .lista-ejemplos-patron {
     display: flex;
     flex-wrap: wrap;
-    justify-content: center;
+    justify-content: flex-start;
     padding: 0;
     width: 100%;
     height: 200px;
@@ -144,12 +144,35 @@ body {
 
 /* Item de imagenes de un patrón */
 .item-ejemplos-patron {
+    display: flex;
+    flex: 0 0 auto;
+    flex-direction: column;
+    align-items: center;
     list-style: none;
 }
 
 /* Imágen de cada item */
 .item-imagen {
     width: 200px;
-    height: 100%;
-    margin-inline: 10px;
+    height: 90%;
+    margin: 10px;
+}
+
+.nombre-patron {
+    position: relative;
+    bottom: 50px;
+    font-family: "Quicksand", sans-serif;
+    font-size: 30px;
+    font-weight: 500;
+    text-align: center;
+    user-select: none;
+    opacity: 0;
+}
+
+.item-ejemplos-patron:hover .item-imagen {
+    opacity: 0.5;
+}
+
+.item-ejemplos-patron:hover .nombre-patron {
+    opacity: 1;
 }

@@ -1,7 +1,7 @@
 /* Creamos dinámicamente las flip-cards de los tipos de patrones */
 const containerTiposPatrones = document.getElementById("cards-patrones");
 const arrTiposPatrones = [
-    //[ Nombre tipo patrón, Camino a la imagen, Descripción de tipo de patrón ]
+    //[ Nombre tipo patrón, URL a la imagen, Descripción de tipo patrón ]
     ["Vidas Estáticas", "../img/estatico-sapo.png", "Son patrones que se mantienen igual a través del tiempo <br/> No cambian de una generación a la siguiente"],
     ["Oscilantes", "../gifs/oscilante-palito.gif", "Tras un número finito de generaciones vuelven a su estado inicial <br/> Funcionan en ciclos de n-periodos"],
     ["Matusalenes", "../img/matusalen-diehard.png", "Pueden evolucionar a lo largo de muchos turnos, o generaciones, antes de estabilizarse <br/> Es decir, que quedarán únicamente patrones estáticos u oscilantes (o mueren todas las células)"],
@@ -58,6 +58,8 @@ arrTiposPatrones.forEach(patron => {
     textoInfo.innerHTML = patron[2];
     cardAtras.appendChild(textoInfo);
 });
+
+/* ------------------------------------------------------------------------------------------ */
 
 /* Evento para ver información de las cards de los tipos de patrones al hacer click */
 const patronesCards = document.querySelectorAll(".tipo-patron");
