@@ -3,6 +3,7 @@
 <head>
     <title>Patrones</title>
     <link rel="icon" href="../img/logo.png">
+    <meta charset="UTF-8">
 
     <!--CSS code-->
     <link rel="stylesheet" href="../css/styles-patrones.css">
@@ -27,101 +28,16 @@
         </nav>
     </header>
 
-    <!-------------------------Patrones------------------------->
+    <!---------------------Tipos de Patrones--------------------->
 
     <section class="seccion-patrones">
         <h1 class="titulo">Tipos de patrones</h1>
 
-        <div class="cards-patrones">
-            <div class="tipo-patron">
-                <div class="tipo-patron-frente">
-                    <h2 class="titulo-patron">Vidas Estáticas</h2>
-                    <img src="../img/estatico-sapo.png" class="img-gif-card">
-                </div>
-                <div class="tipo-patron-atras">
-                    <p>Holaaaaa</p>
-                </div>
-            </div>
-            <div class="tipo-patron">
-                <div class="tipo-patron-frente">
-                    <h2 class="titulo-patron">Oscilantes</h2>
-                    <img src="../gifs/oscilante-palito.gif" class="img-gif-card">
-                </div>
-                <div class="tipo-patron-atras">
-                    <p>Holaaaaa</p>
-                </div>
-            </div>
-            <div class="tipo-patron">
-                <div class="tipo-patron-frente">
-                    <h2 class="titulo-patron">Matusalenes</h2>
-                    <img src="../img/matusalen-diehard1.png" class="img-gif-card">
-                </div>
-                <div class="tipo-patron-atras">
-                    <p>Holaaaaa</p>
-                </div>
-            </div>
-            <div class="tipo-patron">
-                <div class="tipo-patron-frente">
-                    <h2 class="titulo-patron">Naves Espaciales</h2>
-                    <img src="../gifs/glider.gif" class="img-gif-card">
-                </div>
-                <div class="tipo-patron-atras">
-                    <p>Holaaaaa</p>
-                </div>
-            </div>
-        </div>
+        <!-- Creación dinámica en scripts-patrones.js -->
+        <div class="cards-patrones" id="cards-patrones"></div>
     </section>
 
-
-
-
-
-    
-    <!-- viejo -->
-
-    <video autoplay muted loop class="video">
-        <source src="../gifs/matusalen-diehard.webm" type="video/webm">
-    </video>
-
-    <section>
-        <h1 class="tituloPatrones">Tipos de patrones</h1>
-    </section>
-    
-    <section class="contenedor">
-        <div class="columna">
-            <h1 class="tituloReglas">Oscilantes</h1>
-            <p class="textoReglas">Tras un número finito de generaciones vuelven a su estado inicial
-                <br />
-                <br />
-            </p>
-            <img src="../gifs/oscilante-palito.gif" alt="Computer man" style="width:135px;height:135px;">
-        </div>
-        <div class="columna">
-            <h1 class="tituloReglas">Naves espaciales</h1>
-            <p class="textoReglas">Tras un número finito de generaciones vuelven a su estado original pero en una ubicación diferente.
-                <br />
-                <br />
-            </p>
-            <img src="../gifs/nave-pajaro.gif" alt="Computer man" style="width:135px;height:135px;">
-        </div>
-        <div class="columna">
-            <h1 class="tituloReglas">Matusalenes</h1>
-            <p class="textoReglas"> Pueden evolucionar a lo largo de muchos turnos, o generaciones, antes de estabilizarse.
-                <br />
-                <br />
-            </p>
-            <img src="../img/matusalen-raya.png" id="matusalen" class="imagenRegla">
-        </div>
-        <div class="columna">
-            <h1 class="tituloReglas">Vidas estáticas</h1>
-            <p class="textoReglas"> No cambian de una generación a la siguiente.
-                <br />
-                <br />
-            </p>
-            <img src="../img/estatico-sapo.png" id="estatico" class="imagenRegla">
-        </div> 
-    </section>
-
+    <!--JavaScript code-->
     <script src="../js/scripts-navbar.js"></script>
     <script src="../js/scripts-patrones.js"></script>
 </body>

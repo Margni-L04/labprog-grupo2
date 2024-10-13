@@ -33,6 +33,9 @@ body {
 
 /* Cada card de un tipo de patrón */
 .tipo-patron {
+    display: flex;
+    align-items: center;
+    justify-content: center;
     background-color: #ce9c7d;
     width: 300px;
     height: 350px;
@@ -59,10 +62,12 @@ body {
     position: absolute;
     width: 100%;
     height: 100%;
+    margin-top: 10px;
     backface-visibility: hidden;
 }
   
 .tipo-patron-atras {
+    text-align: center;
     backface-visibility: hidden;
     transform: rotateY(180deg);
 }
@@ -82,9 +87,22 @@ body {
     position: relative;
     width: 85%;
     height: 215px;
-    bottom: -20px;
+    bottom: -10px;
     user-select: none;
 }
+
+/* Texto de la parte de atrás de las flip cards */
+
+.texto-info {
+    font-family: "Quicksand", sans-serif;
+    font-weight: bold;
+    font-size: 1em;
+    user-select: none;
+    margin: 40px;
+}
+
+
+
 
 
 /* viejo */
