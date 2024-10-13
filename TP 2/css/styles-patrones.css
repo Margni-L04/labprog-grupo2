@@ -7,45 +7,83 @@ body {
     background-color: #DDD0C8;
 }
 
+/* Sección de patrones */
 .seccion-patrones {
     position: relative;
     padding: 50px;
 }
 
+/* Título principal */
 .titulo {
     font-family: "Quicksand", sans-serif;
     font-weight: bold;
     font-size: 3em;
-    text-align: center;justify-content: center;
+    text-align: center;
+    user-select: none;
 }
 
+/* Contenedor de patrones */
 .cards-patrones {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    padding: 35px 0px;
+    padding: 75px 0px;
     margin: auto;
 }
 
+/* Cada card de un tipo de patrón */
 .tipo-patron {
-    background-color: yellow;
+    background-color: #ce9c7d;
     width: 300px;
     height: 350px;
     text-align: center;
     border-radius: 8px;
     margin: 20px;
+    transition: all 0.6s ease;
+    transform-style: preserve-3d;
 }
 
+/* Para ver qué patrón está seleccionado */
+.tipo-patron:hover {
+    transform: translateY(-15px);
+    box-shadow: 0 12px 16px rgba(0, 0, 0, 0.2);
+    cursor: pointer;
+}
+
+/* Para ver info del patrón al darlo vuelta */
+.tipo-patron.flipped {
+    transform: rotateY(180deg);
+}
+
+.tipo-patron-frente {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden;
+}
+  
+.tipo-patron-atras {
+    backface-visibility: hidden;
+    transform: rotateY(180deg);
+}
+
+/* Título de cada patrón */
 .titulo-patron {
     font-family: "Space Grotesk", sans-serif;
     font-weight: normal;
-    font-size: 1.1cm;
+    font-size: 1cm;
+    user-select: none;
     height: 100px;
+    user-select: none;
 }
 
-.video {
-    height: 95%;
-    width: 95%;
+/* Imágen/Gif de cada patrón */
+.img-gif-card {
+    position: relative;
+    width: 85%;
+    height: 215px;
+    bottom: -20px;
+    user-select: none;
 }
 
 
