@@ -79,7 +79,6 @@ body {
     font-family: "Space Grotesk", sans-serif;
     font-weight: normal;
     font-size: 1cm;
-    user-select: none;
     height: 100px;
     user-select: none;
 }
@@ -108,6 +107,7 @@ body {
 .seccion-patrones {
     position: relative;
     padding-top: 50px;
+    padding-bottom: 10px;
     padding-inline: 15px;
 }
 
@@ -139,14 +139,16 @@ body {
     justify-content: flex-start;
     padding: 0;
     width: 100%;
-    height: 200px;
+    height: auto;
 }
 
 /* Item de imagenes de un patrón */
 .item-ejemplos-patron {
+    position: relative;
     display: flex;
     flex: 0 0 auto;
     flex-direction: column;
+    justify-content: center;
     align-items: center;
     list-style: none;
 }
@@ -154,23 +156,26 @@ body {
 /* Imágen de cada item */
 .item-imagen {
     width: 200px;
-    height: 90%;
+    height: 200px;
     margin: 10px;
 }
 
 .nombre-patron {
-    position: relative;
-    bottom: 50px;
+    position: absolute;
+    bottom: 50%;
+    transform: translateY(50%);
+    width: 200px;
+    text-align: center;
     font-family: "Quicksand", sans-serif;
     font-size: 30px;
-    font-weight: 500;
-    text-align: center;
-    user-select: none;
+    font-weight: 600;
+    color: #8a502c;
     opacity: 0;
+    user-select: none;
 }
 
 .item-ejemplos-patron:hover .item-imagen {
-    opacity: 0.5;
+    opacity: 0.3;
 }
 
 .item-ejemplos-patron:hover .nombre-patron {
