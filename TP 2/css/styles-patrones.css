@@ -160,6 +160,7 @@ body {
     margin: 10px;
 }
 
+/* Nombre del patron de cada item */
 .nombre-patron {
     position: absolute;
     bottom: 50%;
