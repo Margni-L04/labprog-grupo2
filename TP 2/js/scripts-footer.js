@@ -2,10 +2,10 @@
 const cuentasGit = document.getElementById("sobre-nosotros");
 const arrCuentasGit = [
     //[ Link cuenta Git, Nombre cuenta Git ]
-    [ "https://github.com/Margni-L04", "Lucas" ],
-    [ "https://github.com/valenvii", "Vale" ],
-    [ "https://github.com/paulacoronel0", "Pau" ],
-    [ "https://github.com/Ignacio1706", "Mendi" ]
+    {link:"https://github.com/Margni-L04", nombre:"Lucas"},
+    {link:"https://github.com/valenvii", nombre:"Vale"},
+    {link:"https://github.com/paulacoronel0", nombre:"Pau"},
+    {link:"https://github.com/Ignacio1706", nombre:"Mendi"}
 ];
 
 /*
@@ -26,7 +26,7 @@ arrCuentasGit.forEach(cuenta => {
     /* Nivel 1 */
     let linkGit = document.createElement("a");
     linkGit.classList.add("link-git");
-    linkGit.href = cuenta[0];
+    linkGit.href = cuenta.link;
     git.appendChild(linkGit);
 
     /* Nivel 2 */
@@ -38,6 +38,6 @@ arrCuentasGit.forEach(cuenta => {
     /* Nivel 1 */
     let nombreGit = document.createElement("p");
     nombreGit.classList.add("nombre-git");
-    nombreGit.innerHTML = cuenta[1];
+    nombreGit.innerHTML = cuenta.nombre;
     git.appendChild(nombreGit);
 });

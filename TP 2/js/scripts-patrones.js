@@ -1,11 +1,10 @@
 /* Creamos dinámicamente las flip-cards de los tipos de patrones */
 const containerTiposPatrones = document.getElementById("cards-patrones");
-const arrTiposPatrones = [
-    //[ Nombre tipo patrón, URL a la imagen, Descripción de tipo patrón ... ]
-    ["Vidas Estáticas", "../img/estatico-flor.png", "Son patrones que se mantienen igual a través del tiempo <br/> No cambian de una generación a la siguiente"],
-    ["Oscilantes", "../gifs/oscilante-palito.gif", "Tras un número finito de generaciones vuelven a su estado inicial <br/> Funcionan en ciclos de n-periodos"],
-    ["Matusalenes", "../img/matusalen-diehard.png", "Pueden evolucionar a lo largo de muchos turnos, o generaciones, antes de estabilizarse <br/> Es decir, que quedarán únicamente patrones estáticos u oscilantes (o mueren todas las células)"],
-    ["Naves Espaciales", "../gifs/nave-glider.gif", "Tras un número finito de generaciones vuelven a su estado original pero en una ubicación diferente <br/> Avanzan infinitamente por toda la grilla"]
+const tiposPatrones = [
+    {nombre:"Vidas Estáticas", imagen:"../img/estatico-flor.png", descripcion:"Son patrones que se mantienen igual a través del tiempo <br/> No cambian de una generación a la siguiente"},
+    {nombre:"Oscilantes", imagen:"../gifs/oscilante-palito.gif", descripcion:"Tras un número finito de generaciones vuelven a su estado inicial <br/> Funcionan en ciclos de n-periodos"},
+    {nombre:"Matusalenes", imagen:"../img/matusalen-diehard.png", descripcion:"Pueden evolucionar a lo largo de muchos turnos, o generaciones, antes de estabilizarse <br/> Es decir, que quedarán únicamente patrones estáticos u oscilantes (o mueren todas las células)"},
+    {nombre:"Naves Espaciales", imagen:"../gifs/nave-glider.gif", descripcion:"Tras un número finito de generaciones vuelven a su estado original pero en una ubicación diferente <br/> Avanzan infinitamente por toda la grilla"}
 ];
 
 /* Crearemos un html de la forma por cada tipo de patron:
@@ -24,7 +23,7 @@ const arrTiposPatrones = [
 
 */
 
-arrTiposPatrones.forEach(patron => {
+tiposPatrones.forEach(patron => {
     /* Nivel 0 */
     let cardTipoPatron = document.createElement("div");
     cardTipoPatron.classList.add("tipo-patron");
@@ -38,12 +37,12 @@ arrTiposPatrones.forEach(patron => {
     /* Nivel 2 */
     let tituloPatron = document.createElement("h2");
     tituloPatron.classList.add("titulo-patron");
-    tituloPatron.innerHTML = patron[0];
+    tituloPatron.innerHTML = patron.nombre;
     cardFrente.appendChild(tituloPatron);
 
     /* Nivel 2 */
     let imagenPatron = document.createElement("img");
-    imagenPatron.src = patron[1];
+    imagenPatron.src = patron.imagen;
     imagenPatron.classList.add("img-gif-card");
     cardFrente.appendChild(imagenPatron);
 
@@ -55,7 +54,7 @@ arrTiposPatrones.forEach(patron => {
     /* Nivel 2 */
     let textoInfo = document.createElement("p");
     textoInfo.classList.add("texto-info");
-    textoInfo.innerHTML = patron[2];
+    textoInfo.innerHTML = patron.descripcion;
     cardAtras.appendChild(textoInfo);
 });
 
@@ -63,35 +62,35 @@ arrTiposPatrones.forEach(patron => {
 
 /* Creamos dinámicamente cada slider de patrón con ejemplos de cada uno */
 const seccionPatrones = document.getElementById("seccion-patrones");
-const arrEjemplosPatrones = [
+const ejemplosPatrones = [
     //[ Nombre tipo patrón, [ URL de patrón, Nombre patrón ... ] ... ]
-    ["Vidas Estáticas", [ ["../img/estatico-bloque.png", "Bloque"],
-        ["../img/estatico-pan.png", "Pan"],
-        ["../img/estatico-flor.png", "Flor"],
-        ["../img/estatico-bote.png", "Bote"],
-        ["../img/estatico-colmena.png", "Colmena"]
-    ] ],
-    ["Oscilantes", [ ["../gifs/oscilante-palito.gif", "Palito"],
-        ["../gifs/oscilante-sol.gif", "Sol"],
-        ["../gifs/oscilante-tornado.gif", "Tornado"],
-        ["../gifs/oscilante-ocho.gif", "Ocho"],
-        ["../gifs/oscilante-cena.gif", "Cena"]
-    ] ],
-    ["Matusalenes", [ ["../img/matusalen-diehard.png", "Diehard"],
-        ["../img/matusalen-pistola.png", "Pistola"],
-        ["../img/matusalen-pi.png", "Pi"],
-        ["../img/matusalen-tetris.png", "Tetris"],
-        ["../img/matusalen-bheptomino.png", "B-Heptomino"]
-    ] ],
-    ["Naves Espaciales", [ ["../gifs/nave-glider.gif", "Glider"],
-        ["../gifs/nave-pajaro.gif", "Pájaro"],
-        ["../gifs/nave-cara.gif", "Cara"],
-        ["../gifs/nave-58P5H1V1.gif", "58P5H1V1"],
-        ["../gifs/nave-loafer.gif", "Loafer"],
-    ] ],
-    ["Generadores de naves", [ ["../gifs/glider-gun.gif", "Glider Gun"],
-        ["../gifs/super-glider-gun.gif", "Super-Glider Gun"]
-    ] ]
+    {nombre:"Vidas Estáticas", patrones:[ {imagen:"../img/estatico-bloque.png", nombrePatron:"Bloque"},
+        {imagen:"../img/estatico-pan.png", nombrePatron:"Pan"},
+        {imagen:"../img/estatico-flor.png", nombrePatron:"Flor"},
+        {imagen:"../img/estatico-bote.png", nombrePatron:"Bote"},
+        {imagen:"../img/estatico-colmena.png", nombrePatron:"Colmena"}
+    ] },
+    {nombre:"Oscilantes", patrones:[ {imagen:"../gifs/oscilante-palito.gif", nombrePatron:"Palito"},
+        {imagen:"../gifs/oscilante-sol.gif", nombrePatron:"Sol"},
+        {imagen:"../gifs/oscilante-tornado.gif", nombrePatron:"Tornado"},
+        {imagen:"../gifs/oscilante-ocho.gif", nombrePatron:"Ocho"},
+        {imagen:"../gifs/oscilante-cena.gif", nombrePatron:"Cena"}
+    ] },
+    {nombre:"Matusalenes", patrones:[ {imagen:"../img/matusalen-diehard.png", nombrePatron:"Diehard"},
+        {imagen:"../img/matusalen-pistola.png", nombrePatron:"Pistola"},
+        {imagen:"../img/matusalen-pi.png", nombrePatron:"Pi"},
+        {imagen:"../img/matusalen-tetris.png", nombrePatron:"Tetris"},
+        {imagen:"../img/matusalen-bheptomino.png", nombrePatron:"B-Heptomino"}
+    ] },
+    {nombre:"Naves Espaciales", patrones:[ {imagen:"../gifs/nave-glider.gif", nombrePatron:"Glider"},
+        {imagen:"../gifs/nave-pajaro.gif", nombrePatron:"Pájaro"},
+        {imagen:"../gifs/nave-cara.gif", nombrePatron:"Cara"},
+        {imagen:"../gifs/nave-58P5H1V1.gif", nombrePatron:"58P5H1V1"},
+        {imagen:"../gifs/nave-loafer.gif", nombrePatron:"Loafer"}
+    ] },
+    {nombre:"Generadores de naves", patrones:[ {imagen:"../gifs/glider-gun.gif", nombrePatron:"Glider Gun"},
+        {imagen:"../gifs/super-glider-gun.gif", nombrePatron:"Super-Glider Gun"}
+    ] }
 ];
 
 /* Crearemos un html de la forma por cada patron:
@@ -115,7 +114,7 @@ const arrEjemplosPatrones = [
 
 */
 
-arrEjemplosPatrones.forEach(patron => {
+ejemplosPatrones.forEach(tipoPatron => {
     /* Nivel 0 */
     let sliderPatron = document.createElement("div");
     sliderPatron.classList.add("slider-patron");
@@ -124,7 +123,7 @@ arrEjemplosPatrones.forEach(patron => {
     /* Nivel 1 */
     let tituloPatron = document.createElement("h2");
     tituloPatron.classList.add("titulo-patron");
-    tituloPatron.innerHTML = patron[0];
+    tituloPatron.innerHTML = tipoPatron.nombre;
     sliderPatron.appendChild(tituloPatron);
 
     /* Nivel 1 */
@@ -138,7 +137,7 @@ arrEjemplosPatrones.forEach(patron => {
     imagenesPatron.appendChild(listaPatrones);
 
     /* Nivel 3 - Creación de cada elemento de la lista */
-    patron[1].forEach(ejemploPatron => {
+    (tipoPatron.patrones).forEach(ejemploPatron => {
         let itemPatron = document.createElement("li");
         itemPatron.classList.add("item-ejemplos-patron");
         listaPatrones.appendChild(itemPatron);
@@ -146,13 +145,13 @@ arrEjemplosPatrones.forEach(patron => {
         /* Nivel 4 */
         let imagenEjemploPatron = document.createElement("img");
         imagenEjemploPatron.classList.add("item-imagen");
-        imagenEjemploPatron.src = ejemploPatron[0];
+        imagenEjemploPatron.src = ejemploPatron.imagen;
         itemPatron.appendChild(imagenEjemploPatron);
 
         /* Nivel 4 */
         let nombreEjemploPatron = document.createElement("p");
         nombreEjemploPatron.classList.add("nombre-patron");
-        nombreEjemploPatron.innerHTML = ejemploPatron[1];
+        nombreEjemploPatron.innerHTML = ejemploPatron.nombrePatron;
         itemPatron.appendChild(nombreEjemploPatron);
     });
 });
