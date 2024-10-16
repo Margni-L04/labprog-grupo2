@@ -90,6 +90,13 @@ const ejemplosPatrones = [
     ] },
     {nombre:"Generadores de naves", patrones:[ {imagen:"../gifs/glider-gun.gif", nombrePatron:"Glider Gun"},
         {imagen:"../gifs/super-glider-gun.gif", nombrePatron:"Super-Glider Gun"}
+    ] },
+    {nombre:"Logic Gates", patrones:[ {imagen:"../gifs/logic-gate-not-1.gif", nombrePatron:"NOT (IN:1)"},
+        {imagen:"../gifs/logic-gate-not-0.gif", nombrePatron:"NOT (IN:0)"},
+        {imagen:"../gifs/logic-gate-and-00.gif", nombrePatron:"AND (IN:0,0)"},
+        {imagen:"../gifs/logic-gate-and-01.gif", nombrePatron:"AND (IN:0,1)"},
+        {imagen:"../gifs/logic-gate-and-10.gif", nombrePatron:"AND (IN:1,0)"},
+        {imagen:"../gifs/logic-gate-and-11.gif", nombrePatron:"AND (IN:1,1)"}
     ] }
 ];
 
