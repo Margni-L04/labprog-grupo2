@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <title>Juego Conway</title>
     <link rel="icon" href="../img/logo.png">
@@ -12,6 +13,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300..700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display" rel="stylesheet">
 </head>
 
 <body>
@@ -22,53 +24,71 @@
             <a href='juego.html' class="aNav">Jugar!</a>
         </nav>
     </header>
-    <section>
+
+    <section class="contenedorTitulo">
         <h1 class="tituloJuego">Juego de la Vida de Conway</h1>
+        <div class="gif-fondo"></div>
     </section>
 
     <section class="seccionExplicacion">
-        <h2>¿Qué es el Juego de la Vida?</h2>
-            <p class="textoReglas">
+        <div class="preguntas">
+            <h2 class="tituloReglas">¿Qué es el Juego de la Vida?</h2>
+            <p class="textoPreguntas">
                 El juego de la vida de Conway es un modelo matemático computacional que simula sistemas naturales
-                formados por muchos objetos que llamaremos células, que interactúan entre sí con unas reglas muy sencillas.
-                En ciertas ocasiones, de estas reglas pueden surgir cosas tan complejas que parecen casi mágicas.
+                formados por muchos objetos que llamaremos células, que interactúan entre sí con unas reglas muy
+                sencillas. En ciertas ocasiones, de estas reglas pueden surgir cosas tan complejas que parecen casi
+                mágicas.
             </p>
 
-            <p class="textoReglas">
-                El objetivo de hacer matemáticas es también jugar, y eso es precisamente lo que vamos a hacer.
-                Vamos a jugar al juego de la vida de Conway, un juego diseñado para cero jugadores.
+            <p class="textoPreguntas">
+                El objetivo de hacer matemáticas es también jugar, y eso es precisamente lo que vamos a hacer. Vamos a
+                jugar al juego de la vida de Conway, un juego diseñado para cero jugadores.
             </p>
 
             <br />
-
-            <h2>¿Cómo funciona?</h2>
-            <p class="textoReglas">
-                Este juego consta de un número infinito de celdas, pero para poder visualizarlo veremos una vista finita,
-                que debemos imaginar que se extiende hacia el infinito en todas direcciones.
+        </div>
+        <div class="preguntas">
+            <h2 class="tituloReglas">¿Cómo funciona? </h2>
+            <p class="textoPreguntas">
+                Este juego consta de un número infinito de celdas, pero para poder visualizarlo veremos una vista
+                finita, que debemos imaginar que se extiende hacia el infinito en todas direcciones.
             </p>
 
-            <p class="textoReglas">
-                Cada celda, que llamaremos "células", se comporta como si fuera un organismo vivo. Existen dos posibilidades:
-                una célula está viva (que pintaremos de color negro) o está muerta (de color blanco).
+            <p class="textoPreguntas">
+                Cada celda, que llamaremos "células", se comporta como si fuera un organismo vivo. Existen dos
+                posibilidades: una célula está viva (que pintaremos de color negro) o está muerta (de color blanco).
             </p>
 
-            <p class="textoReglas">
+            <p class="textoPreguntas">
                 Se comienza con una configuración inicial de células vivas y muertas, que podemos escoger libremente.
                 Conforme pasa el tiempo, el juego decide qué células mueren y cuáles sobreviven.
             </p>
+        </div>
     </section>
 
-    <section class="contenedor">
+    <section class="seccionReglas">
         <div class="columna">
             <h1 class="tituloReglas">Regla 1</h1>
             <p class="textoReglas">Si una célula está viva:
                 <br /> -Si tiene más de 3 vecinos vivos, muere por sobrepoblación.
                 <br /> -Si tiene menos de 2 células vecinas vivas, muere por aislación.
                 <br /> -Si tiene 2 o 3 células vecinas vivas, sobrevive.
-            </p> 
+            </p>
         </div>
-        <div class="columna">
+        <div class="contenedorImagenReglas">
             <img src="../img/Regla1.png" id="regla1" class="imagenRegla">
+        </div>
+        <div class="cards-patrones" id="cards-patrones">
+            <div class="tipo-patron">
+                <div class="tipo-patron-frente">
+                    <h2 class="titulo-patron">Antes de aplicar la regla</h2>
+                    <img src="../img/regla1-antes.jpeg" class="img-gif-card">
+                </div>
+                <div class="tipo-patron-atras">
+                    <h2 class="titulo-patron">Luego de aplicar la regla</h2>
+                    <img src="../img/regla-despues.jpeg" class="img-gif-card">
+                </div>
+            </div>
         </div>
         <div class="columna">
             <h1 class="tituloReglas">Regla 2</h1>
@@ -76,11 +96,23 @@
                 <br /> -Si tiene 3 vecinos vivos, revive.
                 <br /> -En otro caso, continua muerta.
         </div>
-        <div class="columna">
+        <div class="contenedorImagenReglas">
             <img src="../img/Regla2.png" id="regla2" class="imagenRegla">
+        </div>
+        <div class="cards-patrones" id="cards-patrones">
+            <div class="tipo-patron">
+                <div class="tipo-patron-frente">
+                    <h2 class="titulo-patron">Antes de aplicar la regla</h2>
+                    <img src="../img/regla2-antes.jpeg" class="img-gif-card">
+                </div>
+                <div class="tipo-patron-atras">
+                    <h2 class="titulo-patron">Luego de aplicar la regla</h2>
+                    <img src="../img/regla-despues.jpeg" class="img-gif-card">
+                </div>
+            </div>
         </div>
     </section>
 
-
     <script src="../js/scripts-navbar.js"></script>
+    <script src="../js/scripts-index.js"></script>
 </body>

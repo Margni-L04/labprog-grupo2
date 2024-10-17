@@ -1,21 +1,107 @@
 *{
     margin: 0;
+    padding: 0;
+    border: 0;
+    font-size: 100%;
+    vertical-align: baseline;
     font-optical-sizing: auto;
+    font-family: "Quicksand", sans-serif;
+    text-align: center;
 }
 
 body {
+    display: grid;
     background-color: #DDD0C8;
 }
 
-.contenedor {
+/* Seccion del Titulo */
+.contenedorTitulo {
+    position: relative;
     display: grid;
-    grid-template-columns: repeat(4, 1fr); /* 4 columnas iguales */
-    gap: 2%; /* Espacio entre columnas */
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr;
+    align-items: center;
+    justify-items: center;
+    height: 95vh;
+    width: 100%;
+    overflow: hidden;
+}
+
+/* Formato para título */
+.tituloJuego {
+    font-family: 'Press Start 2P', cursive;
+    position: relative;
+    font-weight: 900;
+    font-size: 3em;
+    margin: 0;
+    color: black;
+    z-index: 1;
+    text-align: center;
+}
+
+/* Fondo del título */
+.gif-fondo {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url('../gifs/conway.gif');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    opacity: 0.4;
+    z-index: -1;
+}
+
+/* Seccion de Preguntas */
+.seccionExplicacion {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: repeat(1, 1fr);
+    gap: 2%;
+    justify-content: space-around;
+    padding: 30px;
+    background-color: #e5bb89;
+}
+
+/* Contenedor de las preguntas */
+.preguntas{
+    margin: 2%;
+}
+
+/* Titulos de las preguntas */
+.tituloReglas {
+    font-weight: bold;
+    font-size: 2.5em;
+    text-align: center;
+    margin: 1em;
+}
+
+/* Texto de las respuestas */
+.textoPreguntas{
+    font-family: "Quicksand", sans-serif;
+    font-size: 1.1em;
+    line-height: 1.6em;
+    margin-bottom: 1.5em;
+    margin: 2%;
+    margin-left: 5em;
+    margin-right: 5em;
+    font-weight: 400;
+}
+
+/* Seccion de las Reglas */
+.seccionReglas {
+    display: grid;
+    width: 100%;
+    grid-template-columns: repeat(3, 32%);
+    grid-template-rows: repeat(1, 1fr);
+    gap: 2%;
     justify-content: space-around;
 }
 
 .columna {
-    padding: 30px;  /* margen dentro de la caja */
+    padding: 10px;  /* margen dentro de la caja */
     box-sizing: border-box;
     height: auto;
     background-size: cover;
@@ -23,40 +109,111 @@ body {
     flex-direction: column;
     align-items: center;
     justify-content: flex-start;
-}
-
-
-.tituloReglas {
-    font-family: "Quicksand", sans-serif;
-    font-weight: bold;
-    font-size: 2em;
-    text-align: center;
-    margin: 5%;
-}
-
-.tituloJuego {
-    font-family: "Quicksand", sans-serif;
-    font-weight: bold;
-    font-size: 3em;
-    margin: 5%;
-}
-
-.seccionExplicacion {
-    padding: 30px;
+    margin-top: 5%;
 }
 
 .textoReglas{
     font-family: "Quicksand", sans-serif;
-    font-size: 1.1em;
+    font-size: 1.3em;
     line-height: 1.6em;
     margin-bottom: 1.5em;
+    margin: 6%;
+    margin-top: 0%;
+    font-weight: 400;
+    width: 100%;
+    text-align: left;
+    padding: 2%;
+    box-sizing: border-box;
+}
+
+.contenedorImagenReglas{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    width: 100%;
+    margin: 0;
 }
 
 .imagenRegla {
     height: auto;
-    width: 100%;
+    width: 60%;
     margin: 2%;
     justify-content: center; /* Centrar verticalmente */
     align-items: flex-start; /* Alinear horizontalmente a la izquierda */ 
     left: 0; /* Alinea la imagen a la izquierda */
+}
+
+/* Seccion de las card de las Reglas*/
+
+/* Contenedor de patrones */
+.cards-patrones {
+    display: grid;
+    flex-wrap: wrap;
+    justify-content: center;
+    padding: 25px 0px;
+    margin: auto;
+}
+
+/* Cada card de un tipo de patrón */
+.tipo-patron {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #ce9c7d;
+    width: 90%;
+    height: 400px;
+    text-align: center;
+    border-radius: 8px;
+    margin: 20px;
+    transition: all 0.6s ease;
+    transform-style: preserve-3d;
+}
+
+/* Para ver qué patrón está seleccionado */
+.tipo-patron:hover {
+    transform: translateY(-15px);
+    box-shadow: 0 12px 16px rgba(0, 0, 0, 0.2);
+    cursor: pointer;
+}
+
+/* Para ver info del patrón al darlo vuelta */
+.tipo-patron.flipped {
+    transform: rotateY(180deg);
+}
+
+/* Parte de adelante de la card */
+.tipo-patron-frente {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    margin-top: 10px;
+    backface-visibility: hidden;
+}
+
+/* Parte de atrás de la card */
+.tipo-patron-atras {
+    text-align: center;
+    backface-visibility: hidden;
+    transform: rotateY(180deg);
+}
+
+/* Título de cada patrón */
+.titulo-patron {
+    font-family: "Quicksand", sans-serif;
+    font-weight: normal;
+    margin-top: 30px;
+    font-size: 1.8em;
+    height: 90px;
+    width: 90%;
+    user-select: none;
+}
+
+/* Imágen/Gif de cada patrón */
+.img-gif-card {
+    position: relative;
+    width: 50%;
+    height: 200px;
+    bottom: -10px;
+    user-select: none;
 }
