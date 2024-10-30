@@ -1,0 +1,36 @@
+[
+    {"nombre":"Vidas Estáticas", "patrones":[ {"imagen":"../img/estatico-bloque.png", "nombrePatron":"Bloque"},
+        {"imagen":"../img/estatico-pan.png", "nombrePatron":"Pan"},
+        {"imagen":"../img/estatico-flor.png", "nombrePatron":"Flor"},
+        {"imagen":"../img/estatico-bote.png", "nombrePatron":"Bote"},
+        {"imagen":"../img/estatico-colmena.png", "nombrePatron":"Colmena"}
+    ] },
+    {"nombre":"Oscilantes", "patrones":[ {"imagen":"../gifs/oscilante-palito.gif", "nombrePatron":"Palito"},
+        {"imagen":"../gifs/oscilante-sol.gif", "nombrePatron":"Sol"},
+        {"imagen":"../gifs/oscilante-tornado.gif", "nombrePatron":"Tornado"},
+        {"imagen":"../gifs/oscilante-ocho.gif", "nombrePatron":"Ocho"},
+        {"imagen":"../gifs/oscilante-cena.gif", "nombrePatron":"Cena"}
+    ] },
+    {"nombre":"Matusalenes", "patrones":[ {"imagen":"../img/matusalen-diehard.png", "nombrePatron":"Diehard"},
+        {"imagen":"../img/matusalen-pistola.png", "nombrePatron":"Pistola"},
+        {"imagen":"../img/matusalen-pi.png", "nombrePatron":"Pi"},
+        {"imagen":"../img/matusalen-tetris.png", "nombrePatron":"Tetris"},
+        {"imagen":"../img/matusalen-bheptomino.png", "nombrePatron":"B-Heptomino"}
+    ] },
+    {"nombre":"Naves Espaciales", "patrones":[ {"imagen":"../gifs/nave-glider.gif", "nombrePatron":"Glider"},
+        {"imagen":"../gifs/nave-pajaro.gif", "nombrePatron":"Pájaro"},
+        {"imagen":"../gifs/nave-cara.gif", "nombrePatron":"Cara"},
+        {"imagen":"../gifs/nave-58P5H1V1.gif", "nombrePatron":"58P5H1V1"},
+        {"imagen":"../gifs/nave-loafer.gif", "nombrePatron":"Loafer"}
+    ] },
+    {"nombre":"Generadores de naves", "patrones":[ {"imagen":"../gifs/glider-gun.gif", "nombrePatron":"Glider Gun"},
+        {"imagen":"../gifs/super-glider-gun.gif", "nombrePatron":"Super-Glider Gun"}
+    ] },
+    {"nombre":"Logic Gates", "patrones":[ {"imagen":"../gifs/logic-gate-not-1.gif", "nombrePatron":"NOT (IN:1)"},
+        {"imagen":"../gifs/logic-gate-not-0.gif", "nombrePatron":"NOT (IN:0)"},
+        {"imagen":"../gifs/logic-gate-and-00.gif", "nombrePatron":"AND (IN:0,0)"},
+        {"imagen":"../gifs/logic-gate-and-01.gif", "nombrePatron":"AND (IN:0,1)"},
+        {"imagen":"../gifs/logic-gate-and-10.gif", "nombrePatron":"AND (IN:1,0)"},
+        {"imagen":"../gifs/logic-gate-and-11.gif", "nombrePatron":"AND (IN:1,1)"}
+    ] }
+]
