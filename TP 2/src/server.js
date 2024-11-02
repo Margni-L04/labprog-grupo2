@@ -1,4 +1,5 @@
-//Para prender el servidor: server.js (posicionados en carpeta node)
+//Para prender el servidor: server.js (posicionados en carpeta src)
+//O con nodemon instalado: npx nodemon server.js
 
 /*
 Para crear los json y la carpeta node_modules
@@ -12,6 +13,8 @@ const express = require('express');
 //instancia express
 const app = express();
 
+module.exports = app;
+
 /*
 Ver ip local en Linux
 En terminal: ip addr show
@@ -20,8 +23,8 @@ Buscamos el relacionado con la ip local, en mi caso es wlp3s0
 En la línea que contiene inet, buscamos la ip y la copiamos sin la máscara (172.16.100.72/16 por ej)
 */
 
-const ip = '172.16.100.208';
-//const ip = 'localhost'; //para evitar usar el comando anterior
+//const ip = '172.16.100.208';
+const ip = 'localhost'; //para evitar usar el comando anterior
 
 //elegimos un puerto, superior a 1024, pues estos son puertos reservados
 const puerto = '3017';
@@ -60,8 +63,32 @@ app.use(express.static(staticPath));
 app.use(express.static(staticPathPages));
 
 //cuando el usuario entre al server, se lo llevara al index
-app.get('/', (req, res) => { // "/" indica la raiz
+app.get('/', (req, res) => { // '/' indica la raiz
     res.sendFile(indexPath);
+});
+
+//le decimos a express que vamos a usar json
+app.use(express.json());
+
+app.post('/api/agregarPatrones', (req, res) => {
+    //leemos el objeto json que nos envían con el post
+    const nuevoPatron = req.body;
+
+    //leemos el contenido del archivo json ejemplos-patrones (se lee como un string)
+    const dataPatrones = fs.readFileSync('public/json/ejemplos-patrones.json', 'utf-8');
+    //transformamos el contenido a formato json
+    const patronesJSON = JSON.parse(dataPatrones);
+
+    //agregamos a la lista de patrones existentes el enviado en el post
+    patronesJSON.push(nuevoPatron);
+
+    //transformamos la nueva lista de patrones a formato string
+    const jsonData = JSON.stringify(patronesJSON);
+    //reescribimos la nueva lista de nuevo en el archivo json ejemplos-patrones
+    fs.writeFileSync('public/json/ejemplos-patrones.json', jsonData, 'utf-8');
+
+    //enviamos a cliente que todo funcionó correctamente
+    res.send('Todo OK');
 });
 
 //abrimos el server en el puerto que especificamos
