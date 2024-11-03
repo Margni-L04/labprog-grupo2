@@ -75,28 +75,36 @@ app.post('/api/agregarPatrones/:tipoPatron', (req, res) => {
     const nuevoPatron = req.body;
     const tipoPatron = req.params.tipoPatron;
 
-    //leemos el contenido del archivo json ejemplos-patrones (se lee como un string)
-    const dataPatrones = fs.readFileSync('public/json/ejemplos-patrones.json', 'utf-8');
-    //transformamos el contenido a formato json
-    const patronesJSON = JSON.parse(dataPatrones);
-
-    //buscamos el patron que tenga el mismo nombre que el pasado por parámetro
-    const patronJSON = patronesJSON.find(pat => pat.nombre == tipoPatron);
-
-    if(!patronJSON) {
-        //no existe el tipo de patron pasado
-        res.send('"' + tipoPatron + '" no es un tipo de patron valido');
+    if(!nuevoPatron.imagen || typeof nuevoPatron.imagen !== 'string') {
+        //validamos que el objeto pasado tenga una imagen y que sea de tipo string
+        res.status(400).send('Es requerido un atributo "imagen" y debe ser de tipo string');
+    } else if(!nuevoPatron.nombrePatron || typeof nuevoPatron.nombrePatron !== 'string') {
+        //validamos que el objeto pasado tenga un nombre del patron y que sea de tipo string
+        res.status(400).send('Es requerido un atributo "nombrePatron" y debe ser de tipo string');
     } else {
-        //agregamos a la lista de patrones existentes el enviado en el post
-        patronJSON.patrones.push(nuevoPatron);
+        //leemos el contenido del archivo json ejemplos-patrones (se lee como un string)
+        const dataPatrones = fs.readFileSync('public/json/ejemplos-patrones.json', 'utf-8');
+        //transformamos el contenido a formato json
+        const patronesJSON = JSON.parse(dataPatrones);
 
-        //transformamos la nueva lista de patrones a formato string
-        const jsonData = JSON.stringify(patronesJSON);
-        //reescribimos la nueva lista de nuevo en el archivo json ejemplos-patrones (la ruta es relativa al archivo "package.json")
-        fs.writeFileSync('public/json/ejemplos-patrones.json', jsonData, 'utf-8');
+        //buscamos el patron que tenga el mismo nombre que el pasado por parámetro
+        const patronJSON = patronesJSON.find(pat => pat.nombre == tipoPatron);
 
-        //enviamos a cliente que todo funcionó correctamente
-        res.send('Todo OK');
+        if(!patronJSON) {
+            //no existe el tipo de patron pasado
+            res.status(400).send('"' + tipoPatron + '" no es un tipo de patron valido');
+        } else {
+            //agregamos a la lista de patrones existentes el enviado en el post
+            patronJSON.patrones.push(nuevoPatron);
+
+            //transformamos la nueva lista de patrones a formato string
+            const jsonData = JSON.stringify(patronesJSON);
+            //reescribimos la nueva lista de nuevo en el archivo json ejemplos-patrones (la ruta es relativa al archivo "package.json")
+            fs.writeFileSync('public/json/ejemplos-patrones.json', jsonData, 'utf-8');
+
+            //enviamos a cliente que todo funcionó correctamente
+            res.send('Todo OK');
+        }
     }
 });
 
