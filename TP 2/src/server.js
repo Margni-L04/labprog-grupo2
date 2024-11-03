@@ -13,8 +13,6 @@ const express = require('express');
 //instancia express
 const app = express();
 
-module.exports = app;
-
 /*
 Ver ip local en Linux
 En terminal: ip addr show
@@ -73,6 +71,7 @@ app.use(express.json());
 app.post('/api/agregarPatrones/:tipoPatron', (req, res) => {
     //leemos el objeto json que nos envían con el post
     const nuevoPatron = req.body;
+    //guardamos el valor del parametro de la url
     const tipoPatron = req.params.tipoPatron;
 
     if(!nuevoPatron.imagen || typeof nuevoPatron.imagen !== 'string') {
@@ -94,16 +93,25 @@ app.post('/api/agregarPatrones/:tipoPatron', (req, res) => {
             //no existe el tipo de patron pasado
             res.status(400).send('"' + tipoPatron + '" no es un tipo de patron valido');
         } else {
-            //agregamos a la lista de patrones existentes el enviado en el post
-            patronJSON.patrones.push(nuevoPatron);
+            //buscamos dentro de la lista de patrones del tipo indicado si existe uno con el mismo nombre de patron
+            const patronExistente = (patronJSON.patrones).find(pat => pat.nombrePatron == nuevoPatron.nombrePatron);
 
-            //transformamos la nueva lista de patrones a formato string
-            const jsonData = JSON.stringify(patronesJSON);
-            //reescribimos la nueva lista de nuevo en el archivo json ejemplos-patrones (la ruta es relativa al archivo "package.json")
-            fs.writeFileSync('public/json/ejemplos-patrones.json', jsonData, 'utf-8');
+            if(patronExistente) {
+                //ya existe un patron con el mismo nombre dentro de este tipo de patron, esto no esta permitido
+                res.status(400).send('El patron "' + (nuevoPatron.nombrePatron) 
+                                    + '" ya existe dentro del tipo de patron "' + tipoPatron +'"');
+            } else {
+                //agregamos a la lista de patrones existentes el enviado en el post
+                patronJSON.patrones.push(nuevoPatron);
 
-            //enviamos a cliente que todo funcionó correctamente
-            res.send('Todo OK');
+                //transformamos la nueva lista de patrones a formato string
+                const jsonData = JSON.stringify(patronesJSON);
+                //reescribimos la nueva lista de nuevo en el archivo json ejemplos-patrones (la ruta es relativa al archivo "package.json")
+                fs.writeFileSync('public/json/ejemplos-patrones.json', jsonData, 'utf-8');
+
+                //enviamos a cliente que todo funcionó correctamente
+                res.send('Operacion realizada con exito');
+            }
         }
     }
 });
