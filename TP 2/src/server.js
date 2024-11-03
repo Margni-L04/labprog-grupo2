@@ -70,25 +70,34 @@ app.get('/', (req, res) => { // '/' indica la raiz
 //le decimos a express que vamos a usar json
 app.use(express.json());
 
-app.post('/api/agregarPatrones', (req, res) => {
+app.post('/api/agregarPatrones/:tipoPatron', (req, res) => {
     //leemos el objeto json que nos envían con el post
     const nuevoPatron = req.body;
+    const tipoPatron = req.params.tipoPatron;
 
     //leemos el contenido del archivo json ejemplos-patrones (se lee como un string)
     const dataPatrones = fs.readFileSync('public/json/ejemplos-patrones.json', 'utf-8');
     //transformamos el contenido a formato json
     const patronesJSON = JSON.parse(dataPatrones);
 
-    //agregamos a la lista de patrones existentes el enviado en el post
-    patronesJSON.push(nuevoPatron);
+    //buscamos el patron que tenga el mismo nombre que el pasado por parámetro
+    const patronJSON = patronesJSON.find(pat => pat.nombre == tipoPatron);
 
-    //transformamos la nueva lista de patrones a formato string
-    const jsonData = JSON.stringify(patronesJSON);
-    //reescribimos la nueva lista de nuevo en el archivo json ejemplos-patrones
-    fs.writeFileSync('public/json/ejemplos-patrones.json', jsonData, 'utf-8');
+    if(!patronJSON) {
+        //no existe el tipo de patron pasado
+        res.send('"' + tipoPatron + '" no es un tipo de patron valido');
+    } else {
+        //agregamos a la lista de patrones existentes el enviado en el post
+        patronJSON.patrones.push(nuevoPatron);
 
-    //enviamos a cliente que todo funcionó correctamente
-    res.send('Todo OK');
+        //transformamos la nueva lista de patrones a formato string
+        const jsonData = JSON.stringify(patronesJSON);
+        //reescribimos la nueva lista de nuevo en el archivo json ejemplos-patrones (la ruta es relativa al archivo "package.json")
+        fs.writeFileSync('public/json/ejemplos-patrones.json', jsonData, 'utf-8');
+
+        //enviamos a cliente que todo funcionó correctamente
+        res.send('Todo OK');
+    }
 });
 
 //abrimos el server en el puerto que especificamos
