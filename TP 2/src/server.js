@@ -21,8 +21,8 @@ Buscamos el relacionado con la ip local, en mi caso es wlp3s0
 En la línea que contiene inet, buscamos la ip y la copiamos sin la máscara (172.16.100.72/16 por ej)
 */
 
-//const ip = '172.16.100.208';
-const ip = 'localhost'; //para evitar usar el comando anterior
+const ip = '172.16.100.208';
+//const ip = 'localhost'; //para evitar usar el comando anterior
 
 //elegimos un puerto, superior a 1024, pues estos son puertos reservados
 const puerto = '3017';
@@ -112,6 +112,41 @@ app.post('/api/agregarPatrones/:tipoPatron', (req, res) => {
                 //enviamos a cliente que todo funcionó correctamente
                 res.send('Operacion realizada con exito');
             }
+        }
+    }
+});
+
+app.get('/api/patrones', (req, res) => { //Mostrar
+    // Obtenemos la cantidad y el inicio
+    const cantidad = parseInt(req.query.cantidad);
+    const from = parseInt(req.query.from);
+    const tipoPatron = req.query.tipoPatron;
+    
+    //leemos el contenido del archivo json ejemplos-patrones (se lee como un string)
+    const dataPatrones = fs.readFileSync('public/json/ejemplos-patrones.json', 'utf-8');
+    //transformamos el contenido a formato json
+    const patronesJSON = JSON.parse(dataPatrones);
+
+    if(!cantidad || cantidad <= 0){
+        //cantidad invalida
+        res.status(400).send('cantidad  = ' + cantidad + ' no es valida');
+    } else if(!from || from < 0){
+        //from invalido
+        res.status(400).send('inicio = ' + from + ' no es valido');
+    } else if (!tipoPatron || typeof tipoPatron !== 'string') {
+        //tipoPatron invalido
+        res.status(400).send('tipoPatron = ' + tipoPatron + ' no es valido');
+    } else {
+        //filtramos por tipo de patrón
+        const tipoEncontrado = patronesJSON.find(pat => pat.nombre == tipoPatron);
+        if (tipoEncontrado) {
+            //si encontramos el tipo, usamos sus patrones
+            patronesFiltrados = tipoEncontrado.patrones;
+            const resultado = patronesFiltrados.slice(from, from + cantidad);
+            res.send(resultado);
+        } else {
+            //si no encontramos el tipo, enviamos un error
+            res.status(404).json('Tipo de patrón no encontrado');
         }
     }
 });
