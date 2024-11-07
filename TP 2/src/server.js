@@ -120,3 +120,74 @@ app.post('/api/agregarPatrones/:tipoPatron', (req, res) => {
 app.listen(puerto, () => {
     console.log('Entremos! http://' + ip + ':' + puerto);
 });
+
+app.get('/api/patrones', (req, res) => { //Mostrar
+    // Obtenemos la cantidad y el inicio
+    const cantidad = parseInt(req.query.cantidad);
+    const from = parseInt(req.query.from);
+    const tipoPatron = req.query.tipoPatron;
+    
+    //leemos el contenido del archivo json ejemplos-patrones (se lee como un string)
+    const dataPatrones = fs.readFileSync('public/json/ejemplos-patrones.json', 'utf-8');
+    //transformamos el contenido a formato json
+    const patronesJSON = JSON.parse(dataPatrones);
+
+    if(!cantidad || cantidad <= 0){
+        //cantidad invalida
+        res.status(400).send('cantidad  = ' + cantidad + ' no es valida');
+    } else if(!from || from < 0){
+        //from invalido
+        res.status(400).send('inicio = ' + from + ' no es valido');
+    } else if (!tipoPatron || typeof tipoPatron !== 'string') {
+        //tipoPatron invalido
+        res.status(400).send('tipoPatron = ' + tipoPatron + ' no es valido');
+    } else {
+        //filtramos por tipo de patrón
+        const tipoEncontrado = patronesJSON.find(pat => pat.nombre == tipoPatron);
+        if (tipoEncontrado) {
+            //si encontramos el tipo, usamos sus patrones
+            patronesFiltrados = tipoEncontrado.patrones;
+            const resultado = patronesFiltrados.slice(from, from + cantidad);
+            res.send(resultado);
+        } else {
+            //si no encontramos el tipo, enviamos un error
+            res.status(404).json('Tipo de patrón no encontrado');
+        }
+    }
+});
+
+app.get('/api/nombrepatron', (req, res) => { //Mostrar
+    // Obtenemos el nombre y el tipo de patron
+    const nombrePatron = req.query.nombrePatron;
+    const tipoPatron = req.query.tipoPatron;
+    
+    //leemos el contenido del archivo json ejemplos-patrones (se lee como un string)
+    const dataPatrones = fs.readFileSync('public/json/ejemplos-patrones.json', 'utf-8');
+    //transformamos el contenido a formato json
+    const patronesJSON = JSON.parse(dataPatrones);
+
+    if(!nombrePatron || typeof nombrePatron !== 'string'){
+        //nombrePatron invalido
+        res.status(400).send('nombrePatron = ' + nombrePatron + ' no es valido');
+    } else if (!tipoPatron || typeof tipoPatron !== 'string') {
+        //tipoPatron invalido
+        res.status(400).send('tipoPatron = ' + tipoPatron + ' no es valido');
+    } else {
+        //filtramos por tipo de patrón
+        const tipoEncontrado = patronesJSON.find(pat => pat.nombre == tipoPatron);
+        if (tipoEncontrado) {
+           //buscamos dentro de la lista de patrones del tipo indicado si existe uno con el mismo nombre de patron
+            const patronExistente = (tipoEncontrado.patrones).find(pat => pat.nombrePatron == nombrePatron);
+            if(patronExistente) {
+                //Enviamos el patron encontrado
+                res.send(patronExistente);
+            }else{
+                //si no encontramos el patron, enviamos un error
+                res.status(404).json('Nombre de patrón no encontrado');
+            }
+        } else {
+            //si no encontramos el tipo, enviamos un error
+            res.status(404).json('Tipo de patrón no encontrado');
+        }
+    }
+});
