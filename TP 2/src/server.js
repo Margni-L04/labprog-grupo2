@@ -13,7 +13,8 @@ const express = require('express');
 //instancia express
 const app = express();
 
-const {existeTipoPatron, existePatronEnTipo, agregarPatronEnTipo} = require('./models/patrones.js');
+const {existeTipoPatron, existePatronEnTipo, agregarPatronEnTipo, 
+    obtenerPatrones, obtenerPatronDeTipo} = require('./models/patrones.js');
 
 /*
 Ver ip local en Linux
@@ -112,38 +113,84 @@ app.post('/api/patrones/:tipoPatron', (req, res) => {
     }
 });
 
-app.get('/api/patrones', (req, res) => { //Mostrar
-    // Obtenemos la cantidad y el inicio
-    let { cantidad, from, tipoPatron } = req.query;
+//url/api/patrones?cantidad=...&desde=...&tipoPatron=...
+app.get('/api/patrones', (req, res) => {
+    //obtenemos la cantidad, el inicio y el tipo de patron de la url
+    let { cantidad, desde, tipoPatron } = req.query;
+    //transformamos los valores a int
     cantidad = parseInt(cantidad);
-    from = parseInt(from);
-    tipoPatron = parseInt(tipoPatron);
-    
-    //leemos el contenido del archivo json ejemplos-patrones (se lee como un string)
-    const dataPatrones = fs.readFileSync('public/json/ejemplos-patrones.json', 'utf-8');
-    //transformamos el contenido a formato json
-    const patronesJSON = JSON.parse(dataPatrones);
+    desde = parseInt(desde);
 
-    if(!cantidad || cantidad <= 0){
-        //cantidad invalida
-        res.status(400).send('cantidad  = ' + cantidad + ' no es valida');
-    } else if(!from || from < 0){
-        //from invalido
-        res.status(400).send('inicio = ' + from + ' no es valido');
-    } else if (!tipoPatron || typeof tipoPatron !== 'string') {
-        //tipoPatron invalido
-        res.status(400).send('tipoPatron = ' + tipoPatron + ' no es valido');
+    if(!cantidad && cantidad != 0){
+        //validamos que nos pasen como parametro de url una cantidad
+        res.status(400).send({message:'Es requerido un parametro \'cantidad\''});
+    } else if(cantidad <= 0){
+        //validamos que el parametro cantidad sea positivo
+        res.status(400).send({message:'El parametro \'cantidad\' debe ser un número positivo'});
+    } else if(!desde && desde != 0){
+        //validamos que nos pasen como parametro de url un valor desde
+        res.status(400).send({message:'Es requerido un parametro \'desde\''});
+    } else if(desde < 0){
+        //validamos que el parametro desde sea positivo o 0
+        res.status(400).send({message:'El parametro \'desde\' debe ser 0 o un número positivo'});
+    } else if (!tipoPatron) {
+        //validamos que nos pasen como parametro de url un tipo de patron
+        res.status(400).send({message:'Es requerido un parametro \'tipoPatron\''});
+    } else if(typeof tipoPatron !== 'string') {
+        //validamos que el parametro tipo de patron sea un string
+        res.status(400).send({message:'El parametro \'tipoPatron\' debe ser un string'});
     } else {
-        //filtramos por tipo de patrón
-        const tipoEncontrado = patronesJSON.find(pat => pat.nombre == tipoPatron);
-        if (tipoEncontrado) {
-            //si encontramos el tipo, usamos sus patrones
-            patronesFiltrados = tipoEncontrado.patrones;
-            const resultado = patronesFiltrados.slice(from, from + cantidad);
-            res.send(resultado);
+        //datos de entrada correctos
+        
+        if(!existeTipoPatron(tipoPatron)) {
+            //no existe el tipo de patron pasado
+            res.status(400).send({message:'\'' + tipoPatron + '\' no es un tipo de patron valido'});
         } else {
-            //si no encontramos el tipo, enviamos un error
-            res.status(404).json('Tipo de patrón no encontrado');
+            //existe el tipo de patron pasado, obtenemos los patrones con los datos de los parametros
+            const resultado = obtenerPatrones(tipoPatron, cantidad, desde);
+
+            res.send(resultado);
+        }
+    }
+});
+
+//url/api/nombrepatron?nombrePatron=...&tipoPatron=...
+app.get('/api/nombrepatron', (req, res) => {
+    // Obtenemos el nombre y el tipo de patron
+    const {nombrePatron, tipoPatron} = req.query;
+
+    if (!nombrePatron) {
+        //validamos que nos pasen como parametro de url un nombre de patron
+        res.status(400).send({message:'Es requerido un parametro \'nombrePatron\''});
+    } else if(typeof nombrePatron !== 'string') {
+        //validamos que el parametro nombre de patron sea un string
+        res.status(400).send({message:'El parametro \'nombrePatron\' debe ser un string'});
+    } else if (!tipoPatron) {
+        //validamos que nos pasen como parametro de url un tipo de patron
+        res.status(400).send({message:'Es requerido un parametro \'tipoPatron\''});
+    } else if(typeof tipoPatron !== 'string') {
+        //validamos que el parametro tipo de patron sea un string
+        res.status(400).send({message:'El parametro \'tipoPatron\' debe ser un string'});
+    } else {
+        //tenemos los datos de entrada correctos
+
+        if(!existeTipoPatron(tipoPatron)) {
+            //no existe el tipo de patron pasado
+            res.status(404).send({message:'\'' + tipoPatron + '\' no es un tipo de patron valido'});
+        } else {
+            //el tipo de patron pasado es valido
+
+            if(!existePatronEnTipo(nombrePatron, tipoPatron)) {
+                //no existe un patron con el mismo nombre dentro de este tipo de patron
+                res.status(404).send({message:'No existe el patron \'' + nombrePatron 
+                    + '\' en el tipo de patron \'' + tipoPatron + '\''});
+            } else {
+                //encontramos el patron buscado, lo obtenemos
+                const patronExistente = obtenerPatronDeTipo(nombrePatron, tipoPatron);
+
+                //enviamos a cliente el patron solicitado
+                res.send(patronExistente);
+            }
         }
     }
 });
@@ -151,75 +198,4 @@ app.get('/api/patrones', (req, res) => { //Mostrar
 //abrimos el server en el puerto que especificamos
 app.listen(puerto, () => {
     console.log('Entremos! http://' + ip + ':' + puerto);
-});
-
-app.get('/api/patrones', (req, res) => { //Mostrar
-    // Obtenemos la cantidad y el inicio
-    const cantidad = parseInt(req.query.cantidad);
-    const from = parseInt(req.query.from);
-    const tipoPatron = req.query.tipoPatron;
-    
-    //leemos el contenido del archivo json ejemplos-patrones (se lee como un string)
-    const dataPatrones = fs.readFileSync('public/json/ejemplos-patrones.json', 'utf-8');
-    //transformamos el contenido a formato json
-    const patronesJSON = JSON.parse(dataPatrones);
-
-    if(!cantidad || cantidad <= 0){
-        //cantidad invalida
-        res.status(400).send('cantidad  = ' + cantidad + ' no es valida');
-    } else if(!from || from < 0){
-        //from invalido
-        res.status(400).send('inicio = ' + from + ' no es valido');
-    } else if (!tipoPatron || typeof tipoPatron !== 'string') {
-        //tipoPatron invalido
-        res.status(400).send('tipoPatron = ' + tipoPatron + ' no es valido');
-    } else {
-        //filtramos por tipo de patrón
-        const tipoEncontrado = patronesJSON.find(pat => pat.nombre == tipoPatron);
-        if (tipoEncontrado) {
-            //si encontramos el tipo, usamos sus patrones
-            patronesFiltrados = tipoEncontrado.patrones;
-            const resultado = patronesFiltrados.slice(from, from + cantidad);
-            res.send(resultado);
-        } else {
-            //si no encontramos el tipo, enviamos un error
-            res.status(404).json('Tipo de patrón no encontrado');
-        }
-    }
-});
-
-app.get('/api/nombrepatron', (req, res) => { //Mostrar
-    // Obtenemos el nombre y el tipo de patron
-    const nombrePatron = req.query.nombrePatron;
-    const tipoPatron = req.query.tipoPatron;
-    
-    //leemos el contenido del archivo json ejemplos-patrones (se lee como un string)
-    const dataPatrones = fs.readFileSync('public/json/ejemplos-patrones.json', 'utf-8');
-    //transformamos el contenido a formato json
-    const patronesJSON = JSON.parse(dataPatrones);
-
-    if(!nombrePatron || typeof nombrePatron !== 'string'){
-        //nombrePatron invalido
-        res.status(400).send('nombrePatron = ' + nombrePatron + ' no es valido');
-    } else if (!tipoPatron || typeof tipoPatron !== 'string') {
-        //tipoPatron invalido
-        res.status(400).send('tipoPatron = ' + tipoPatron + ' no es valido');
-    } else {
-        //filtramos por tipo de patrón
-        const tipoEncontrado = patronesJSON.find(pat => pat.nombre == tipoPatron);
-        if (tipoEncontrado) {
-           //buscamos dentro de la lista de patrones del tipo indicado si existe uno con el mismo nombre de patron
-            const patronExistente = (tipoEncontrado.patrones).find(pat => pat.nombrePatron == nombrePatron);
-            if(patronExistente) {
-                //Enviamos el patron encontrado
-                res.send(patronExistente);
-            }else{
-                //si no encontramos el patron, enviamos un error
-                res.status(404).json('Nombre de patrón no encontrado');
-            }
-        } else {
-            //si no encontramos el tipo, enviamos un error
-            res.status(404).json('Tipo de patrón no encontrado');
-        }
-    }
 });
