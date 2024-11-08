@@ -13,6 +13,8 @@ const express = require('express');
 //instancia express
 const app = express();
 
+const {existeTipoPatron, existePatronEnTipo, agregarPatronEnTipo} = require('./models/patrones.js');
+
 /*
 Ver ip local en Linux
 En terminal: ip addr show
@@ -21,8 +23,8 @@ Buscamos el relacionado con la ip local, en mi caso es wlp3s0
 En la línea que contiene inet, buscamos la ip y la copiamos sin la máscara (172.16.100.72/16 por ej)
 */
 
-const ip = '172.16.100.208';
-//const ip = 'localhost'; //para evitar usar el comando anterior
+//const ip = '172.16.100.208';
+const ip = 'localhost'; //para evitar usar el comando anterior
 
 //elegimos un puerto, superior a 1024, pues estos son puertos reservados
 const puerto = '3017';
@@ -68,49 +70,43 @@ app.get('/', (req, res) => { // '/' indica la raiz
 //le decimos a express que vamos a usar json
 app.use(express.json());
 
-app.post('/api/agregarPatrones/:tipoPatron', (req, res) => {
+app.post('/api/patrones/:tipoPatron', (req, res) => {
     //leemos el objeto json que nos envían con el post
     const nuevoPatron = req.body;
     //guardamos el valor del parametro de la url
     const tipoPatron = req.params.tipoPatron;
 
-    if(!nuevoPatron.imagen || typeof nuevoPatron.imagen !== 'string') {
-        //validamos que el objeto pasado tenga una imagen y que sea de tipo string
-        res.status(400).send('Es requerido un atributo "imagen" y debe ser de tipo string');
-    } else if(!nuevoPatron.nombrePatron || typeof nuevoPatron.nombrePatron !== 'string') {
-        //validamos que el objeto pasado tenga un nombre del patron y que sea de tipo string
-        res.status(400).send('Es requerido un atributo "nombrePatron" y debe ser de tipo string');
+    if(!nuevoPatron.imagen) {
+        //validamos que el objeto pasado tenga una imagen
+        res.status(400).send({message:'Es requerido un atributo \'imagen\''});
+    } else if(typeof nuevoPatron.imagen !== 'string') {
+        //validamos que el objeto pasado tenga una imagen de tipo string
+        res.status(400).send({message:'El atributo \'imagen\' debe ser de tipo string'});
+    } else if(!nuevoPatron.nombrePatron) {
+        //validamos que el objeto pasado tenga un nombre de patron
+        res.status(400).send({message:'Es requerido un atributo \'nombrePatron\''});
+    } else if(typeof nuevoPatron.nombrePatron !== 'string') {
+        //validamos que el objeto pasado tenga un nombre de patron de tipo string
+        res.status(400).send({message:'El atributo \'tipoPatron\' debe ser de tipo string'});
     } else {
-        //leemos el contenido del archivo json ejemplos-patrones (se lee como un string)
-        const dataPatrones = fs.readFileSync('public/json/ejemplos-patrones.json', 'utf-8');
-        //transformamos el contenido a formato json
-        const patronesJSON = JSON.parse(dataPatrones);
+        //tenemos los datos de entrada correctos
 
-        //buscamos el patron que tenga el mismo nombre que el pasado por parámetro
-        const patronJSON = patronesJSON.find(pat => pat.nombre == tipoPatron);
-
-        if(!patronJSON) {
+        if(!existeTipoPatron(tipoPatron)) {
             //no existe el tipo de patron pasado
-            res.status(400).send('"' + tipoPatron + '" no es un tipo de patron valido');
+            res.status(400).send({message:'\'' + tipoPatron + '\' no es un tipo de patron valido'});
         } else {
-            //buscamos dentro de la lista de patrones del tipo indicado si existe uno con el mismo nombre de patron
-            const patronExistente = (patronJSON.patrones).find(pat => pat.nombrePatron == nuevoPatron.nombrePatron);
+            //el tipo de patron pasado es valido
 
-            if(patronExistente) {
+            if(existePatronEnTipo(nuevoPatron.nombrePatron, tipoPatron)) {
                 //ya existe un patron con el mismo nombre dentro de este tipo de patron, esto no esta permitido
-                res.status(400).send('El patron "' + (nuevoPatron.nombrePatron) 
-                                    + '" ya existe dentro del tipo de patron "' + tipoPatron +'"');
+                res.status(400).send({message:'El patron \'' + (nuevoPatron.nombrePatron) 
+                                    + '\' ya existe dentro del tipo de patron \'' + tipoPatron +'\''});
             } else {
-                //agregamos a la lista de patrones existentes el enviado en el post
-                patronJSON.patrones.push(nuevoPatron);
-
-                //transformamos la nueva lista de patrones a formato string
-                const jsonData = JSON.stringify(patronesJSON);
-                //reescribimos la nueva lista de nuevo en el archivo json ejemplos-patrones (la ruta es relativa al archivo "package.json")
-                fs.writeFileSync('public/json/ejemplos-patrones.json', jsonData, 'utf-8');
+                //no tenemos un patron con este nombre en el tipo pasado, lo agregamos a nuestr lista
+                agregarPatronEnTipo(nuevoPatron, tipoPatron);
 
                 //enviamos a cliente que todo funcionó correctamente
-                res.send('Operacion realizada con exito');
+                res.send({message:'Operacion realizada con exito'});
             }
         }
     }
@@ -118,9 +114,10 @@ app.post('/api/agregarPatrones/:tipoPatron', (req, res) => {
 
 app.get('/api/patrones', (req, res) => { //Mostrar
     // Obtenemos la cantidad y el inicio
-    const cantidad = parseInt(req.query.cantidad);
-    const from = parseInt(req.query.from);
-    const tipoPatron = req.query.tipoPatron;
+    let { cantidad, from, tipoPatron } = req.query;
+    cantidad = parseInt(cantidad);
+    from = parseInt(from);
+    tipoPatron = parseInt(tipoPatron);
     
     //leemos el contenido del archivo json ejemplos-patrones (se lee como un string)
     const dataPatrones = fs.readFileSync('public/json/ejemplos-patrones.json', 'utf-8');
