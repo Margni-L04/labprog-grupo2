@@ -98,5 +98,5 @@ const obtenerPatronDeTipo = (nombPatron, tipoPatron) => {
 }
 
 
-module.exports = {obtenerTipoPatron, obtenerJson, existeTipoPatron, existePatronEnTipo,
+module.exports = {obtenerJson, obtenerTipoPatron, existeTipoPatron, existePatronEnTipo,
     agregarPatronEnTipo, obtenerPatrones, obtenerPatronDeTipo};

@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 
-const {obtenerTipoPatron, obtenerJson, existeTipoPatron, existePatronEnTipo,
+const {obtenerJson, obtenerTipoPatron, existeTipoPatron, existePatronEnTipo,
     agregarPatronEnTipo, obtenerPatrones, obtenerPatronDeTipo} = require('./../models/model-patrones.js');
 
 //le decimos a express que vamos a usar json
