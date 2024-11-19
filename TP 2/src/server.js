@@ -14,9 +14,6 @@ const routerPatrones = require('./routers/router-patrones.js');
 //instancia express
 const app = express();
 
-const {existeTipoPatron, existePatronEnTipo, agregarPatronEnTipo, 
-    obtenerPatrones, obtenerPatronDeTipo} = require('./models/model-patrones.js');
-
 /*
 Ver ip local en Linux
 En terminal: ip addr show

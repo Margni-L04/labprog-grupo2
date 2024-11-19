@@ -1,38 +1,62 @@
 const express = require('express');
 const router = express.Router();
 
-const {existeTipoPatron, existePatronEnTipo, agregarPatronEnTipo, 
-    obtenerPatrones, obtenerPatronDeTipo} = require('./../models/model-patrones.js');
+const {obtenerTipoPatron, obtenerJson, existeTipoPatron, existePatronEnTipo,
+    agregarPatronEnTipo, obtenerPatrones, obtenerPatronDeTipo} = require('./../models/model-patrones.js');
 
 //le decimos a express que vamos a usar json
 router.use(express.json());
 
-/* ../api/patrones?nombrePatron=...&tipoPatron=... */
+//get de todo el arreglo de los patrones
 router.get('/', (req, res) => {
-    // Obtenemos el nombre y el tipo de patron
-    const {nombrePatron, tipoPatron} = req.query;
+    //obtenemos el json con todos los datos y lo devolvemos
+    const patronesJSON = obtenerJson();
 
-    if (!nombrePatron) {
-        //validamos que nos pasen como parametro de url un nombre de patron
-        res.status(400).send({message:'Es requerido un parametro \'nombrePatron\''});
-    } else if(typeof nombrePatron !== 'string') {
-        //validamos que el parametro nombre de patron sea un string
-        res.status(400).send({message:'El parametro \'nombrePatron\' debe ser un string'});
-    } else if (!tipoPatron) {
-        //validamos que nos pasen como parametro de url un tipo de patron
-        res.status(400).send({message:'Es requerido un parametro \'tipoPatron\''});
-    } else if(typeof tipoPatron !== 'string') {
-        //validamos que el parametro tipo de patron sea un string
-        res.status(400).send({message:'El parametro \'tipoPatron\' debe ser un string'});
+    res.send(patronesJSON);
+});
+
+//get para un tipo de patron
+router.get('/:tipoPatron', (req, res) => {
+    //obtenemos el nombre y el tipo de patron
+    const tipoPatron = req.params.tipoPatron;
+
+    //validacion del tipo de patron
+    if(!existeTipoPatron(tipoPatron)) {
+        //no existe el tipo de patron pasado
+        res.status(404).send({message:'\'' + tipoPatron + '\' no es un tipo de patron valido'});
     } else {
-        //tenemos los datos de entrada correctos
+        // .../nombrePatron=...
+        const { nombrePatron } = req.query;
 
-        if(!existeTipoPatron(tipoPatron)) {
-            //no existe el tipo de patron pasado
-            res.status(404).send({message:'\'' + tipoPatron + '\' no es un tipo de patron valido'});
+        if (!nombrePatron) {
+            // .../cantidad=...&desde=...
+            let { cantidad, desde } = req.query;
+            //transformamos los valores a int
+            cantidad = parseInt(cantidad);
+            desde = parseInt(desde);
+
+            if((!cantidad && cantidad != 0) || (!desde && desde != 0)) {
+                //debemos devolver todos los patrones del tipo de patron pasado
+                const resultado = obtenerTipoPatron(tipoPatron);
+
+                res.send(resultado);
+            } else if(cantidad <= 0) {
+                //validamos que el parametro cantidad sea positivo
+                res.status(400).send({message:'El parametro \'cantidad\' debe ser un número positivo'});
+            } else if(desde < 0) {
+                //validamos que el parametro desde sea positivo o 0
+                res.status(400).send({message:'El parametro \'desde\' debe ser 0 o un número positivo'});
+            } else {
+                //debemos devolver una lista de patrones dentro del tipo de patron pasado
+                const resultado = obtenerPatrones(tipoPatron, cantidad, desde);
+
+                res.send(resultado);
+            }
+        } else if(typeof nombrePatron !== 'string') {
+            //validamos que el parametro nombre de patron sea un string
+            res.status(400).send({message:'El parametro \'nombrePatron\' debe ser un string'});
         } else {
-            //el tipo de patron pasado es valido
-
+            //debemos devolver el patron dentro de este tipo de patron
             if(!existePatronEnTipo(nombrePatron, tipoPatron)) {
                 //no existe un patron con el mismo nombre dentro de este tipo de patron
                 res.status(404).send({message:'No existe el patron \'' + nombrePatron 
@@ -44,47 +68,6 @@ router.get('/', (req, res) => {
                 //enviamos a cliente el patron solicitado
                 res.send(patronExistente);
             }
-        }
-    }
-});
-
-/* .../api/patrones/lista?cantidad=...&desde=...&tipoPatron=... */
-router.get('/lista', (req, res) => {
-    //obtenemos la cantidad, el inicio y el tipo de patron de la url
-    let { cantidad, desde, tipoPatron } = req.query;
-    //transformamos los valores a int
-    cantidad = parseInt(cantidad);
-    desde = parseInt(desde);
-
-    if(!cantidad && cantidad != 0){
-        //validamos que nos pasen como parametro de url una cantidad
-        res.status(400).send({message:'Es requerido un parametro \'cantidad\''});
-    } else if(cantidad <= 0){
-        //validamos que el parametro cantidad sea positivo
-        res.status(400).send({message:'El parametro \'cantidad\' debe ser un número positivo'});
-    } else if(!desde && desde != 0){
-        //validamos que nos pasen como parametro de url un valor desde
-        res.status(400).send({message:'Es requerido un parametro \'desde\''});
-    } else if(desde < 0){
-        //validamos que el parametro desde sea positivo o 0
-        res.status(400).send({message:'El parametro \'desde\' debe ser 0 o un número positivo'});
-    } else if (!tipoPatron) {
-        //validamos que nos pasen como parametro de url un tipo de patron
-        res.status(400).send({message:'Es requerido un parametro \'tipoPatron\''});
-    } else if(typeof tipoPatron !== 'string') {
-        //validamos que el parametro tipo de patron sea un string
-        res.status(400).send({message:'El parametro \'tipoPatron\' debe ser un string'});
-    } else {
-        //datos de entrada correctos
-        
-        if(!existeTipoPatron(tipoPatron)) {
-            //no existe el tipo de patron pasado
-            res.status(400).send({message:'\'' + tipoPatron + '\' no es un tipo de patron valido'});
-        } else {
-            //existe el tipo de patron pasado, obtenemos los patrones con los datos de los parametros
-            const resultado = obtenerPatrones(tipoPatron, cantidad, desde);
-
-            res.send(resultado);
         }
     }
 });

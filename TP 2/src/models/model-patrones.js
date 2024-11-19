@@ -1,16 +1,30 @@
 const fs = require('fs');
 
-const existeTipoPatron = (tipoPatron) => {
-    let existe = true;
-
-    //leemos el archivo que contiene los patrones a buscar
+const obtenerJson = () => {
+    //leemos el archivo que contiene todos los patrones
     const archPatrones = fs.readFileSync('./public/json/ejemplos-patrones.json', 'utf-8');
 
     //transformamos el contenido a formato json
     const patronesJSON = JSON.parse(archPatrones);
 
+    return patronesJSON;
+}
+
+const obtenerTipoPatron = (tipoPatron) => {
+    //obtenemos el archivo que contiene todos los patrones en formato json
+    const patronesJSON = obtenerJson();
+
     //buscamos el tipo de patron que tenga el mismo nombre que el pasado por parámetro
     const tipoPat = patronesJSON.find(tpat => tpat.nombre == tipoPatron);
+
+    return tipoPat;
+}
+
+const existeTipoPatron = (tipoPatron) => {
+    let existe = true;
+
+    //buscamos el tipo de patron que tenga el mismo nombre que el pasado por parámetro
+    const tipoPat = obtenerTipoPatron(tipoPatron);
 
     if(!tipoPat) {
         //no existe el tipo de patron buscado
@@ -23,14 +37,8 @@ const existeTipoPatron = (tipoPatron) => {
 const existePatronEnTipo = (nombPatron, tipoPatron) => {
     let existe = false;
 
-    //leemos el archivo que contiene los patrones a buscar
-    const archPatrones = fs.readFileSync('./public/json/ejemplos-patrones.json', 'utf-8');
-
-    //transformamos el contenido a formato json
-    const patronesJSON = JSON.parse(archPatrones);
-
     //buscamos el tipo de patron que tenga el mismo nombre que el pasado por parámetro
-    const tipoPat = patronesJSON.find(tpat => tpat.nombre == tipoPatron);
+    const tipoPat = obtenerTipoPatron(tipoPatron);
 
     if(tipoPat) {
         //existe el tipo de patron pasado, buscamos si existe algun patron en este tipo
@@ -46,14 +54,8 @@ const existePatronEnTipo = (nombPatron, tipoPatron) => {
 };
 
 const agregarPatronEnTipo = (nuevoPatron, tipoPatron) => {
-    //leemos el archivo que contiene los patrones a buscar
-    const archPatrones = fs.readFileSync('./public/json/ejemplos-patrones.json', 'utf-8');
-
-    //transformamos el contenido a formato json
-    const patronesJSON = JSON.parse(archPatrones);
-
     //buscamos el tipo de patron que tenga el mismo nombre que el pasado por parámetro
-    const tipoPat = patronesJSON.find(tpat => tpat.nombre == tipoPatron);
+    const tipoPat = obtenerTipoPatron(tipoPatron);
 
     if(tipoPat) {
         //existe el tipo de patron pasado, lo agregamos al final de la lista de patrones
@@ -70,14 +72,8 @@ const agregarPatronEnTipo = (nuevoPatron, tipoPatron) => {
 const obtenerPatrones = (tipoPatron, cant, desde) => {
     let listaPatrones = null
 
-    //leemos el archivo que contiene los patrones a buscar
-    const archPatrones = fs.readFileSync('./public/json/ejemplos-patrones.json', 'utf-8');
-
-    //transformamos el contenido a formato json
-    const patronesJSON = JSON.parse(archPatrones);
-
     //buscamos el tipo de patron que tenga el mismo nombre que el pasado por parámetro
-    const tipoPat = patronesJSON.find(tpat => tpat.nombre == tipoPatron);
+    const tipoPat = obtenerTipoPatron(tipoPatron);
 
     if(tipoPat) {
         //existe el tipo de patron pasado, extraemos los patrones segun lo indicado por los parametros
@@ -90,14 +86,8 @@ const obtenerPatrones = (tipoPatron, cant, desde) => {
 const obtenerPatronDeTipo = (nombPatron, tipoPatron) => {
     let patron = null;
 
-    //leemos el archivo que contiene los patrones a buscar
-    const archPatrones = fs.readFileSync('./public/json/ejemplos-patrones.json', 'utf-8');
-
-    //transformamos el contenido a formato json
-    const patronesJSON = JSON.parse(archPatrones);
-
     //buscamos el tipo de patron que tenga el mismo nombre que el pasado por parámetro
-    const tipoPat = patronesJSON.find(tpat => tpat.nombre == tipoPatron);
+    const tipoPat = obtenerTipoPatron(tipoPatron);
 
     if(tipoPat) {
         //existe el tipo de patron pasado, guardamos el patron en la variable
@@ -108,4 +98,5 @@ const obtenerPatronDeTipo = (nombPatron, tipoPatron) => {
 }
 
 
-module.exports = {existeTipoPatron, existePatronEnTipo, agregarPatronEnTipo, obtenerPatrones, obtenerPatronDeTipo};
+module.exports = {obtenerTipoPatron, obtenerJson, existeTipoPatron, existePatronEnTipo,
+    agregarPatronEnTipo, obtenerPatrones, obtenerPatronDeTipo};
