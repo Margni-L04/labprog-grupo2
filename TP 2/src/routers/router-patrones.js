@@ -1,8 +1,8 @@
 const express = require('express');
 const router = express.Router();
 
-const {obtenerJson, obtenerTipoPatron, existeTipoPatron, existePatronEnTipo,
-    agregarPatronEnTipo, obtenerPatrones, obtenerPatronDeTipo, cambiarImagenDePatronEnTipo} = require('./../models/model-patrones.js');
+const {obtenerJson, obtenerTipoPatron, obtenerPatronDeTipo, obtenerPatrones, 
+    existeTipoPatron, existePatronEnTipo, agregarPatronEnTipo, cambiarImagenDePatronEnTipo} = require('./../models/model-patrones.js');
 
 //le decimos a express que vamos a usar json
 router.use(express.json());
@@ -25,11 +25,11 @@ router.get('/:tipoPatron', (req, res) => {
         //no existe el tipo de patron pasado
         res.status(404).send({message:'\'' + tipoPatron + '\' no es un tipo de patron valido'});
     } else {
-        // .../nombrePatron=...
+        // ...?nombrePatron=...
         const { nombrePatron } = req.query;
 
         if (!nombrePatron) {
-            // .../cantidad=...&desde=...
+            // ...?cantidad=...&desde=...
             let { cantidad, desde } = req.query;
             //transformamos los valores a int
             cantidad = parseInt(cantidad);
