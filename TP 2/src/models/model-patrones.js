@@ -54,8 +54,11 @@ const existePatronEnTipo = (nombPatron, tipoPatron) => {
 };
 
 const agregarPatronEnTipo = (nuevoPatron, tipoPatron) => {
+    //obtenemos el archivo que contiene todos los patrones en formato json
+    const patronesJSON = obtenerJson();
+
     //buscamos el tipo de patron que tenga el mismo nombre que el pasado por parámetro
-    const tipoPat = obtenerTipoPatron(tipoPatron);
+    const tipoPat = patronesJSON.find(tpat => tpat.nombre == tipoPatron);
 
     if(tipoPat) {
         //existe el tipo de patron pasado, lo agregamos al final de la lista de patrones
@@ -97,6 +100,30 @@ const obtenerPatronDeTipo = (nombPatron, tipoPatron) => {
     return patron;
 }
 
+const cambiarImagenDePatronEnTipo = (nombPatron, tipoPatron, nuevaImagen) => {
+    //obtenemos el archivo que contiene todos los patrones en formato json
+    const patronesJSON = obtenerJson();
+
+    //buscamos el tipo de patron que tenga el mismo nombre que el pasado por parámetro
+    const tipoPat = patronesJSON.find(tpat => tpat.nombre == tipoPatron);
+
+    if(tipoPat) {
+        //existe el tipo de patron pasado, guardamos el patron en la variable
+        patron = (tipoPat.patrones).find(pat => pat.nombrePatron == nombPatron);
+
+        if(patron) {
+            //existe un patron en este tipo con el nombre pasado, modificamos la imagen del patron
+            patron.imagen = nuevaImagen;
+
+            //transformamos la nueva lista de patrones a formato string
+            const jsonData = JSON.stringify(patronesJSON);
+
+            //reescribimos la nueva lista de nuevo en el archivo json ejemplos-patrones (la ruta es relativa al archivo "package.json")
+            fs.writeFileSync('public/json/ejemplos-patrones.json', jsonData, 'utf-8');
+        }
+    }
+};
+
 
 module.exports = {obtenerJson, obtenerTipoPatron, existeTipoPatron, existePatronEnTipo,
-    agregarPatronEnTipo, obtenerPatrones, obtenerPatronDeTipo};
+    agregarPatronEnTipo, obtenerPatrones, obtenerPatronDeTipo, cambiarImagenDePatronEnTipo};

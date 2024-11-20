@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 
 const {obtenerJson, obtenerTipoPatron, existeTipoPatron, existePatronEnTipo,
-    agregarPatronEnTipo, obtenerPatrones, obtenerPatronDeTipo} = require('./../models/model-patrones.js');
+    agregarPatronEnTipo, obtenerPatrones, obtenerPatronDeTipo, cambiarImagenDePatronEnTipo} = require('./../models/model-patrones.js');
 
 //le decimos a express que vamos a usar json
 router.use(express.json());
@@ -106,6 +106,48 @@ router.post('/:tipoPatron', (req, res) => {
             } else {
                 //no tenemos un patron con este nombre en el tipo pasado, lo agregamos a nuestr lista
                 agregarPatronEnTipo(nuevoPatron, tipoPatron);
+
+                //enviamos a cliente que todo funcionó correctamente
+                res.send({message:'Operacion realizada con exito'});
+            }
+        }
+    }
+});
+
+router.put('/:tipoPatron', (req, res) => {
+    //leemos el objeto json que nos envían con el post
+    const nuevoPatron = req.body;
+    //guardamos el valor del parametro de la url
+    const tipoPatron = req.params.tipoPatron;
+
+    if(!nuevoPatron.imagen) {
+        //validamos que el objeto pasado tenga una imagen
+        res.status(400).send({message:'Es requerido un atributo \'imagen\''});
+    } else if(typeof nuevoPatron.imagen !== 'string') {
+        //validamos que el objeto pasado tenga una imagen de tipo string
+        res.status(400).send({message:'El atributo \'imagen\' debe ser de tipo string'});
+    } else if(!nuevoPatron.nombrePatron) {
+        //validamos que el objeto pasado tenga un nombre de patron
+        res.status(400).send({message:'Es requerido un atributo \'nombrePatron\''}); // Esto lo pasan en el body o por donde ???
+    } else if(typeof nuevoPatron.nombrePatron !== 'string') {
+        //validamos que el objeto pasado tenga un nombre de patron de tipo string
+        res.status(400).send({message:'El atributo \'tipoPatron\' debe ser de tipo string'});
+    } else {
+        //tenemos los datos de entrada correctos
+
+        if(!existeTipoPatron(tipoPatron)) {
+            //no existe el tipo de patron pasado
+            res.status(400).send({message:'\'' + tipoPatron + '\' no es un tipo de patron valido'});
+        } else {
+            //el tipo de patron pasado es valido
+
+            if(!existePatronEnTipo(nuevoPatron.nombrePatron, tipoPatron)) {
+                //no existe un patron con el mismo nombre dentro de este tipo de patron no podemos modificarlo así
+                res.status(400).send({message:'El patron \'' + (nuevoPatron.nombrePatron) 
+                                    + '\' no existe dentro del tipo de patron \'' + tipoPatron +'\''});
+            } else {
+                //encontramos el patron con este nombre en el tipo pasado, lo modificamos con la nueva imagen pasada
+                cambiarImagenDePatronEnTipo(nuevoPatron.nombrePatron, tipoPatron, nuevoPatron.imagen);
 
                 //enviamos a cliente que todo funcionó correctamente
                 res.send({message:'Operacion realizada con exito'});
