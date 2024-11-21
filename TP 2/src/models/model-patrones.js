@@ -60,14 +60,14 @@ const obtenerPatrones = (tipoPatron, cant, desde) => {
 };
 
 const existeTipoPatron = (tipoPatron) => {
-    let existe = true;
+    let existe = false;
 
     //buscamos el tipo de patron que tenga el mismo nombre que el pasado por parámetro
     const tipoPat = obtenerTipoPatron(tipoPatron);
 
-    if(!tipoPat) {
-        //no existe el tipo de patron buscado
-        existe = false;
+    if(tipoPat) {
+        //existe el tipo de patron buscado
+        existe = true;
     }
 
     return existe;
@@ -117,7 +117,7 @@ const cambiarImagenDePatronEnTipo = (nombPatron, tipoPatron, nuevaImagen) => {
 
     if(tipoPat) {
         //existe el tipo de patron pasado, guardamos el patron en la variable
-        patron = (tipoPat.patrones).find(pat => pat.nombrePatron == nombPatron);
+        const patron = (tipoPat.patrones).find(pat => pat.nombrePatron == nombPatron);
 
         if(patron) {
             //existe un patron en este tipo con el nombre pasado, modificamos la imagen del patron
