@@ -129,5 +129,27 @@ const cambiarImagenDePatronEnTipo = (nombPatron, tipoPatron, nuevaImagen) => {
     }
 };
 
+const eliminarPatronEnTipo = (nombPatron, tipoPatron) => {
+    //obtenemos el archivo que contiene todos los patrones en formato json
+    const patronesJSON = obtenerJson();
+
+    //buscamos el tipo de patron que tenga el mismo nombre que el pasado por parámetro
+    const tipoPat = patronesJSON.find(tpat => tpat.nombre == tipoPatron);
+
+    if(tipoPat) {
+        //existe el tipo de patron pasado, guardamos el patron en la variable
+        const patron = (tipoPat.patrones).find(pat => pat.nombrePatron == nombPatron);
+
+        if(patron) {
+            //existe un patron en este tipo con el nombre pasado, eliminamos el patrón del arreglo de patrones
+            tipoPat.patrones = (tipoPat.patrones).filter(pat => pat.nombrePatron !== nombPatron);
+
+            //reescribimos la nueva lista de nuevo en el archivo json
+            escribirJson(patronesJSON);
+        }
+    }
+};
+
 module.exports = {obtenerJson, obtenerTipoPatron, obtenerPatronDeTipo, obtenerPatrones, 
-    existeTipoPatron, existePatronEnTipo, agregarPatronEnTipo, cambiarImagenDePatronEnTipo};
+    existeTipoPatron, existePatronEnTipo, agregarPatronEnTipo,
+    cambiarImagenDePatronEnTipo, eliminarPatronEnTipo};
