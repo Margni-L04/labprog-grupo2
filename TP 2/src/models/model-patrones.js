@@ -77,16 +77,11 @@ const existePatronEnTipo = (nombPatron, tipoPatron) => {
     let existe = false;
 
     //buscamos el tipo de patron que tenga el mismo nombre que el pasado por parámetro
-    const tipoPat = obtenerTipoPatron(tipoPatron);
+    const patron = obtenerPatronDeTipo(nombPatron, tipoPatron);
 
-    if(tipoPat) {
-        //existe el tipo de patron pasado, buscamos si existe algun patron en este tipo
-        const patron = (tipoPat.patrones).find(pat => pat.nombrePatron == nombPatron);
-
-        if(patron) {
-            //existe un patron con el nombre pasado en este tipo de patron
-            existe = true;
-        }
+    if(patron) {
+        //existe un patron con el nombre pasado en este tipo de patron
+        existe = true;
     }
 
     return existe;
