@@ -1,20 +1,8 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import { registerRootComponent } from 'expo';
 
-export default function App() {
-  return (
-    <View style={styles.container}>
-      <Text style={{color:'blue'}}>Holaaaaaaaa</Text>
-      <StatusBar style="auto" />
-    </View>
-  );
-}
+import Home from './src/screens/Home';
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+// registerRootComponent calls AppRegistry.registerComponent('main', () => App);
+// It also ensures that whether you load the app in Expo Go or in a native build,
+// the environment is set up appropriately
+registerRootComponent(Home);
