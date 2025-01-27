@@ -1,11 +1,13 @@
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View } from 'react-native';
+import Boton from '../components/Boton/Boton';
 
 const Home = () => {
   return (
     <View style={styles.container}>
       <Text style={{color:'green'}}>Holaaaaaaaa</Text>
-      <StatusBar style="auto" />
+      <StatusBar style='auto' />
+      <Boton title='Sip' />
     </View>
   );
 }
