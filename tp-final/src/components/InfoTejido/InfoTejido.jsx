@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import * as Font from 'expo-font';
-import { TouchableOpacity, Text } from 'react-native';
+import { View, Text } from 'react-native';
 import styles from './styles';
 
-const BotonCelulas = ({nombre, onPress}) => {
+const InfoTejido = ({texto}) => {
     const [fontLoaded, setFontLoaded] = useState(false);
-
+    
     useEffect(() => {
         if(!fontLoaded) {
             Font.loadAsync({
@@ -15,10 +15,10 @@ const BotonCelulas = ({nombre, onPress}) => {
     });
 
     return (
-        <TouchableOpacity style={styles.boton} onPress={onPress}>
-            <Text style={styles.nombre}>{nombre}</Text>
-        </TouchableOpacity>
+        <View style={styles.cajaTexto}>
+            <Text style={styles.texto}>{texto}</Text>
+        </View>
     );
 };
 
-export default BotonCelulas;
+export default InfoTejido;
