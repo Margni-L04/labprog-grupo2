@@ -3,7 +3,8 @@ import { StyleSheet } from 'react-native';
 const styles = StyleSheet.create({
     cajaTexto: {
         alignItems: 'center',
-        justifyContent: 'center'
+        justifyContent: 'center',
+        paddingBottom: 25
     },
 
     texto: {

@@ -1,14 +1,23 @@
 import { StyleSheet } from 'react-native';
 
 const styles = StyleSheet.create({
-  Navbar: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'space-evenly',
-    backgroundColor: '#e5bb89',
-    width: '100%',
-    height: '10%'
-  },
+    contenedor: {
+        flex: 1,
+        flexDirection: 'row'
+    },
+
+    fondoPag: {
+        backgroundColor: 'brown'
+    },
+
+    barraNav: {
+        backgroundColor: '#e5bb89',
+        paddingTop: 25
+    },
+
+    labelBarraNav: {
+        fontSize: 18
+    }
 });
 
 export default styles;

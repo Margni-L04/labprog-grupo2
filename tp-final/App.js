@@ -1,10 +1,21 @@
-import { registerRootComponent } from 'expo';
-import Home from './src/screens/Home';
-import Juego from './src/screens/Juego';
+import { View, ScrollView, StyleSheet } from 'react-native'
+import Navbar from './src/components/Navbar/Navbar';
+import Footer from './src/components/Footer/Footer';
 
-// registerRootComponent calls AppRegistry.registerComponent('main', () => App);
-// It also ensures that whether you load the app in Expo Go or in a native build,
-// the environment is set up appropriately
+const App = () => {
+    return(
+        <View style={styles.container}>
+            <Navbar />
+            <Footer />
+        </View>
+    );
+};
 
-//registerRootComponent(Home);
-registerRootComponent(Juego);
+const styles = StyleSheet.create({
+    container: {
+        flex: 1,
+        position: "relative"
+    }
+});
+
+export default App;

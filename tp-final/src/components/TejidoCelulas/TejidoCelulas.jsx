@@ -1,17 +1,17 @@
 import React, { useState, useEffect } from 'react';
-import { View } from 'react-native';
+import { View, ScrollView } from 'react-native';
 import styles from './styles';
 import Celula from '../Celula/Celula';
 import BotonCelulas from '../BotonCelulas/BotonCelulas';
 import InfoTejido from '../InfoTejido/InfoTejido';
 
-const tamanioTejido = 10;
-let intervalo;
+const filasTejido = 50;
+const colsTejido = 10;
 
 const generarTejidoInicial = () => {
-    return Array(tamanioTejido)
+    return Array(filasTejido)
         .fill(0)
-        .map(() => Array(tamanioTejido).fill(0));
+        .map(() => Array(colsTejido).fill(0));
 };
 
 const TejidoCelula = () => {
@@ -58,7 +58,7 @@ const TejidoCelula = () => {
             //primera fila, no hay fila anterior
             iniI = 1;
         }
-        if(fila+1 == tamanioTejido) {
+        if(fila+1 == filasTejido) {
             //ultima fila, no existe proxima fila
             finI = 2;
         }
@@ -66,7 +66,7 @@ const TejidoCelula = () => {
             //primera columna, no hay columna anterior
             iniJ = 1;
         }
-        if(col+1 == tamanioTejido) {
+        if(col+1 == colsTejido) {
             //ultima columna, no existe proxima columna
             finJ = 2;
         }
@@ -87,8 +87,8 @@ const TejidoCelula = () => {
         setCelulas(celulasAntes => {
             const nuevasCelulas = celulasAntes.map(fila => [...fila]);
 
-            for(let i = 0; i < tamanioTejido; i++) {
-                for(let j = 0; j < tamanioTejido; j++) {
+            for(let i = 0; i < filasTejido; i++) {
+                for(let j = 0; j < colsTejido; j++) {
                     let vecinosVivos = contarVecinosVivos(i, j, celulasAntes);
         
                     if(celulasAntes[i][j] == 1) {
@@ -152,12 +152,12 @@ const TejidoCelula = () => {
     }
 
     return (
-        <View>
+        <ScrollView>
             <View style={styles.contenedorCelulas}>
                 {celulas.map((fila, i) => (
                     <View key={i} style={styles.fila}>
                         {fila.map((estado, j) => (
-                            <Celula key={i*tamanioTejido+j}
+                            <Celula key={i*filasTejido+j}
                                 estaViva={estado} onPress={() => actualizarCelula(i, j)}/>
                         ))}
                     </View>
@@ -172,7 +172,7 @@ const TejidoCelula = () => {
                     onPress={() => resetearJuego()}/>
             </View>
             <InfoTejido texto={"Generación: "+numGen.toString()} />
-        </View>
+        </ScrollView>
     );
 };
 

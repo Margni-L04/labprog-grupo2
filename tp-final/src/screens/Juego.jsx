@@ -1,11 +1,9 @@
 import { StyleSheet, Text, View } from 'react-native';
-import Navbar from '../components/Navbar/Navbar';
 import TejidoCelulas from '../components/TejidoCelulas/TejidoCelulas';
 
 const Juego = () => {
   return (
     <View style={styles.container}>
-      <Navbar />
       <TejidoCelulas />
     </View>
   );
