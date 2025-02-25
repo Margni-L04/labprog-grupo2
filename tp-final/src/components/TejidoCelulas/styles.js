@@ -1,10 +1,16 @@
 import { StyleSheet } from 'react-native';
 
 const styles = StyleSheet.create({
+    contenedorInfo: {
+        alignItems: 'center',
+        justifyContent: 'center',
+        paddingTop: 50,
+        paddingBottom: 20
+    },
+
     contenedorCelulas: {
         alignItems: 'center',
         justifyContent: 'center',
-        paddingTop: 50
     },
 
     fila: {

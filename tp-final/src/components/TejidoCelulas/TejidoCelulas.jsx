@@ -1,12 +1,14 @@
 import React, { useState, useEffect } from 'react';
-import { View, ScrollView } from 'react-native';
+import { View, ScrollView, Dimensions } from 'react-native';
 import styles from './styles';
 import Celula from '../Celula/Celula';
 import BotonCelulas from '../BotonCelulas/BotonCelulas';
 import InfoTejido from '../InfoTejido/InfoTejido';
 
-const filasTejido = 50;
-const colsTejido = 10;
+//const filasTejido = 10;
+//const colsTejido = 10;
+const filasTejido = Math.floor(Dimensions.get('window').height/30);
+const colsTejido = Math.floor(Dimensions.get('window').width/20);
 
 const generarTejidoInicial = () => {
     return Array(filasTejido)
@@ -153,6 +155,9 @@ const TejidoCelula = () => {
 
     return (
         <ScrollView>
+            <View style={styles.contenedorInfo}>
+                <InfoTejido texto={"Generación: "+numGen.toString()} />
+            </View>
             <View style={styles.contenedorCelulas}>
                 {celulas.map((fila, i) => (
                     <View key={i} style={styles.fila}>
@@ -171,7 +176,6 @@ const TejidoCelula = () => {
                 <BotonCelulas nombre="Resetear"
                     onPress={() => resetearJuego()}/>
             </View>
-            <InfoTejido texto={"Generación: "+numGen.toString()} />
         </ScrollView>
     );
 };

@@ -1,19 +1,36 @@
-import { StyleSheet, Text, View } from 'react-native';
-import TejidoCelulas from '../components/TejidoCelulas/TejidoCelulas';
+import { StyleSheet, ScrollView, View } from 'react-native';
+import FlipCard from '../components/FlipCard/FilpCard';
+
+const tiposPatrones = require('../json/tipos-patrones.json');
 
 const Patrones = () => {
   return (
-    <View style={styles.container}>
-      <Text>Siiii</Text>
-    </View>
+        <ScrollView style={styles.container}>
+            <View style={styles.contenedorCards}>
+                {tiposPatrones.map((tPatron) => (
+                    <FlipCard key={tPatron.nombre}
+                        imagen={tPatron.imagen}
+                        texto={tPatron.descripcion}
+                        titulo={tPatron.nombre}/>
+                ))}
+            </View>
+        </ScrollView>
   );
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#DDD0C8'
-  },
+    container: {
+        flex: 1,
+        backgroundColor: '#DDD0C8'
+    },
+
+    contenedorCards: {
+        flexDirection: 'row',
+        flexWrap: 'wrap',
+        justifyContent: 'center',
+        paddingTop: 30,
+        margin: 'auto'
+    }
 });
 
 export default Patrones;

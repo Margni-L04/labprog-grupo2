@@ -12,7 +12,8 @@ const styles = StyleSheet.create({
 
     nombre: {
         color: 'white',
-        fontFamily: 'quicksand'
+        fontFamily: 'quicksand',
+        fontSize: 17
     }
 });
 

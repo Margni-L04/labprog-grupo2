@@ -4,15 +4,17 @@ const styles = StyleSheet.create({
     cajaTexto: {
         alignItems: 'center',
         justifyContent: 'center',
-        paddingBottom: 25
+        borderRadius: 2,
+        backgroundColor: 'gray',
+        width: '40%',
+        height: 40
     },
 
     texto: {
-        backgroundColor: 'gray',
         fontFamily: 'quicksand',
         borderRadius: 5,
-        paddingVertical: 10,
-        paddingHorizontal: 40
+        paddingVertical: 1,
+        paddingHorizontal: 4
     }
 });
 

@@ -3,9 +3,9 @@ import TejidoCelulas from '../components/TejidoCelulas/TejidoCelulas';
 
 const Juego = () => {
   return (
-    <View style={styles.container}>
-      <TejidoCelulas />
-    </View>
+        <View style={styles.container}>
+            <TejidoCelulas />
+        </View>
   );
 }
 
