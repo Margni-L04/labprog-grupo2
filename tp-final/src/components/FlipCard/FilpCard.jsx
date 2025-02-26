@@ -67,7 +67,7 @@ const FlipCard = ({imagen, texto, titulo}) => {
             <View style={styles.contenedorCard}>
                 <Animated.View style={[styles.frente, styles.card, rotarFrente]}>
                     <Text style={styles.titulo}>{titulo}</Text>
-                    <Image source={imagen}/>
+                    <Image source={imagen} style={styles.imagen}/>
                 </Animated.View>
                 <Animated.View style={[styles.atras, styles.card, rotarAtras]}>
                     <Text style={styles.text}>{texto}</Text>

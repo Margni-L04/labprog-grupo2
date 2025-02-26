@@ -4,9 +4,9 @@ import styles from './styles';
 import { NavigationContainer } from "@react-navigation/native";
 import { createMaterialTopTabNavigator } from "@react-navigation/material-top-tabs";
 
-import HomeScreen from "../../screens/Home";
-import PatronesScreen from "../../screens/Patrones";
-import JuegoScreen from "../../screens/Juego";
+import HomeScreen from "../../screens/Home/Home";
+import PatronesScreen from "../../screens/Patrones/Patrones";
+import JuegoScreen from "../../screens/Juego/Juego";
 
 const Tab = createMaterialTopTabNavigator();
 

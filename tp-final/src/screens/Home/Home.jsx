@@ -1,4 +1,5 @@
-import { StyleSheet, Text, View } from 'react-native';
+import { Text, View } from 'react-native';
+import styles from './styles';
 
 const Home = () => {
   return (
@@ -7,12 +8,5 @@ const Home = () => {
     </View>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#DDD0C8'
-  },
-});
 
 export default Home;

@@ -47,6 +47,10 @@ const styles = StyleSheet.create({
         fontSize: 13,
         userSelect: 'none',
         margin: 12
+    },
+
+    imagen: {
+        
     }
 });
 
