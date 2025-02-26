@@ -1,12 +1,11 @@
 import { View, ScrollView, StyleSheet } from 'react-native'
 import Navbar from './src/components/Navbar/Navbar';
-import Footer from './src/components/Footer/Footer';
+//import Footer from './src/components/Footer/Footer';
 
 const App = () => {
     return(
         <View style={styles.container}>
             <Navbar />
-            <Footer />
         </View>
     );
 };

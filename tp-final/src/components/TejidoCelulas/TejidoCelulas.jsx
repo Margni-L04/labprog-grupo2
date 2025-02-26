@@ -5,10 +5,10 @@ import Celula from '../Celula/Celula';
 import BotonCelulas from '../BotonCelulas/BotonCelulas';
 import InfoTejido from '../InfoTejido/InfoTejido';
 
-//const filasTejido = 10;
-//const colsTejido = 10;
-const filasTejido = Math.floor(Dimensions.get('window').height/30);
-const colsTejido = Math.floor(Dimensions.get('window').width/20);
+const filasTejido = 10;
+const colsTejido = 10;
+//const filasTejido = Math.floor(Dimensions.get('window').height/30);
+//const colsTejido = Math.floor(Dimensions.get('window').width/20);
 
 const generarTejidoInicial = () => {
     return Array(filasTejido)

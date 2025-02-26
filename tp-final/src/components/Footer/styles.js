@@ -7,7 +7,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         backgroundColor: 'black',
         width: '100%',
-        height: '15%'
+        height: 125
     },
 
     cajaUsuario: {

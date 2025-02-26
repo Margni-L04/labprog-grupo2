@@ -6,14 +6,14 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         backgroundColor: '#864332',
         borderRadius: 5,
-        width: '30%',
+        width: '31%',
         height: 40
     },
 
     nombre: {
         color: 'white',
         fontFamily: 'quicksand',
-        fontSize: 15
+        fontSize: 14
     }
 });
 

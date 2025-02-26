@@ -17,6 +17,19 @@ const styles = StyleSheet.create({
 
     labelBarraNav: {
         fontSize: 18
+    },
+
+    contenedorImagen: {
+        width: 50,
+        height: 50,
+        justifyContent: "center",
+        alignItems: "center"
+    },
+
+    imagen: {
+        width: 50,
+        height: 50,
+        resizeMode: "contain"
     }
 });
 
