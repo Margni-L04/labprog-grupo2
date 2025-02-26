@@ -1,24 +1,18 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { View, Text, Image, Animated, TouchableWithoutFeedback } from 'react-native';
+import { View, Text, Animated, TouchableWithoutFeedback } from 'react-native';
+import { Image } from 'expo-image';
 import * as Font from 'expo-font';
 import styles from './styles';
 
 const FlipCard = ({imagen, texto, titulo}) => {
+    const [fontLoaded, setFontLoaded] = useState(false);
     const [estaFrente, setEstaFrente] = useState(true);
     const animacionFlip = useRef(new Animated.Value(0)).current;
-    const [fontLoaded, setFontLoaded] = useState(false);
     
     useEffect(() => {
         if(!fontLoaded) {
             Font.loadAsync({
-                'space-grotesk': require('../../assets/fonts/SpaceGrotesk.ttf')
-            })
-        }
-    });
-
-    useEffect(() => {
-        if(!fontLoaded) {
-            Font.loadAsync({
+                'space-grotesk': require('../../assets/fonts/SpaceGrotesk.ttf'),
                 'quicksand': require('../../assets/fonts/Quicksand.ttf')
             })
         }
@@ -66,8 +60,8 @@ const FlipCard = ({imagen, texto, titulo}) => {
         <TouchableWithoutFeedback onPress={flip}>
             <View style={styles.contenedorCard}>
                 <Animated.View style={[styles.frente, styles.card, rotarFrente]}>
+                    <Image source={{uri: imagen}} style={styles.imagen}/>
                     <Text style={styles.titulo}>{titulo}</Text>
-                    <Image source={imagen} style={styles.imagen}/>
                 </Animated.View>
                 <Animated.View style={[styles.atras, styles.card, rotarAtras]}>
                     <Text style={styles.text}>{texto}</Text>

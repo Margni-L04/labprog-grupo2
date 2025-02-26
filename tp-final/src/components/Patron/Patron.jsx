@@ -1,6 +1,6 @@
-import React, { useState, useEffect, useRef } from 'react';
-import { View, Text, Image, Animated, TouchableWithoutFeedback } from 'react-native';
-import * as Font from 'expo-font';
+import React, { useState } from 'react';
+import { View, Text, TouchableWithoutFeedback } from 'react-native';
+import { Image } from 'expo-image';
 import styles from './styles';
 
 const Patron = ({nombre, imagen}) => {
@@ -23,7 +23,7 @@ const Patron = ({nombre, imagen}) => {
     return (
         <TouchableWithoutFeedback onPress={mostrarNombre}>
             <View style={styles.contenedor}>
-                <Image source={{ uri: 'https://upload.wikimedia.org/wikipedia/commons/3/3a/Cat03.jpg'}}
+                <Image source={{ uri: imagen}}
                     style={[styles.imagen, {opacity: opacityImagen}]}/>
                 <Text style={[styles.nombre, {opacity: opacityNombre}]}>{nombre}</Text>
             </View>

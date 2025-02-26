@@ -43,7 +43,6 @@ const Patrones = () => {
                 ))}
             </View>
             <Footer/>
-            
         </ScrollView>
   );
 }

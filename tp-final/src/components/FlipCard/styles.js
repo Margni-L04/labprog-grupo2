@@ -50,7 +50,10 @@ const styles = StyleSheet.create({
     },
 
     imagen: {
-        
+        width: 125,
+        height: 125,
+        borderRadius: 5,
+        margin: 10
     }
 });
 

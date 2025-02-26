@@ -1,18 +1,18 @@
 [
     {"nombre":"Vidas Estáticas",
-    "imagen":"../../assets/images/estatico-flor.png",
+    "imagen":"https://iili.io/3dFg2Wb.png",
     "descripcion":"Son patrones que se mantienen igual a través del tiempo \nNo cambian de una generación a la siguiente"
     },
     {"nombre":"Oscilantes",
-    "imagen":"../../assets/gifs/oscilante-palito.gif",
+    "imagen":"https://iili.io/3dFgy4R.gif",
     "descripcion":"Tras un número finito de generaciones vuelven a su estado inicial \nFuncionan en ciclos de n-periodos"
     },
     {"nombre":"Matusalenes",
-    "imagen":"../../assets/images/matusalen-diehard.png",
+    "imagen":"https://iili.io/3dFUpJS.png",
     "descripcion":"Pueden evolucionar a lo largo de muchos turnos, o generaciones, antes de estabilizarse \nEs decir, que quedarán únicamente patrones estáticos u oscilantes (o mueren todas las células)"
     },
     {"nombre":"Naves Espaciales",
-    "imagen":"../../assets/gifs/nave-glider.gif",
+    "imagen":"https://iili.io/3dFrCGf.gif",
     "descripcion":"Tras un número finito de generaciones vuelven a su estado original pero en una ubicación diferente \nAvanzan infinitamente por toda la grilla"
     }
 ]
