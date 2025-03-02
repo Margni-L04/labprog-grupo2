@@ -16,7 +16,7 @@ const Formulario = ({nombre, valor, setValor}) => {
 
     return (
         <View style={styles.caja}>
-            <TextInput 
+            <TextInput style={styles.texto}
                 placeholder={nombre}
                 value={valor}
                 onChangeText={setValor} />
