@@ -5,7 +5,7 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
         width: 160,
-        height: 200,
+        height: 210,
         textAlign: 'center',
         borderRadius: 10,
         margin: 10
@@ -16,13 +16,15 @@ const styles = StyleSheet.create({
         height: '100%',
         marginTop: 10,
         width: 160,
-        height: 200
+        height: 210,
+        backgroundColor: '#CE9C7D'
     },
     
     atras: {
         textAlign: 'center',
         width: 160,
-        height: 200,
+        height: 210,
+        backgroundColor: '#E3AC8A'
     },
     
     card: {
@@ -31,7 +33,6 @@ const styles = StyleSheet.create({
         borderRadius: 5,
         position: 'absolute',
         backfaceVisibility: 'hidden',
-        backgroundColor: '#CE9C7D'
     },
 
     titulo: {
@@ -43,7 +44,6 @@ const styles = StyleSheet.create({
     
     text: {
         fontFamily: 'quicksand',
-        fontWeight: 'bold',
         fontSize: 13,
         userSelect: 'none',
         margin: 12

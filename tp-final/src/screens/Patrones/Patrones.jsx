@@ -1,3 +1,5 @@
+//Server donde se subieron las imagenes: https://freeimage.host
+
 import React, { useState, useEffect } from 'react';
 import { ScrollView, View, Text } from 'react-native';
 import * as Font from 'expo-font';
@@ -5,6 +7,7 @@ import styles from './styles';
 import FlipCard from '../../components/FlipCard/FilpCard';
 import Patron from '../../components/Patron/Patron';
 import Footer from '../../components/Footer/Footer';
+import Formulario from '../../components/Formulario/Formulario';
 
 const tiposPatrones = require('../../json/tipos-patrones.json');
 const ejsPatrones = require('../../json/ejemplos-patrones.json');
@@ -38,6 +41,7 @@ const Patrones = () => {
                             {(tPatron.patrones).map((pat, j) => (
                                 <Patron key={j} nombre={pat.nombrePatron} imagen={pat.imagen}/>
                             ))}
+                            <Formulario tipoPatron={tPatron.nombre}/>
                         </View>
                     </View>
                 ))}

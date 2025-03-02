@@ -18,11 +18,13 @@ const styles = StyleSheet.create({
     },
 
     nombre: {
+        fontFamily: 'quicksand-bold',
         position: 'absolute',
         textAlign: 'center',
         fontSize: 10,
         fontWeight: 600,
-        color: '#8A502C',
+        //color: '#8A502C',
+        color: 'black',
         userSelect: 'none'
     }
 });
