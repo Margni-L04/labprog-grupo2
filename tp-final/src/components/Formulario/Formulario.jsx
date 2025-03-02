@@ -21,6 +21,17 @@ const Formulario = ({tipoPatron}) => {
         }
     });
 
+    const cerrar = () => {
+        setModalVisible(false);
+        setNombre('');
+        setImagen('');
+    };
+
+    const cargar = () => {
+        //carga
+        cerrar();
+    };
+
     return (
         <View>
             <TouchableWithoutFeedback onPress={() => setModalVisible(true)}>
@@ -40,10 +51,10 @@ const Formulario = ({tipoPatron}) => {
                         setValor={setImagen}/>
                     <View style={styles.contenedorBotones}>
                         <BotonFormulario titulo={'Cerrar'}
-                            onPress={() => setModalVisible(false)}
+                            onPress={cerrar}
                             color='#D10209' />
                         <BotonFormulario titulo={'Cargar'}
-                            onPress={() => {}}
+                            onPress={cargar}
                             color='#2B7C40' />
                     </View>
                 </View>
