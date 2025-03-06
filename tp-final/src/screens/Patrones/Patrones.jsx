@@ -7,11 +7,30 @@ import FlipCard from '../../components/FlipCard/FilpCard';
 import Patron from '../../components/Patron/Patron';
 import Footer from '../../components/Footer/Footer';
 import Formulario from '../../components/Formulario/Formulario';
+import API_URL from "../../../backend/myip";
 
-const tiposPatrones = require('../../json/tipos-patrones.json');
-const ejsPatrones = require('../../json/ejemplos-patrones.json');
+const Patrones =  () => {
+    const [ejsPatrones, setEjsPatrones] = useState([]);
+    const [tiposPatrones, setTiposPatrones] = useState([]);
 
-const Patrones = () => {
+    useEffect(() => { 
+            fetchPatrones();
+            fetchTiposPatrones();
+        },[]);
+
+    const fetchPatrones = () => { 
+        fetch(`${API_URL}/api/patrones`) 
+            .then(response => response.json()) 
+            .then(jsonResponse => setEjsPatrones(jsonResponse)) 
+            .catch(error => console.log(error)) 
+    }; 
+
+    const fetchTiposPatrones = () => { 
+        fetch(`${API_URL}/api/tipospatrones`) 
+            .then(response => response.json()) 
+            .then(jsonResponse => setTiposPatrones(jsonResponse)) 
+            .catch(error => console.log(error)) 
+    }; 
 
     return (
         <ScrollView style={styles.container}>

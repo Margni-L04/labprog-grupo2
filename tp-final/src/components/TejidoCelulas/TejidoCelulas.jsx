@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { View, ScrollView, Dimensions } from 'react-native';
+import { View, ScrollView, Dimensions, Alert } from 'react-native';
+import API_URL from "../../../backend/myip";
 import styles from './styles';
 import Celula from '../Celula/Celula';
 import BotonCelulas from '../BotonCelulas/BotonCelulas';
@@ -121,7 +122,7 @@ const TejidoCelula = () => {
         setNumGen(numGenAntes => numGenAntes + 1);
     };
 
-    const empezarJuego = () => {
+    const empezarJuego = async () => {
         setEstaEjecutando(true);
         setNombreBoton('Pausar');
     }
