@@ -22,14 +22,14 @@ const Patrones =  () => {
         fetch(`${API_URL}/api/patrones`) 
             .then(response => response.json()) 
             .then(jsonResponse => setEjsPatrones(jsonResponse)) 
-            .catch(error => console.log(error)) 
+            .catch(error => console.log(error));
     }; 
 
     const fetchTiposPatrones = () => { 
         fetch(`${API_URL}/api/tipospatrones`) 
             .then(response => response.json()) 
             .then(jsonResponse => setTiposPatrones(jsonResponse)) 
-            .catch(error => console.log(error)) 
+            .catch(error => console.log(error));
     }; 
 
     return (
