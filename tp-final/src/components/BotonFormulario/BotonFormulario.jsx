@@ -1,19 +1,9 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState} from 'react';
 import { TouchableWithoutFeedback, Text, View } from 'react-native';
-import * as Font from 'expo-font';
 import styles from './styles';
 
 const BotonFormulario = ({titulo, onPress, color}) => {
     const [modalVisible, setModalVisible] = useState(false);
-    const [fontLoaded, setFontLoaded] = useState(false);
-    
-    useEffect(() => {
-        if(!fontLoaded) {
-            Font.loadAsync({
-                'quicksand-bold': require('../../assets/fonts/Quicksand-Bold.ttf')
-            })
-        }
-    });
 
     return (
         <TouchableWithoutFeedback onPress={onPress}>

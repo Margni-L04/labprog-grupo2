@@ -1,26 +1,18 @@
-import React,{ useEffect, useState } from 'react';
+import React from 'react';
 import { StyleSheet, Text, View, FlatList, ScrollView} from 'react-native';
 import { Image } from 'expo-image';
-import * as Font from "expo-font";
 import styles from './styles';
 import Footer from '../../components/Footer/Footer';
+import FlipCardImagen from '../../components/FlipCardImagen/FilpCardImagen';
 
 const fondo = require('../../assets/gifs/conway.gif');
 const regla1 = require('../../assets/images/Regla1.png');
 const regla2 = require('../../assets/images/Regla2.png');
+const regla1_antes = require('../../assets/images/regla1-antes.png');
+const regla2_antes = require('../../assets/images/regla2-antes.png');
+const regla_despues = require('../../assets/images/regla-despues.png');
 
 const Home = () => {
-    const [fontLoaded, setFontLoaded] = useState(false);
-
-    useEffect(() => {
-        if(!fontLoaded) {
-            Font.loadAsync({
-                'quicksand': require('../../assets/fonts/Quicksand.ttf'),
-                'quicksand-bold': require('../../assets/fonts/Quicksand-Bold.ttf'),
-                'ps2': require("../../assets/fonts/PressStart2P.ttf")
-            })
-        }
-    });
 
     return (
         <ScrollView style={styles.container}>
@@ -41,11 +33,25 @@ const Home = () => {
                     {"\n"}- Si tiene menos de 2 células vecinas vivas, muere por aislación.
                     {"\n"}- Si tiene 2 o 3 células vecinas vivas, sobrevive.</Text>
                 <Image source={regla1} style={styles.imagenReglas}/>
+                <View style={styles.contenedorCards}>
+                    <FlipCardImagen
+                        imagen={regla1_antes}
+                        imagen2={regla_despues}
+                        titulo={'Antes de aplicar la regla'}
+                        titulo2={'Luego de aplicar la regla'}/>
+                </View>
                 <Text style={styles.tituloReglas}>Regla 2</Text>
                 <Text style={styles.textoReglas}>Si una célula está muerta:
                     {"\n"}- Si tiene 3 vecinos vivos, revive.
                     {"\n"}- En otro caso, continua muerta.</Text>
                 <Image source={regla2} style={styles.imagenReglas}/>
+                <View style={styles.contenedorCards}>
+                    <FlipCardImagen
+                        imagen={regla2_antes}
+                        imagen2={regla_despues}
+                        titulo={'Antes de aplicar la regla'}
+                        titulo2={'Luego de aplicar la regla'}/>
+                </View>
             </View>
             <Footer />
         </ScrollView>

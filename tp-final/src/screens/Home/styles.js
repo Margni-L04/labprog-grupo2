@@ -87,7 +87,14 @@ const styles = StyleSheet.create({
         width: 200,
         height: 148,
         alignItems: 'center'
-    }
+    },
+    contenedorCards: {
+        flexDirection: 'row',
+        flexWrap: 'wrap',
+        justifyContent: 'center',
+        paddingTop: 30,
+        margin: 'auto'
+    },
 });
 
 export default styles;

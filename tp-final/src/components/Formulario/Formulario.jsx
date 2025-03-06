@@ -1,6 +1,5 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { View, Text, Modal, TouchableWithoutFeedback, Image } from 'react-native';
-import * as Font from 'expo-font';
 import styles from './styles';
 import CampoFormulario from '../CampoFormulario/CampoFormulario';
 import BotonFormulario from '../BotonFormulario/BotonFormulario';
@@ -11,15 +10,6 @@ const Formulario = ({tipoPatron}) => {
     const [nombre, setNombre] = useState('');
     const [imagen, setImagen] = useState('');
     const [modalVisible, setModalVisible] = useState(false);
-    const [fontLoaded, setFontLoaded] = useState(false);
-    
-    useEffect(() => {
-        if(!fontLoaded) {
-            Font.loadAsync({
-                'quicksand-bold': require('../../assets/fonts/Quicksand-Bold.ttf')
-            })
-        }
-    });
 
     const cerrar = () => {
         setModalVisible(false);

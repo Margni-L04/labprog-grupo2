@@ -1,18 +1,8 @@
-import React, { useState, useEffect } from 'react';
-import * as Font from 'expo-font';
+import React from 'react';
 import { TouchableOpacity, Text } from 'react-native';
 import styles from './styles';
 
 const BotonCelulas = ({nombre, onPress}) => {
-    const [fontLoaded, setFontLoaded] = useState(false);
-
-    useEffect(() => {
-        if(!fontLoaded) {
-            Font.loadAsync({
-                'quicksand': require('../../assets/fonts/Quicksand.ttf')
-            })
-        }
-    });
 
     return (
         <TouchableOpacity style={styles.boton} onPress={onPress}>
