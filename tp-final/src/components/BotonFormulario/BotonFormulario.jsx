@@ -1,9 +1,8 @@
-import React, { useState} from 'react';
+import React from 'react';
 import { TouchableWithoutFeedback, Text, View } from 'react-native';
 import styles from './styles';
 
 const BotonFormulario = ({titulo, onPress, color}) => {
-    const [modalVisible, setModalVisible] = useState(false);
 
     return (
         <TouchableWithoutFeedback onPress={onPress}>

@@ -2,7 +2,6 @@
 
 import React, { useState, useEffect } from 'react';
 import { ScrollView, View, Text } from 'react-native';
-import * as Font from 'expo-font';
 import styles from './styles';
 import FlipCard from '../../components/FlipCard/FilpCard';
 import Patron from '../../components/Patron/Patron';
@@ -13,15 +12,6 @@ const tiposPatrones = require('../../json/tipos-patrones.json');
 const ejsPatrones = require('../../json/ejemplos-patrones.json');
 
 const Patrones = () => {
-    const [fontLoaded, setFontLoaded] = useState(false);
-
-    useEffect(() => {
-        if(!fontLoaded) {
-            Font.loadAsync({
-                'quicksand': require('../../assets/fonts/Quicksand.ttf')
-            })
-        }
-    });
 
     return (
         <ScrollView style={styles.container}>

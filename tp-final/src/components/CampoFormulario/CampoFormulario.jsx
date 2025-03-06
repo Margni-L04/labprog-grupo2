@@ -1,18 +1,8 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { View, TextInput, Text } from 'react-native';
-import * as Font from 'expo-font';
 import styles from './styles';
 
 const Formulario = ({nombre, valor, setValor}) => {
-    const [fontLoaded, setFontLoaded] = useState(false);
-    
-    useEffect(() => {
-        if(!fontLoaded) {
-            Font.loadAsync({
-                'quicksand': require('../../assets/fonts/Quicksand.ttf')
-            })
-        }
-    });
 
     return (
         <View style={styles.contenedor}>

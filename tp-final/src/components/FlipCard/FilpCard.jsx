@@ -1,22 +1,11 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useRef } from 'react';
 import { View, Text, Animated, TouchableWithoutFeedback } from 'react-native';
 import { Image } from 'expo-image';
-import * as Font from 'expo-font';
 import styles from './styles';
 
 const FlipCard = ({imagen, texto, titulo}) => {
-    const [fontLoaded, setFontLoaded] = useState(false);
     const [estaFrente, setEstaFrente] = useState(true);
     const animacionFlip = useRef(new Animated.Value(0)).current;
-    
-    useEffect(() => {
-        if(!fontLoaded) {
-            Font.loadAsync({
-                'space-grotesk': require('../../assets/fonts/SpaceGrotesk.ttf'),
-                'quicksand': require('../../assets/fonts/Quicksand.ttf')
-            })
-        }
-    });
 
     const giroFrente = animacionFlip.interpolate({
         inputRange: [0, 180],
