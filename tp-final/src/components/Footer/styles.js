@@ -19,7 +19,7 @@ const styles = StyleSheet.create({
         padding: 5
     },
 
-    cuenta: {
+    nombreCuenta: {
         color: 'white',
         fontSize: 15
     }

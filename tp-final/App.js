@@ -2,7 +2,6 @@ import React,{ useEffect, useState } from 'react';
 import { View, StyleSheet, ActivityIndicator, Text } from 'react-native'
 import Navbar from './src/components/Navbar/Navbar';
 import * as Font from "expo-font";
-import { AppLoading } from 'expo';
 
 const App = () => {
     const [fontLoaded, setFontLoaded] = useState(false);
