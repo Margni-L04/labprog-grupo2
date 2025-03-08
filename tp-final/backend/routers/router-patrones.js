@@ -3,17 +3,27 @@ const router = express.Router();
 
 const {obtenerJson, obtenerTipoPatron, obtenerPatronDeTipo, obtenerPatrones, 
     existeTipoPatron, existePatronEnTipo, agregarPatronEnTipo,
-    cambiarImagenDePatronEnTipo, eliminarPatronEnTipo} = require('./../models/model-patrones.js');
+    cambiarImagenDePatronEnTipo, eliminarPatronEnTipo,
+    obtenerTiposPatrones} = require('./../models/model-patrones.js');
 
 //le decimos a express que vamos a usar json
 router.use(express.json());
 
 //get de todo el arreglo de los patrones
 router.get('/', (req, res) => {
-    //obtenemos el json con todos los datos y lo devolvemos
-    const patronesJSON = obtenerJson();
+    const { tipospatrones } = req.query;
 
-    res.send(patronesJSON);
+    if(!tipospatrones) {
+        //obtenemos el json con todos los datos y lo devolvemos
+        const patronesJSON = obtenerJson();
+
+        res.send(patronesJSON);
+    } else {
+        //queremos ver solo los nombres de los tipos de patrones
+        const nombresTiposPatrones = obtenerTiposPatrones();
+
+        res.send(nombresTiposPatrones);
+    }
 });
 
 //get para un tipo de patron
@@ -79,18 +89,18 @@ router.post('/:tipoPatron', (req, res) => {
     //guardamos el valor del parametro de la url
     const tipoPatron = req.params.tipoPatron;
 
-    if(!nuevoPatron.imagen) {
-        //validamos que el objeto pasado tenga una imagen
-        res.status(400).send({message:'Es requerido un atributo \'imagen\''});
-    } else if(typeof nuevoPatron.imagen !== 'string') {
-        //validamos que el objeto pasado tenga una imagen de tipo string
-        res.status(400).send({message:'El atributo \'imagen\' debe ser de tipo string'});
-    } else if(!nuevoPatron.nombrePatron) {
+    if(!nuevoPatron.nombrePatron) {
         //validamos que el objeto pasado tenga un nombre de patron
         res.status(400).send({message:'Es requerido un atributo \'nombrePatron\''});
     } else if(typeof nuevoPatron.nombrePatron !== 'string') {
         //validamos que el objeto pasado tenga un nombre de patron de tipo string
         res.status(400).send({message:'El atributo \'tipoPatron\' debe ser de tipo string'});
+    } else if(!nuevoPatron.imagen) {
+        //validamos que el objeto pasado tenga una imagen
+        res.status(400).send({message:'Es requerido un atributo \'imagen\''});
+    } else if(typeof nuevoPatron.imagen !== 'string') {
+        //validamos que el objeto pasado tenga una imagen de tipo string
+        res.status(400).send({message:'El atributo \'imagen\' debe ser de tipo string'});
     } else {
         //tenemos los datos de entrada correctos
 

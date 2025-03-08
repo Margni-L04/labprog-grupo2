@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, Modal, TouchableWithoutFeedback, Image } from 'react-native';
+import { View, Text, Modal, TouchableWithoutFeedback, Image, Alert } from 'react-native';
 import styles from './styles';
 import CampoFormulario from '../CampoFormulario/CampoFormulario';
 import BotonFormulario from '../BotonFormulario/BotonFormulario';
@@ -19,9 +19,8 @@ const Formulario = ({tipoPatron}) => {
     };
 
     const cargar = async () => {
-
         try {
-            await fetch(
+            const respuesta = await fetch(
                 `${API_URL}/api/patrones/${tipoPatron}`, {
                     method: 'POST',
                     headers: { 
@@ -32,14 +31,32 @@ const Formulario = ({tipoPatron}) => {
                         nombrePatron: nombre
                     })
                 })
-                    .then(response => { response.json() })
-                    .then(data => { console.log("Patrón agregado") });
+                    //.then(response => { response.json() })
+                    //.then(data => { console.log('Patrón agregado') });
+            
+            if(respuesta.ok) {
+                console.log('Patrón agregado');
+
+                cerrar();
+            } else {
+                const errorData = await respuesta.json();
+                const errorMensaje = errorData.message;
+                let mensajeAlerta;
+
+                if(errorMensaje.includes('nombrePatron')) {
+                    mensajeAlerta = 'Falta ingresar el nombre del patrón';
+                } else if(errorMensaje.includes('imagen')) {
+                    mensajeAlerta = 'Falta ingresar la url de la imagen';
+                } else {
+                    mensajeAlerta = 'Nombre de patrón ya existente. Ingrese uno nuevo';
+                }
+
+                Alert.alert(mensajeAlerta);
+            }
         }
         catch (error) {
             console.error(error);
-        } 
-
-        cerrar();
+        }
     };
 
     return (

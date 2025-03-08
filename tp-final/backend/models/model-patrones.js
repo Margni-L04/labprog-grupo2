@@ -145,6 +145,15 @@ const eliminarPatronEnTipo = (nombPatron, tipoPatron) => {
     }
 };
 
+const obtenerTiposPatrones = () => {
+    //obtenemos el archivo que contiene todos los patrones en formato json
+    const patronesJSON = obtenerJson();
+
+    const tiposPatrones = patronesJSON.map(function (tPatron) {return tPatron.nombre});
+
+    return tiposPatrones;
+};
+
 module.exports = {obtenerJson, obtenerTipoPatron, obtenerPatronDeTipo, obtenerPatrones, 
     existeTipoPatron, existePatronEnTipo, agregarPatronEnTipo,
-    cambiarImagenDePatronEnTipo, eliminarPatronEnTipo};
+    cambiarImagenDePatronEnTipo, eliminarPatronEnTipo, obtenerTiposPatrones};

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { View, ScrollView, Dimensions, Alert } from 'react-native';
+import { View, ScrollView, Dimensions, FlatList } from 'react-native';
 import API_URL from "../../../backend/myip";
 import styles from './styles';
 import Celula from '../Celula/Celula';
@@ -154,20 +154,35 @@ const TejidoCelula = () => {
         }
     }
 
+    const renderFilasCelulas = ({item, index}) => (
+        <View style={styles.fila}>
+            {item.map((estado, j) => (
+                <Celula key={filasTejido+j}
+                    estaViva={estado} onPress={() => actualizarCelula(index, j)}/>
+            ))}
+        </View>
+    );
+
     return (
         <ScrollView>
             <View style={styles.contenedorInfo}>
                 <InfoTejido texto={"Generación: "+numGen.toString()} />
             </View>
-            <View style={styles.contenedorCelulas}>
-                {celulas.map((fila, i) => (
+            <View>
+                <FlatList
+                    data={celulas}
+                    renderItem={renderFilasCelulas}
+                    keyExtractor={(item, index) => `fila-${index}`}
+                    contentContainerStyle={styles.contenedorCelulas}
+                    scrollEnabled={false} />
+                {/*celulas.map((fila, i) => (
                     <View key={i} style={styles.fila}>
                         {fila.map((estado, j) => (
                             <Celula key={i*filasTejido+j}
                                 estaViva={estado} onPress={() => actualizarCelula(i, j)}/>
                         ))}
                     </View>
-                ))}
+                ))*/}
             </View>
             <View style={styles.contenedorBotones}>
                 <BotonCelulas nombre={nombreBoton}
