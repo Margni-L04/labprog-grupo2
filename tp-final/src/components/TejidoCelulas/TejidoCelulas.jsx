@@ -158,7 +158,8 @@ const TejidoCelula = () => {
         <View style={styles.fila}>
             {item.map((estado, j) => (
                 <Celula key={filasTejido+j}
-                    estaViva={estado} onPress={() => actualizarCelula(index, j)}/>
+                    estaViva={estado}
+                    onPress={() => actualizarCelula(index, j)}/>
             ))}
         </View>
     );
