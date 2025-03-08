@@ -24,14 +24,15 @@ const styles = StyleSheet.create({
 
     infoTipoPatron: {
         flexDirection: 'column',
+        width: '100%',
         padding: 10
     },
 
     sliderPatrones: {
         flexDirection: 'row',
         flexWrap: 'wrap',
-        justifyContent: 'flex-start',
-        padding: 0,
+        justifyContent: 'center',
+        marginVertical: 10,
         width: '100%',
     },
 

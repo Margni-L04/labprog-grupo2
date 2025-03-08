@@ -1,37 +1,78 @@
 //Server donde se subieron las imagenes: https://freeimage.host
 
 import React, { useState, useEffect } from 'react';
-import { ScrollView, View, Text, FlatList } from 'react-native';
+import { ScrollView, View, Text, FlatList, TouchableOpacity } from 'react-native';
 import styles from './styles';
 import FlipCard from '../../components/FlipCard/FilpCard';
 import Patron from '../../components/Patron/Patron';
 import Footer from '../../components/Footer/Footer';
 import Formulario from '../../components/Formulario/Formulario';
+import BotonSlider from '../../components/BotonSlider/BotonSlider';
 import API_URL from "../../../backend/myip";
 
-const Patrones =  () => {
-    const [ejsPatrones, setEjsPatrones] = useState([]);
-    const [tiposPatrones, setTiposPatrones] = useState([]);
+const tamPag = 3;
 
-    useEffect(() => { 
-            fetchPatrones();
-            fetchTiposPatrones();
-        },[]);
+const Patrones = () => {
+    const [tiposPatronesFlip, setTiposPatronesFlip] = useState([]);
+    const [tiposPatronesSlider, setTiposPatronesFlipSlider] = useState([]);
+    const [dataPatrones, setDataPatrones] = useState({});
+    //const [ejsPatrones, setEjsPatrones] = useState([]);
 
-    const fetchPatrones = () => { 
+    /*
+    Estructura de dataPatrones:
+    {
+        "unTipoPatron": {"patrones": [ {"nombre": unNombrePatron, "imagen": unaUrlImagenPatron}
+                                    ... a lo sumo tamPag veces
+                                    ],
+                        "numPag": unNumeroDePagina},
+        ...
+    }
+    */
+
+    useEffect(() => {
+        fetchTiposPatrones();
+        fetchPatrones();
+    }, []);
+
+    useEffect(() => {
+        tiposPatronesSlider.forEach(tPatron => fetchPatronesDeTipo(tPatron, 1));
+    }, [tiposPatronesSlider]);
+
+    const fetchTiposPatrones = () => { 
+        fetch(`${API_URL}/api/tipospatrones`) 
+            .then(response => response.json()) 
+            .then(jsonResponse => setTiposPatronesFlip(jsonResponse)) 
+            .catch(error => console.log(error));
+    };
+
+    /*const fetchPatrones = () => { 
         //fetch(`${API_URL}/api/patrones?tipospatrones=true`) 
         fetch(`${API_URL}/api/patrones`) 
             .then(response => response.json()) 
             .then(jsonResponse => setEjsPatrones(jsonResponse)) 
             .catch(error => console.log(error));
+    };*/
+
+    const fetchPatrones = () => { 
+        fetch(`${API_URL}/api/patrones?tipospatrones=true`)
+            .then(response => response.json()) 
+            .then(jsonResponse => setTiposPatronesFlipSlider(jsonResponse)) 
+            .catch(error => console.log(error));
     }; 
 
-    const fetchTiposPatrones = () => { 
-        fetch(`${API_URL}/api/tipospatrones`) 
+    const fetchPatronesDeTipo = (tipoPatron, pagina) => { 
+        const desde = (pagina - 1) * tamPag;
+
+        fetch(`${API_URL}/api/patrones/${tipoPatron}?cantidad=${tamPag}&desde=${desde}`)
             .then(response => response.json()) 
-            .then(jsonResponse => setTiposPatrones(jsonResponse)) 
+            .then(jsonResponse => {
+                setDataPatrones(dataAntes => ({
+                    ...dataAntes,
+                    [tipoPatron]: {"patrones": jsonResponse, "numPag": pagina}
+                }));
+            }) 
             .catch(error => console.log(error));
-    };
+    }; 
 
     const renderTiposPatrones = ({item}) => (
         <FlipCard
@@ -40,72 +81,74 @@ const Patrones =  () => {
             titulo={item.nombre} />
     );
 
-    const renderPatrones = ({item}) => (
+    /*const renderPatrones = ({item}) => (
         <View style={styles.infoTipoPatron}>
             <Text style={styles.tituloPatron}>{item.nombre}</Text>
             <View style={styles.sliderPatrones}>
-                {(item.patrones).map((pat, j) => (
-                    <Patron key={j} nombre={pat.nombrePatron} imagen={pat.imagen}/>
+                {(item.patrones).map((pat, i) => (
+                    <Patron key={i} nombre={pat.nombrePatron} imagen={pat.imagen}/>
                 ))}
-                <Formulario tipoPatron={item.nombre}/>
+                {item.patrones.length > 0 && <Formulario tipoPatron={item.nombre}/>}
+            </View>
+        </View>
+    );*/
+
+    const renderPatrones = ({item}) => (
+        <View style={styles.infoTipoPatron}>
+            <Text style={styles.tituloPatron}>{item}</Text>
+            <View style={styles.sliderPatrones}>
+                <BotonSlider onPress={() => retrocederPagina(item)} direccion={1} />
+                {(dataPatrones[item]?.patrones || []).map((pat, i) => (
+                    <Patron key={i} nombre={pat.nombrePatron} imagen={pat.imagen}/>
+                ))}
+                {(dataPatrones[item]?.patrones.length || 0) < tamPag
+                    && <Formulario tipoPatron={item.nombre}/>}
+                <BotonSlider onPress={() => avanzarPagina(item)} direccion={0} />
             </View>
         </View>
     );
 
-    const pedirPatrones = (tipoPatron, cantidad, pagina) => {
-        const desde = (pagina - 1 ) * cantidad;
-        let patrones;
+    const avanzarPagina = (tipoPatron) => {
+        if((dataPatrones[tipoPatron]?.patrones.length || 0) == tamPag) {
+            //Completamos la página, hay más que mostrar (al menos el formulario)
+            const nuevaPag = (dataPatrones[tipoPatron]?.numPag || 0) + 1;
 
-        fetch(`${API_URL}/api/patrones/${tipoPatron}?cantidad=${cantidad}&desde=${desde}`) 
-            .then(response => response.json()) 
-            .then(jsonResponse => {patrones = jsonResponse}) 
-            .catch(error => console.log(error));
-
-        return patrones;
+            fetchPatronesDeTipo(tipoPatron, nuevaPag);
+        }
     };
 
-    const renderPatrones2 = async ({item}) => {
-        let patrones;
+    const retrocederPagina = (tipoPatron) => {
+        if((dataPatrones[tipoPatron]?.numPag || 0) > 1) {
+            //No estamos en la primer página, podemos retroceder
+            const nuevaPag = (dataPatrones[tipoPatron]?.numPag || 0) - 1;
 
-        await fetch(`${API_URL}/api/patrones/${item}?cantidad=${3}&desde=${0}`) 
-            .then(response => response.json()) 
-            .then(jsonResponse => {patrones = jsonResponse}) 
-            .catch(error => console.log(error));
-        
-        return(
-            <View style={styles.infoTipoPatron}>
-                <Text style={styles.tituloPatron}>{item}</Text>
-                    <View style={styles.sliderPatrones}>
-                        {patrones.map((pat, j) => (
-                        <Patron key={j} nombre={pat.nombrePatron} imagen={pat.imagen}/>
-                    ))}
-                </View>
-            </View>
-        )
+            fetchPatronesDeTipo(tipoPatron, nuevaPag);
+        }
     };
 
     return (
         <ScrollView style={styles.container}>
             <View>
                 <FlatList
-                    data={tiposPatrones}
+                    data={tiposPatronesFlip}
                     renderItem={renderTiposPatrones}
                     keyExtractor={(item) => item.nombre}
                     contentContainerStyle={styles.contenedorCards}
                     scrollEnabled={false} />
             </View>
             <View>
-                {/*<FlatList
-                    data={ejsPatrones}
-                    renderItem={renderPatrones2}
-                    keyExtractor={item => item}
-                    contentContainerStyle={styles.contenedorPatrones} />*/}
                 <FlatList
+                    data={tiposPatronesSlider}
+                    renderItem={renderPatrones}
+                    keyExtractor={(item) => item}
+                    contentContainerStyle={styles.contenedorPatrones}
+                    scrollEnabled={false} />
+                {/*<FlatList
                     data={ejsPatrones}
                     renderItem={renderPatrones}
                     keyExtractor={(item) => item.nombre}
                     contentContainerStyle={styles.contenedorPatrones}
-                    scrollEnabled={false} />
+                    scrollEnabled={false} />*/}
             </View>
             <Footer/>
         </ScrollView>

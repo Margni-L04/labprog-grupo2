@@ -9,9 +9,9 @@ router.use(express.json());
 //get de todo el arreglo de las cuentas de github
 router.get('/', (req, res) => {
     //obtenemos el json con todos los datos y lo devolvemos
-    const tipospatronesJSON = obtenerJson();
+    const cuentasgitJSON = obtenerJson();
 
-    res.send(tipospatronesJSON);
+    res.send(cuentasgitJSON);
 });
 
 module.exports = router;
