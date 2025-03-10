@@ -37,9 +37,10 @@ const styles = StyleSheet.create({
     },
 
     tituloPatron: {
-        fontFamily: 'quicksand',
+        fontFamily: 'quicksand-bold',
         fontWeight: 'normal',
-        fontSize: 25,
+        fontSize: 30,
+        marginLeft: 15,
         userSelect: 'none'
     }
 });

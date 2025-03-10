@@ -6,14 +6,14 @@ const styles = StyleSheet.create({
         flexDirection: 'column',
         justifyContent: 'center',
         alignItems: 'center',
-        width: 75,
-        height: 75,
+        width: 90,
+        height: 90,
         margin: 7
     },
 
     imagen: {
-        width: 75,
-        height: 75,
+        width: '100%',
+        height: '100%',
         borderRadius: 10
     },
 

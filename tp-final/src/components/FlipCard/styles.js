@@ -38,7 +38,7 @@ const styles = StyleSheet.create({
     titulo: {
         fontFamily: 'space-grotesk',
         fontWeight: 'bold',
-        fontSize: 17,
+        fontSize: 20,
         userSelect: 'none'
     },
     

@@ -14,7 +14,7 @@ const tamPag = 3;
 
 const Patrones = () => {
     const [tiposPatronesFlip, setTiposPatronesFlip] = useState([]);
-    const [tiposPatronesSlider, setTiposPatronesFlipSlider] = useState([]);
+    const [tiposPatronesSlider, setTiposPatronesSlider] = useState([]);
     const [dataPatrones, setDataPatrones] = useState({});
     //const [ejsPatrones, setEjsPatrones] = useState([]);
 
@@ -30,15 +30,15 @@ const Patrones = () => {
     */
 
     useEffect(() => {
+        fetchFlipCards();
         fetchTiposPatrones();
-        fetchPatrones();
     }, []);
 
     useEffect(() => {
         tiposPatronesSlider.forEach(tPatron => fetchPatronesDeTipo(tPatron, 1));
     }, [tiposPatronesSlider]);
 
-    const fetchTiposPatrones = () => { 
+    const fetchFlipCards = () => { 
         fetch(`${API_URL}/api/tipospatrones`) 
             .then(response => response.json()) 
             .then(jsonResponse => setTiposPatronesFlip(jsonResponse)) 
@@ -46,17 +46,16 @@ const Patrones = () => {
     };
 
     /*const fetchPatrones = () => { 
-        //fetch(`${API_URL}/api/patrones?tipospatrones=true`) 
         fetch(`${API_URL}/api/patrones`) 
             .then(response => response.json()) 
             .then(jsonResponse => setEjsPatrones(jsonResponse)) 
             .catch(error => console.log(error));
     };*/
 
-    const fetchPatrones = () => { 
+    const fetchTiposPatrones = () => { 
         fetch(`${API_URL}/api/patrones?tipospatrones=true`)
             .then(response => response.json()) 
-            .then(jsonResponse => setTiposPatronesFlipSlider(jsonResponse)) 
+            .then(jsonResponse => setTiposPatronesSlider(jsonResponse)) 
             .catch(error => console.log(error));
     }; 
 
@@ -93,20 +92,29 @@ const Patrones = () => {
         </View>
     );*/
 
-    const renderPatrones = ({item}) => (
-        <View style={styles.infoTipoPatron}>
-            <Text style={styles.tituloPatron}>{item}</Text>
-            <View style={styles.sliderPatrones}>
-                <BotonSlider onPress={() => retrocederPagina(item)} direccion={1} />
-                {(dataPatrones[item]?.patrones || []).map((pat, i) => (
-                    <Patron key={i} nombre={pat.nombrePatron} imagen={pat.imagen}/>
-                ))}
-                {(dataPatrones[item]?.patrones.length || 0) < tamPag
-                    && <Formulario tipoPatron={item.nombre}/>}
-                <BotonSlider onPress={() => avanzarPagina(item)} direccion={0} />
+    const renderPatrones = ({item}) => {
+        const listaPatrones = (dataPatrones[item]?.patrones || []);
+        const pagActual = (dataPatrones[item]?.numPag || 1);
+        const cantPatrones = (listaPatrones?.length || 0);
+
+        return (
+            <View style={styles.infoTipoPatron}>
+                <Text style={styles.tituloPatron}>{item}</Text>
+                <View style={styles.sliderPatrones}>
+                    <BotonSlider onPress={() => retrocederPagina(item)}
+                        direccion={1}
+                        activo={pagActual > 1} />
+                    {listaPatrones.map((pat, i) => (
+                        <Patron key={i} nombre={pat.nombrePatron} imagen={pat.imagen}/>
+                    ))}
+                    {cantPatrones < tamPag && <Formulario tipoPatron={item}/>}
+                    <BotonSlider onPress={() => avanzarPagina(item)}
+                        direccion={0}
+                        activo={cantPatrones == tamPag} />
+                </View>
             </View>
-        </View>
-    );
+        );
+    };
 
     const avanzarPagina = (tipoPatron) => {
         if((dataPatrones[tipoPatron]?.patrones.length || 0) == tamPag) {
@@ -120,7 +128,7 @@ const Patrones = () => {
     const retrocederPagina = (tipoPatron) => {
         if((dataPatrones[tipoPatron]?.numPag || 0) > 1) {
             //No estamos en la primer página, podemos retroceder
-            const nuevaPag = (dataPatrones[tipoPatron]?.numPag || 0) - 1;
+            const nuevaPag = (dataPatrones[tipoPatron]?.numPag || tamPag) - 1;
 
             fetchPatronesDeTipo(tipoPatron, nuevaPag);
         }

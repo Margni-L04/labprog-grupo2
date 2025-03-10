@@ -2,7 +2,7 @@ import React from 'react';
 import { View, TouchableOpacity, Image } from 'react-native';
 import styles from './styles';
 
-const BotonSlider = ({onPress, direccion}) => {
+const BotonSlider = ({onPress, direccion, activo}) => {
     //direccion = 0 ANTERIOR
     //direccion = 1 PROXIMO
 
@@ -14,7 +14,7 @@ const BotonSlider = ({onPress, direccion}) => {
         <TouchableOpacity onPress={onPress}>
             <View style={styles.contenedorImagen}>
                 <Image source={imagenSlider}
-                        style={styles.imagen}/>
+                        style={[styles.imagen, {opacity: activo ? 1 : 0}]}/>
             </View>
         </TouchableOpacity>
     );
