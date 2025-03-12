@@ -1,1 +1,144 @@
-[{"nombre":"Vidas Estáticas","patrones":[{"imagen":"https://iili.io/3dFgf0Q.png","nombrePatron":"Bloque"},{"imagen":"https://iili.io/3dFgdzu.png","nombrePatron":"Pan"},{"imagen":"https://iili.io/3dFg2Wb.png","nombrePatron":"Flor"},{"imagen":"https://iili.io/3dFgKqx.png","nombrePatron":"Bote"},{"imagen":"https://iili.io/3dFg3sj.png","nombrePatron":"Colmena"}]},{"nombre":"Oscilantes","patrones":[{"imagen":"https://iili.io/3dFgy4R.gif","nombrePatron":"Palito"},{"imagen":"https://iili.io/3dFrH2p.gif","nombrePatron":"Sol"},{"imagen":"https://iili.io/3dFrdvI.gif","nombrePatron":"Tornado"},{"imagen":"https://iili.io/3dFrKjn.gif","nombrePatron":"Ocho"},{"imagen":"https://iili.io/3dFrfQs.gif","nombrePatron":"Cena"}]},{"nombre":"Matusalenes","patrones":[{"imagen":"https://iili.io/3dFUpJS.png","nombrePatron":"Diehard"},{"imagen":"https://iili.io/3dFUD0l.png","nombrePatron":"Pistola"},{"imagen":"https://iili.io/3dFUbg2.png","nombrePatron":"Pi"},{"imagen":"https://iili.io/3dFUsxs.png","nombrePatron":"Tetris"},{"imagen":"https://iili.io/3dFUy57.png","nombrePatron":"B-Heptomino"}]},{"nombre":"Naves Espaciales","patrones":[{"imagen":"https://iili.io/3dFrCGf.gif","nombrePatron":"Glider"},{"imagen":"https://iili.io/3dFrBCG.gif","nombrePatron":"Pájaro"},{"imagen":"https://iili.io/3dFrza2.gif","nombrePatron":"Cara"},{"imagen":"https://iili.io/3dFrIvS.gif","nombrePatron":"58P5H1V1"},{"imagen":"https://iili.io/3dFrn44.gif","nombrePatron":"Loafer"}]},{"nombre":"Generadores de naves","patrones":[{"imagen":"https://iili.io/3dFrXZg.gif","nombrePatron":"Glider Gun"},{"imagen":"https://iili.io/3dFr2pt.gif","nombrePatron":"Super-Glider Gun"},{"imagen":"https://iili.io/3dFgf0Q.png","nombrePatron":"hdhfjhs"}]},{"nombre":"Logic Gates","patrones":[{"imagen":"https://iili.io/3dFraGj.gif","nombrePatron":"NOT (IN:1)"},{"imagen":"https://iili.io/3dFrYCb.gif","nombrePatron":"NOT (IN:0)"},{"imagen":"https://iili.io/3dFreFR.gif","nombrePatron":"AND (IN:0,0)"},{"imagen":"https://iili.io/3dFrwMJ.gif","nombrePatron":"AND (IN:0,1)"},{"imagen":"https://iili.io/3dFrVu1.gif","nombrePatron":"AND (IN:1,0)"},{"imagen":"https://iili.io/3dFrGyP.gif","nombrePatron":"AND (IN:1,1)"}]}]
+[
+    {
+        "nombre": "Vidas Estáticas",
+        "patrones": [
+            {
+                "imagen": "https://iili.io/3dFgf0Q.png",
+                "nombrePatron": "Bloque"
+            },
+            {
+                "imagen": "https://iili.io/3dFgdzu.png",
+                "nombrePatron": "Pan"
+            },
+            {
+                "imagen": "https://iili.io/3dFg2Wb.png",
+                "nombrePatron": "Flor"
+            },
+            {
+                "imagen": "https://iili.io/3dFgKqx.png",
+                "nombrePatron": "Bote"
+            },
+            {
+                "imagen": "https://iili.io/3dFg3sj.png",
+                "nombrePatron": "Colmena"
+            }
+        ]
+    },
+    {
+        "nombre": "Oscilantes",
+        "patrones": [
+            {
+                "imagen": "https://iili.io/3dFgy4R.gif",
+                "nombrePatron": "Palito"
+            },
+            {
+                "imagen": "https://iili.io/3dFrH2p.gif",
+                "nombrePatron": "Sol"
+            },
+            {
+                "imagen": "https://iili.io/3dFrdvI.gif",
+                "nombrePatron": "Tornado"
+            },
+            {
+                "imagen": "https://iili.io/3dFrKjn.gif",
+                "nombrePatron": "Ocho"
+            },
+            {
+                "imagen": "https://iili.io/3dFrfQs.gif",
+                "nombrePatron": "Cena"
+            }
+        ]
+    },
+    {
+        "nombre": "Matusalenes",
+        "patrones": [
+            {
+                "imagen": "https://iili.io/3dFUpJS.png",
+                "nombrePatron": "Diehard"
+            },
+            {
+                "imagen": "https://iili.io/3dFUD0l.png",
+                "nombrePatron": "Pistola"
+            },
+            {
+                "imagen": "https://iili.io/3dFUbg2.png",
+                "nombrePatron": "Pi"
+            },
+            {
+                "imagen": "https://iili.io/3dFUsxs.png",
+                "nombrePatron": "Tetris"
+            },
+            {
+                "imagen": "https://iili.io/3dFUy57.png",
+                "nombrePatron": "B-Heptomino"
+            }
+        ]
+    },
+    {
+        "nombre": "Naves Espaciales",
+        "patrones": [
+            {
+                "imagen": "https://iili.io/3dFrCGf.gif",
+                "nombrePatron": "Glider"
+            },
+            {
+                "imagen": "https://iili.io/3dFrBCG.gif",
+                "nombrePatron": "Pájaro"
+            },
+            {
+                "imagen": "https://iili.io/3dFrza2.gif",
+                "nombrePatron": "Cara"
+            },
+            {
+                "imagen": "https://iili.io/3dFrIvS.gif",
+                "nombrePatron": "58P5H1V1"
+            },
+            {
+                "imagen": "https://iili.io/3dFrn44.gif",
+                "nombrePatron": "Loafer"
+            }
+        ]
+    },
+    {
+        "nombre": "Generadores de naves",
+        "patrones": [
+            {
+                "imagen": "https://iili.io/3dFrXZg.gif",
+                "nombrePatron": "Glider Gun"
+            },
+            {
+                "imagen": "https://iili.io/3dFr2pt.gif",
+                "nombrePatron": "Super-Glider Gun"
+            }
+        ]
+    },
+    {
+        "nombre": "Logic Gates",
+        "patrones": [
+            {
+                "imagen": "https://iili.io/3dFraGj.gif",
+                "nombrePatron": "NOT (IN:1)"
+            },
+            {
+                "imagen": "https://iili.io/3dFrYCb.gif",
+                "nombrePatron": "NOT (IN:0)"
+            },
+            {
+                "imagen": "https://iili.io/3dFreFR.gif",
+                "nombrePatron": "AND (IN:0,0)"
+            },
+            {
+                "imagen": "https://iili.io/3dFrwMJ.gif",
+                "nombrePatron": "AND (IN:0,1)"
+            },
+            {
+                "imagen": "https://iili.io/3dFrVu1.gif",
+                "nombrePatron": "AND (IN:1,0)"
+            },
+            {
+                "imagen": "https://iili.io/3dFrGyP.gif",
+                "nombrePatron": "AND (IN:1,1)"
+            }
+        ]
+    }
+]
