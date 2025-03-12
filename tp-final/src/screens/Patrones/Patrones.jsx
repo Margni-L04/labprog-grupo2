@@ -104,7 +104,7 @@ const Patrones = () => {
             titulo={item.nombre} />
     );
 
-    const renderPatrones = ({item}) => {
+    const renderSliderPatrones = ({item}) => {
         const listaPatrones = (dataPatrones[item]?.patrones || []);
         const pagActual = (dataPatrones[item]?.numPag || 1);
         const cantPatrones = (listaPatrones?.length || 0);
@@ -117,7 +117,7 @@ const Patrones = () => {
                         direccion={1}
                         activo={pagActual > 1} />
                     {listaPatrones.map((pat, i) => (
-                        <Patron key={i} nombre={pat.nombrePatron} imagen={pat.imagen}/>
+                        <Patron key={i} nombre={pat.nombrePatron} imagen={pat.imagen} />
                     ))}
                     {cantPatrones < tamPag && <Formulario tipoPatron={item}/>}
                     <BotonSlider onPress={() => avanzarPagina(item)}
@@ -141,7 +141,7 @@ const Patrones = () => {
             <View>
                 <FlatList
                     data={tiposPatronesSlider}
-                    renderItem={renderPatrones}
+                    renderItem={renderSliderPatrones}
                     keyExtractor={(item) => item}
                     contentContainerStyle={styles.contenedorPatrones}
                     scrollEnabled={false} />
