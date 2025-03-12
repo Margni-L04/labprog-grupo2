@@ -1,12 +1,15 @@
 import React, { useState } from "react";
-import { View, Text, Image, TouchableOpacity } from 'react-native';
-import styles from './styles';
+import { View, Image, TouchableOpacity } from 'react-native';
 import { NavigationContainer } from "@react-navigation/native";
 import { createMaterialTopTabNavigator } from "@react-navigation/material-top-tabs";
 
+//componentes
 import HomeScreen from "../../screens/Home/Home";
 import PatronesScreen from "../../screens/Patrones/Patrones";
 import JuegoScreen from "../../screens/Juego/Juego";
+
+//estilos
+import styles from './styles';
 
 const logo = require("../../assets/images/logo.png");
 const logoInvertido = require("../../assets/images/logoInvertido.png");

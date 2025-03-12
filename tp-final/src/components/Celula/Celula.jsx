@@ -1,5 +1,7 @@
 import React from 'react';
 import { TouchableOpacity } from 'react-native';
+
+//estilos
 import styles from './styles';
 
 const Celula = ({estaViva, onPress}) => {

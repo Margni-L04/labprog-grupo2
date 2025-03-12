@@ -1,17 +1,21 @@
 import React, { useState, useEffect } from 'react';
 import { View, ScrollView, Dimensions, FlatList } from 'react-native';
-import API_URL from "../../../backend/myip";
-import styles from './styles';
+
+//componentes
 import Celula from '../Celula/Celula';
 import BotonCelulas from '../BotonCelulas/BotonCelulas';
 import InfoTejido from '../InfoTejido/InfoTejido';
 
+//estilos
+import styles from './styles';
+
 const filasTejido = 10;
 const colsTejido = 10;
-//const filasTejido = Math.floor(Dimensions.get('window').height/30);
-//const colsTejido = Math.floor(Dimensions.get('window').width/20);
+/*const filasTejido = Math.floor(Dimensions.get('window').height/30);
+const colsTejido = Math.floor(Dimensions.get('window').width/20);*/
 
 const generarTejidoInicial = () => {
+    //generamos la matriz inicial con todas las células en 0 (muertas)
     return Array(filasTejido)
         .fill(0)
         .map(() => Array(colsTejido).fill(0));
@@ -23,6 +27,7 @@ const TejidoCelula = () => {
     const [numGen, setNumGen] = useState(0);
     const [nombreBoton, setNombreBoton] = useState('Iniciar');
 
+    //cuando se modifica el estado "estaEjecutando", empezamos o eliminamos el intervalo
     useEffect(() => {
         let intervalo;
 
@@ -35,7 +40,7 @@ const TejidoCelula = () => {
 
         return () => clearInterval(intervalo);
     }, [estaEjecutando]);
-
+    
     const actualizarCelula = (fila, col) => {
         setCelulas(celulasAntes => {
             const nuevasCelulas = celulasAntes.map(fila => [...fila]);
@@ -51,6 +56,7 @@ const TejidoCelula = () => {
     };
 
     const contarVecinosVivos = (fila, col, tejido) => {
+        //revisamos los vecinos en la célula de la posición pasada, en el tejido dado
         let cantVecinos = 0;
         let iniI = 0;
         let finI = 3;
@@ -76,7 +82,7 @@ const TejidoCelula = () => {
     
         for(let i = iniI; i < finI; i++) {
             for(let j = iniJ; j < finJ; j++) {
-                //buscamos todas las celulas excepto la actual
+                //buscamos en todas las celulas excepto en la actual
                 if(i != 1 || j != 1) {
                     cantVecinos += tejido[fila-1+i][col-1+j];
                 }
@@ -100,7 +106,7 @@ const TejidoCelula = () => {
                             //muere por sobrepoblacion o aislamiento
                             nuevasCelulas[i][j] = 0;
                         } else {
-                            //contunua vivo
+                            //contunua viva
                             nuevasCelulas[i][j] = 1;
                         }
                     } else {
@@ -109,7 +115,7 @@ const TejidoCelula = () => {
                             //revive
                             nuevasCelulas[i][j] = 1;
                         } else {
-                            //continua muerto
+                            //continua muerta
                             nuevasCelulas[i][j] = 0;
                         }
                     }
@@ -122,16 +128,19 @@ const TejidoCelula = () => {
         setNumGen(numGenAntes => numGenAntes + 1);
     };
 
+    //acción para comenzar el juego
     const empezarJuego = async () => {
         setEstaEjecutando(true);
         setNombreBoton('Pausar');
     }
     
+    //acción para pausar el juego que comenzó
     const pausarJuego = () => {
         setEstaEjecutando(false);
         setNombreBoton('Iniciar');
     }
 
+    //acción para volver al estado inicial
     const resetearJuego = () => {
         if(estaEjecutando) {
             pausarJuego();
@@ -167,7 +176,7 @@ const TejidoCelula = () => {
     return (
         <ScrollView>
             <View style={styles.contenedorInfo}>
-                <InfoTejido texto={"Generación: "+numGen.toString()} />
+                <InfoTejido texto={`Generación: ${numGen}`} />
             </View>
             <View>
                 <FlatList
@@ -176,14 +185,6 @@ const TejidoCelula = () => {
                     keyExtractor={(item, index) => `fila-${index}`}
                     contentContainerStyle={styles.contenedorCelulas}
                     scrollEnabled={false} />
-                {/*celulas.map((fila, i) => (
-                    <View key={i} style={styles.fila}>
-                        {fila.map((estado, j) => (
-                            <Celula key={i*filasTejido+j}
-                                estaViva={estado} onPress={() => actualizarCelula(i, j)}/>
-                        ))}
-                    </View>
-                ))*/}
             </View>
             <View style={styles.contenedorBotones}>
                 <BotonCelulas nombre={nombreBoton}

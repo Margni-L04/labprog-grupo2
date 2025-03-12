@@ -1,9 +1,10 @@
 import React from 'react';
 import { TouchableWithoutFeedback, Text, View } from 'react-native';
+
+//estilos
 import styles from './styles';
 
 const BotonFormulario = ({titulo, onPress, color}) => {
-
     return (
         <TouchableWithoutFeedback onPress={onPress}>
             <View style={[styles.boton, {backgroundColor: color}]}>

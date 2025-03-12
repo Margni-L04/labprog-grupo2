@@ -1,9 +1,13 @@
 import React from 'react';
-import { StyleSheet, Text, View, FlatList, ScrollView} from 'react-native';
+import { Text, View, ScrollView} from 'react-native';
 import { Image } from 'expo-image';
-import styles from './styles';
+
+//componentes
 import Footer from '../../components/Footer/Footer';
 import FlipCardImagen from '../../components/FlipCardImagen/FilpCardImagen';
+
+//estilos
+import styles from './styles';
 
 const fondo = require('../../assets/gifs/conway.gif');
 const regla1 = require('../../assets/images/Regla1.png');
@@ -13,7 +17,6 @@ const regla2_antes = require('../../assets/images/regla2-antes.png');
 const regla_despues = require('../../assets/images/regla-despues.png');
 
 const Home = () => {
-
     return (
         <ScrollView style={styles.container}>
             <View style={styles.containerTitulo}>
@@ -42,8 +45,8 @@ const Home = () => {
                 </View>
                 <Text style={styles.tituloReglas}>Regla 2</Text>
                 <Text style={styles.textoReglas}>Si una célula está muerta:
-                    {"\n"}- Si tiene 3 vecinos vivos, revive.
-                    {"\n"}- En otro caso, continua muerta.</Text>
+                    {'\n'}- Si tiene 3 vecinos vivos, revive.
+                    {'\n'}- En otro caso, continua muerta.</Text>
                 <Image source={regla2} style={styles.imagenReglas}/>
                 <View style={styles.contenedorCards}>
                     <FlipCardImagen

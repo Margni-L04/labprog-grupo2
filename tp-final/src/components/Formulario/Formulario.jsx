@@ -1,8 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import { View, Text, Modal, TouchableWithoutFeedback, Image, Alert } from 'react-native';
-import styles from './styles';
+
+//componentes
 import CampoFormulario from '../CampoFormulario/CampoFormulario';
 import BotonFormulario from '../BotonFormulario/BotonFormulario';
+
+//estilos
+import styles from './styles';
+
+//backend
 import API_URL from "../../../backend/myip";
 
 const imagenMas = require('../../assets/images/mas.jpeg');
@@ -18,6 +24,7 @@ const Formulario = ({tipoPatron}) => {
         setImagen('');
     };
 
+    //fetch post para carga de nuevo patrón
     const cargar = async () => {
         try {
             const respuesta = await fetch(
@@ -31,14 +38,16 @@ const Formulario = ({tipoPatron}) => {
                         nombrePatron: nombre
                     })
                 })
-                    //.then(response => { response.json() })
-                    //.then(data => { console.log('Patrón agregado') });
+                    /*.then(response => { response.json() })
+                    .then(data => { console.log('Patrón agregado') });*/
             
             if(respuesta.ok) {
+                //post se hizo correctamente
                 console.log('Patrón agregado');
 
                 cerrar();
             } else {
+                //no se pudo hacer el post
                 const errorData = await respuesta.json();
                 const errorMensaje = errorData.message;
                 let mensajeAlerta;

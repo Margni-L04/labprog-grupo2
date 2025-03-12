@@ -1,26 +1,32 @@
 import React, { useState, useRef } from 'react';
 import { View, Text, Animated, TouchableWithoutFeedback } from 'react-native';
 import { Image } from 'expo-image';
+
+//estilos
 import styles from './styles';
 
 const FlipCard = ({imagen, texto, titulo}) => {
     const [estaFrente, setEstaFrente] = useState(true);
     const animacionFlip = useRef(new Animated.Value(0)).current;
 
+    //cómo rota cuando está la card hacia adelante
     const giroFrente = animacionFlip.interpolate({
         inputRange: [0, 180],
         outputRange: ['0deg', '180deg']
     });
 
+    //cómo rota cuando está la card hacia atrás
     const giroAtras = animacionFlip.interpolate({
         inputRange: [0, 180],
         outputRange: ['180deg', '360deg']
     });
 
+    //acción de rotar cuando está el frente
     const rotarFrente = {
         transform: [{rotateY: giroFrente}]
     };
 
+    //acción de rotar cuando está hacia atrás
     const rotarAtras = {
         transform: [{rotateY: giroAtras}]
     };

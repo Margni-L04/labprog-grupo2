@@ -1,6 +1,8 @@
 import React, { useState} from 'react';
 import { View, Text, TouchableWithoutFeedback } from 'react-native';
 import { Image } from 'expo-image';
+
+//estilos
 import styles from './styles';
 
 const Patron = ({nombre, imagen}) => {
@@ -8,6 +10,7 @@ const Patron = ({nombre, imagen}) => {
     const [opacityImagen, setOpacityImagen] = useState(1);
     const [opacityNombre, setOpacityNombre] = useState(0);
 
+    //alternar entre mostrar el nombre u ocultarlo
     const mostrarNombre = () => {
         if(nombreOculto) {
             setOpacityImagen(0.1);

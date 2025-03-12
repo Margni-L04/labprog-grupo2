@@ -1,11 +1,12 @@
 import React from 'react';
 import { View, TouchableOpacity, Image } from 'react-native';
+
+//estilos
 import styles from './styles';
 
 const BotonSlider = ({onPress, direccion, activo}) => {
     //direccion = 0 ANTERIOR
     //direccion = 1 PROXIMO
-
     const imagenSlider = direccion == 0 ?
                             require('../../assets/images/sliderProximo.png')
                             : require('../../assets/images/sliderAnterior.png');

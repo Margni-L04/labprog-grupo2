@@ -1,5 +1,7 @@
 import React from 'react';
 import { View, Text } from 'react-native';
+
+//estilos
 import styles from './styles';
 
 const InfoTejido = ({texto}) => {

@@ -1,9 +1,10 @@
 import React from 'react';
 import { View, TextInput, Text } from 'react-native';
+
+//estilos
 import styles from './styles';
 
 const Formulario = ({nombre, valor, setValor}) => {
-
     return (
         <View style={styles.contenedor}>
             <Text style={styles.titulo}>{nombre}</Text>
